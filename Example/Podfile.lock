@@ -1,0 +1,21 @@
+PODS:
+  - KRAnimationKit (0.8.3):
+    - KRTimingFunction
+  - KRPresentationKit (0.1.0):
+    - KRAnimationKit
+  - KRTimingFunction (0.9.1)
+
+DEPENDENCIES:
+  - KRAnimationKit
+  - KRPresentationKit (from `../`)
+
+EXTERNAL SOURCES:
+  KRPresentationKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  KRAnimationKit: c36764ae700cd16b929a0f645d3c5dcdb49ba136
+  KRPresentationKit: 585e7ad6303018e469209fc8eac284a1939baba8
+  KRTimingFunction: 78e502786e657c880a890b675633a766a54240a0
+
+COCOAPODS: 0.39.0

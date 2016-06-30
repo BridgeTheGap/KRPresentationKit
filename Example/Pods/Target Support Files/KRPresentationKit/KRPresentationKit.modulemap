@@ -1,0 +1,6 @@
+framework module KRPresentationKit {
+  umbrella header "KRPresentationKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

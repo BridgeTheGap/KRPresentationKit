@@ -1,0 +1,6 @@
+framework module Pods_KRPresentationKit_Example {
+  umbrella header "Pods-KRPresentationKit_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
