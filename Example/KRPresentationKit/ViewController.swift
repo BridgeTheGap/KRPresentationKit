@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import KRPresentationKit
 
-class ViewController: UIViewController {
+class ViewController: CustomPresentationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,5 +21,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func presentAction(sender: AnyObject) {
+        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC")
+        presentViewController(pvc, completion: nil)
+    }
 }
 

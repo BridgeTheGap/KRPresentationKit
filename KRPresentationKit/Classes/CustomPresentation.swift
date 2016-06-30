@@ -18,29 +18,14 @@ private extension TransitionKey {
 }
 
 public enum PresentationStyle {
-    case Default
-    case Popup
-    case SlideUp
-    case SlideDown
-    case SlideLeft
-    case SlideRight
-    case Custom(initialFrame: CGRect?, finalFrame: CGRect?)
+    case SlideUp(FunctionType?)
+    case SlideDown(FunctionType?)
+    case SlideLeft(FunctionType?)
+    case SlideRight(FunctionType?)
+    case Overlay(FunctionType?)
+    case Popup(FunctionType?)
+    case Custom((() -> Void) -> Void)
     case NoAnimation
-}
-
-public func == (lhs: PresentationStyle, rhs: PresentationStyle) -> Bool {
-    switch (lhs, rhs) {
-    case (.Default, .Default): return true
-    case (.Popup, .Popup): return true
-    case (.SlideUp, .SlideUp): return true
-    case (.SlideDown, .SlideDown): return true
-    case (.SlideLeft, .SlideLeft): return true
-    case (.SlideRight, .SlideRight): return true
-    case (.Custom(initialFrame: let lhsFrame1, finalFrame: let lhsFrame2), .Custom(initialFrame: let rhsFrame1, finalFrame: let rhsFrame2)):
-        return lhsFrame1 == rhsFrame1 && lhsFrame2 == rhsFrame2
-    case (.NoAnimation, .NoAnimation): return true
-    default: return false
-    }
 }
 
 public enum ContentAnimation {
@@ -54,17 +39,17 @@ public protocol CustomPresentable: UIViewControllerTransitioningDelegate, UIView
 
 public class BackgroundSeparableViewController: UIViewController {
     @IBOutlet public weak var contentView: UIView! {
-        didSet { self.contentViewFrame = self.contentView.frame }
+        didSet { targetFrame = contentView.frame }
     }
     
     public var constraints = [NSLayoutConstraint]()
-    public var contentViewFrame: CGRect!
+    public var targetFrame: CGRect!
     
     public var customPresentingViewController: CustomPresentationViewController? {
-        if let cpvc = self.presentingViewController as? CustomPresentationViewController {
+        if let cpvc = presentingViewController as? CustomPresentationViewController {
             return cpvc
         }
-        if let nc = self.presentingViewController as? UINavigationController {
+        if let nc = presentingViewController as? UINavigationController {
             for vc in nc.viewControllers {
                 if let cpvc = vc as? CustomPresentationViewController {
                     return cpvc
@@ -74,14 +59,14 @@ public class BackgroundSeparableViewController: UIViewController {
         return nil
     }
     
-    public var presentationStyle: PresentationStyle = .Default
+    public var presentationStyle: PresentationStyle = .SlideUp(.EaseOutCubic)
     public var contentAnimation: ContentAnimation = .None
     public var contentAnimationDuration = 0.3
     
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -91,24 +76,24 @@ public class BackgroundSeparableViewController: UIViewController {
     override public func awakeFromNib() {
         super.awakeFromNib()
         
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
     }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        self.saveConstraints()
+        saveConstraints()
     }
     
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.addConstraints(self.constraints)
+        NSLayoutConstraint.activateConstraints(constraints)
     }
     
     private func saveConstraints() {
-        for c in self.view.constraints {
-            if c.firstItem as? NSObject == self.contentView || c.secondItem as? NSObject == self.contentView {
-                self.constraints.append(c)
+        for c in view.constraints {
+            if c.firstItem as? UIView === contentView || c.secondItem as? UIView === contentView {
+                constraints.append(c)
             }
         }
     }
@@ -122,97 +107,98 @@ public class CustomPresentationViewController: UIViewController {
     
     public weak var background: UIView? {
         didSet {
-            if let content = self.presentingContent {
-                self.view.insertSubview(self.background!, belowSubview: content)
-            } else if let content = self.dismissingContent {
-                self.view.insertSubview(self.background!, belowSubview: content)
+            if let content = presentingContent {
+                view.insertSubview(background!, belowSubview: content)
+            } else if let content = dismissingContent {
+                view.insertSubview(background!, belowSubview: content)
             } else {
-                self.view.addSubview(self.background!)
+                view.addSubview(background!)
             }
         }
     }
     public weak var presentingContent: UIView? {
         didSet {
-            self.presentingContent!.hidden = true
-            self.view.addSubview(self.presentingContent!)
+            presentingContent!.hidden = true
+            view.addSubview(presentingContent!)
         }
     }
     public weak var dismissingContent: UIView? {
         didSet {
-            self.dismissingContent!.hidden = true
-            self.view.addSubview(self.dismissingContent!)
+            dismissingContent!.hidden = true
+            view.addSubview(dismissingContent!)
         }
     }
 }
 
 extension CustomPresentationViewController: CustomPresentable {
     public func preparePresentation(viewController: BackgroundSeparableViewController) {
-        if self.background == nil {
+        if background == nil {
             let background = UIView(frame: viewController.view.frame)
             background.backgroundColor = viewController.view.backgroundColor
             self.background = background
         }
         
-        if !self.isFading { self.background!.alpha = 0.0 }
+        if !isFading { background!.alpha = 0.0 }
         
-        if self.presentingContent == nil {
+        if presentingContent == nil {
             let content = viewController.contentView.snapshotViewAfterScreenUpdates(true)
-            self.presentingContent = content
+            presentingContent = content
         }
-        self.presentingContent!.frame = viewController.contentViewFrame
+        presentingContent!.frame = viewController.targetFrame
     }
     
     public func prepareDismissal(viewController: BackgroundSeparableViewController) {
-        if self.isFading {
-            self.presentingContent!.hidden = true
+        if isFading {
+            presentingContent!.hidden = true
         } else {
-            if self.background == nil {
+            if background == nil {
                 let background = UIView(frame: viewController.view.frame)
                 background.backgroundColor = viewController.view.backgroundColor
                 self.background = background
             }
         }
         
-        self.background!.hidden = true
+        background!.hidden = true
         
-        if self.dismissingContent == nil {
+        if dismissingContent == nil {
             let content = viewController.contentView.snapshotViewAfterScreenUpdates(true)
-            self.dismissingContent = content
+            dismissingContent = content
         }
-        self.dismissingContent!.frame = viewController.contentViewFrame
+        dismissingContent!.frame = viewController.targetFrame
     }
     
     public func reset() {
-        if let background = self.background { background.removeFromSuperview() }
-        if let presentingContent = self.presentingContent { presentingContent.removeFromSuperview() }
-        if let dismissingContent = self.dismissingContent { dismissingContent.removeFromSuperview() }
-        self.presentationAnimation = nil
-        self.dismissalAnimation = nil
+        if let background = background { background.removeFromSuperview() }
+        if let presentingContent = presentingContent { presentingContent.removeFromSuperview() }
+        if let dismissingContent = dismissingContent { dismissingContent.removeFromSuperview() }
+        presentationAnimation = nil
+        dismissalAnimation = nil
     }
     
-    public func presentViewController(viewController: UIViewController, duration: Double, completion: (() -> Void)?) {
+    final override public func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        presentViewController(viewControllerToPresent, completion: completion)
+    }
+    
+    public func presentViewController(viewController: UIViewController, style: PresentationStyle = .SlideUp(.EaseOutCubic), duration: Double = 0.3, completion: (() -> Void)?) {
         if let vc = viewController as? BackgroundSeparableViewController {
             self.duration = duration
             
-            if !self.isFading { self.preparePresentation(vc) }
+            if !isFading { preparePresentation(vc) }
             
             viewController.modalPresentationStyle = .Custom
             viewController.transitioningDelegate = self
         }
+        
         super.presentViewController(viewController, animated: true, completion: {
             self.reset()
             completion?()
         })
     }
     
-    final override public func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
-        self.presentViewController(viewControllerToPresent, duration: 0.3, completion: completion)
-    }
-    
-    public func fadeToViewController(viewController: UIViewController, duration: Double, completion: (() -> Void)?) {
-        self.isFading = true
-        if let vc = viewController as? BackgroundSeparableViewController { self.preparePresentation(vc) }
-        self.dismissViewControllerAnimated(true, duration: duration) {
+    public func fadeToViewController(viewController: UIViewController, duration: Double = 0.3, completion: (() -> Void)?) {
+        isFading = true
+        if let vc = viewController as? BackgroundSeparableViewController { preparePresentation(vc) }
+        dismissViewController(duration: duration) {
             self.presentViewController(viewController, duration: duration) {
                 self.isFading = false
                 completion?()
@@ -220,18 +206,18 @@ extension CustomPresentationViewController: CustomPresentable {
         }
     }
     
-    public func dismissViewControllerAnimated(flag: Bool, duration: Double, completion: (() -> Void)?) {
-        if let vc = self.presentedViewController as? BackgroundSeparableViewController { self.prepareDismissal(vc) }
+    final override public func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
+        dismissViewController(flag, completion: completion)
+    }
+    
+    public func dismissViewController(flag: Bool = true, style: PresentationStyle = .SlideUp(.EaseInCubic), duration: Double = 0.3, completion: (() -> Void)?) {
+        if let vc = presentedViewController as? BackgroundSeparableViewController { prepareDismissal(vc) }
         self.duration = duration
         
         super.dismissViewControllerAnimated(flag, completion: {
             if !self.isFading { self.reset() }
             completion?()
         })
-    }
-    
-    final override public func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
-        self.dismissViewControllerAnimated(flag, duration: 0.3, completion: completion)
     }
     
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -241,6 +227,8 @@ extension CustomPresentationViewController: CustomPresentable {
     public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self
     }
+    
+    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return duration }
     
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         func completeTransition() {
@@ -254,25 +242,23 @@ extension CustomPresentationViewController: CustomPresentable {
         if toVC.isBeingPresented() {    // Presentation
             let presentedVC = toVC as! BackgroundSeparableViewController
             
-            self.animatePresentation(presentedVC) {
+            animatePresentation(presentedVC) {
                 switch presentedVC.contentAnimation {
                 case .FadeIn, .FadeInOut:
                     presentedVC.contentView.alpha = 0.0
                     containerView.addSubview(presentedVC.contentView)
                     
-                    UIView.animateWithDuration(presentedVC.contentAnimationDuration, animations: {
-                        presentedVC.contentView.alpha = 1.0
-                        }, completion: { (complete) in
-                            self.background!.removeFromSuperview()
-                            
-                            presentedVC.view.addSubview(presentedVC.contentView)
-                            containerView.addSubview(toVC.view)
-                            completeTransition()
-                    })
+                    presentedVC.contentView.animateAlpha(1.0, duration: presentedVC.contentAnimationDuration) {
+                        self.background!.removeFromSuperview()
+                        
+                        presentedVC.view.addSubview(presentedVC.contentView)
+                        containerView.addSubview(presentedVC.view)
+                        completeTransition()
+                    }
                 default:
                     self.background!.removeFromSuperview()
                     
-                    containerView.addSubview(toVC.view)
+                    containerView.addSubview(presentedVC.view)
                     completeTransition()
                 }
             }
@@ -309,80 +295,89 @@ extension CustomPresentationViewController: CustomPresentable {
         }
     }
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval { return self.duration }
-    
     private func animatePresentation(presentedVC: BackgroundSeparableViewController, completion: () -> Void) {
-        if !self.isFading { self.background!.animateOpacity(1.0, duration: self.duration) }
-        let style = presentedVC.presentationStyle
-        switch style  {
-        case .Popup:
-            self.presentingContent!.transform = CGAffineTransformMakeScale(0.1, 0.1)
-            self.presentingContent!.hidden = false
+        if !isFading { background!.animateOpacity(1.0, duration: duration) }
+        
+        switch presentedVC.presentationStyle {
+        case .SlideUp(let function):
+            let targetY = presentedVC.targetFrame.origin.y
             
-            self.presentingContent!.animateScale2D(1.0, duration: self.duration, function: .EaseOutBack, completion: completion)
-        case .SlideUp, .SlideDown:
-            let targetY = presentedVC.contentViewFrame.origin.y
+            presentingContent!.frame.origin.y = Screen.bounds.height
+            presentingContent!.hidden = false
             
-            self.presentingContent!.frame.origin.y = style == .SlideUp ? Screen.bounds.endPoint.y : -Screen.bounds.endPoint.y
-            self.presentingContent!.hidden = false
+            presentingContent!.animateY(targetY, duration: duration, function: function ?? .EaseOutCubic, completion: completion)
             
-            self.presentingContent!.animateY(targetY, duration: self.duration, completion: completion)
-        case .SlideLeft, .SlideRight:
-            let targetX = presentedVC.contentViewFrame.origin.x
+        case .SlideDown(let function):
+            let targetY = presentedVC.targetFrame.origin.y
             
-            self.presentingContent!.frame.origin.x = style == .SlideLeft ? Screen.bounds.endPoint.x : -Screen.bounds.endPoint.x
-            self.presentingContent!.hidden = false
+            presentingContent!.frame.origin.y = -Screen.bounds.height
+            presentingContent!.hidden = false
             
-            self.presentingContent!.animateX(targetX, duration: self.duration, function: .EaseInOutCirc, completion: completion)
+            presentingContent!.animateY(targetY, duration: duration, function: function ?? .EaseOutCubic, completion: completion)
+        case .SlideLeft(let function):
+            let targetX = presentedVC.targetFrame.origin.x
+            
+            presentingContent!.frame.origin.x = Screen.bounds.width
+            presentingContent!.hidden = false
+            
+            presentingContent!.animateX(targetX, duration: duration, function: function ?? .EaseOutCubic, completion: completion)
+        case .SlideRight(let function):
+            let targetX = presentedVC.targetFrame.origin.x
+            
+            presentingContent!.frame.origin.x = -Screen.bounds.width
+            presentingContent!.hidden = false
+            
+            presentingContent!.animateX(targetX, duration: duration, function: function ?? .EaseOutCubic, completion: completion)
+        case .Popup(let function):
+            presentingContent!.transform = CGAffineTransformMakeScale(0.0, 0.0)
+            presentingContent!.hidden = false
+            
+            presentingContent!.animateScale2D(1.0, duration: duration, function: function ?? .EaseOutBack, completion: completion)
+        case .Overlay(let function):
+            let function = function ?? .EaseOutCubic
+            presentingContent!.transform = CGAffineTransformMakeScale(2.0, 2.0)
+            presentingContent!.hidden = false
+            presentingContent!.alpha = 0.0
+            
+            KRAnimation.chain(
+                presentingContent!.chainAlpha(1.0, duration: duration, function: function) + presentingContent!.chainScale(1.0, duration: duration, function: function)
+            ) {
+                completion()
+            }
+        case .Custom(let animClosure):
+            animClosure(completion)
         case .NoAnimation:
             completion()
-        case .Custom(let initialFrame, let finalFrame):
-            if initialFrame != nil { self.presentingContent!.frame = initialFrame! }
-            self.presentingContent!.hidden = false
-
-            UIView.animateWithDuration(self.duration, animations: {
-                if finalFrame != nil { self.presentingContent!.frame = finalFrame! }
-                self.presentationAnimation?(presentingContent: self.presentingContent!, background: self.background!)
-                }, completion: { if $0 { completion() } })
-        default:
-            self.presentingContent!.transform = CGAffineTransformMakeScale(2.0, 2.0)
-            self.presentingContent!.hidden = false
-            self.presentingContent!.alpha = 0.0
-            
-            UIView.animateWithDuration(self.duration, delay: 0.05, usingSpringWithDamping: 1.0, initialSpringVelocity: 2.0, options: .CurveEaseIn, animations: {
-                self.presentingContent!.alpha = 1.0
-                self.presentingContent!.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                }, completion: { if $0 { completion() }})
         }
     }
     
     private func animateDismissal(dismissedVC: BackgroundSeparableViewController, completion: () -> Void) {
-        if !self.isFading { self.background!.animateOpacity(0.0, duration: self.duration) }
+        if !isFading { background!.animateOpacity(0.0, duration: duration) }
         
         switch dismissedVC.presentationStyle {
-        case .Popup:
-            self.dismissingContent!.animateScale2D(0.0, duration: self.duration, function: .EaseInOutCubic, completion: completion)
-        case .SlideUp:
-            self.dismissingContent!.animateY(Screen.bounds.endPoint.y, duration: self.duration, function: .EaseInOutCirc, completion: completion)
-        case .SlideDown:
-            self.dismissingContent!.animateY(-Screen.bounds.endPoint.y, duration: self.duration, function: .EaseInOutCirc, completion: completion)
-        case .SlideLeft:
-            self.dismissingContent!.animateX(Screen.bounds.endPoint.x, duration: self.duration, function: .EaseInOutCirc, completion: completion)
-        case .SlideRight:
-            self.dismissingContent!.animateX(-Screen.bounds.endPoint.x, duration: self.duration, function: .EaseInOutCirc, completion: completion)
+        case .SlideUp(let function):
+            dismissingContent!.animateY(Screen.bounds.height, duration: duration, function: function ?? .EaseInCubic, completion: completion)
+        case .SlideDown(let function):
+            dismissingContent!.animateY(-Screen.bounds.height, duration: duration, function: function ?? .EaseInCubic, completion: completion)
+        case .SlideLeft(let function):
+            dismissingContent!.animateX(Screen.bounds.width, duration: duration, function: function ?? .EaseInCubic, completion: completion)
+        case .SlideRight(let function):
+            dismissingContent!.animateX(-Screen.bounds.width, duration: duration, function: function ?? .EaseInCubic, completion: completion)
+        case .Popup(let function):
+            dismissingContent!.animateScale2D(0.0, duration: duration, function: function ?? .EaseInCubic, completion: completion)
+        case .Overlay(let function):
+            let function = function ?? .EaseInCubic
+            KRAnimation.chain(
+                dismissingContent!.chainAlpha(0.0, duration: duration, function: function) + dismissingContent!.chainScale2D(2.0, duration: duration, function: function)
+            ) {
+                completion()
+            }
+        case .Custom(let animClosure):
+            animClosure(completion)
         case .NoAnimation:
             self.dismissingContent!.removeFromSuperview()
             completion()
-        case .Custom(let initialFrame, _):
-            UIView.animateWithDuration(self.duration, animations: {
-                if let initialFrame = initialFrame { self.dismissingContent!.frame = initialFrame }
-                self.dismissalAnimation?(dismissingContent: self.dismissingContent!, background: self.background!)
-                }, completion: { if $0 { self.dismissingContent!.removeFromSuperview(); completion() }})
-        default:
-            UIView.animateWithDuration(self.duration, delay: 0.05, usingSpringWithDamping: 1.0, initialSpringVelocity: 2.0, options: .CurveEaseIn, animations: {
-                self.dismissingContent!.alpha = 0.0
-                self.dismissingContent!.transform = CGAffineTransformMakeScale(2.0, 2.0)
-                }, completion: { if $0 { completion() }})
+            
         }
     }
 }
