@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import KRAnimationKit
 
 private typealias TransitionKey = String
 private extension TransitionKey {
