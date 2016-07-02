@@ -29,7 +29,7 @@ public class KRViewController: UIViewController {
         presentViewController(viewControllerToPresent, style: .SlideUp(.EaseInOutCubic), completion: completion)
     }
     
-    public func presentViewController(viewController: UIViewController, duration: Double = 0.3, style: KRTransitionStyle, completion: (() -> Void)?) {
+    public func presentViewController(viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle, completion: (() -> Void)?) {
         if let vc = viewController as? KRContentViewController {
             guard vc.destinationFrame != CGRectZero else {
                 fatalError("\(vc.dynamicType).destinationFrame not set.\n`destinationFrame` needs to be set in order to use KRPresentationStyles.")
@@ -42,7 +42,7 @@ public class KRViewController: UIViewController {
         super.presentViewController(viewController, animated: true, completion: completion)
     }
     
-    public func fadeToViewController(viewController: UIViewController, duration: Double = 0.3, style: KRTransitionStyle,  completion: (() -> Void)?) {
+    public func fadeToViewController(viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle,  completion: (() -> Void)?) {
         dismissViewController(duration: duration) {
             self.presentViewController(viewController, duration: duration, style: style, completion: completion)
         }
@@ -52,7 +52,7 @@ public class KRViewController: UIViewController {
         dismissViewController(flag, completion: completion)
     }
     
-    public func dismissViewController(flag: Bool = true, duration: Double = 0.3, completion: (() -> Void)?) {
+    public func dismissViewController(flag: Bool = true, duration: Double = 0.5, completion: (() -> Void)?) {
         super.dismissViewControllerAnimated(flag, completion: completion)
     }
 }

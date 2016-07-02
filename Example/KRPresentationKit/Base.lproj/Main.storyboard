@@ -103,7 +103,7 @@
                         <userDefinedRuntimeAttribute type="rect" keyPath="destinationFrame">
                             <rect key="value" x="166" y="242" width="437" height="539"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="useSnapshot" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="useSnapshot" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE2-Ry-m8J" userLabel="First Responder" sceneMemberID="firstResponder"/>

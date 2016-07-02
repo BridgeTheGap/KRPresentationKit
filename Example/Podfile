@@ -1,7 +1,6 @@
 use_frameworks!
 
 target 'KRPresentationKit_Example' do
-  pod 'KRAnimationKit'
   pod 'KRPresentationKit', :path => '../'
 
   # target 'KRPresentationKit_Tests' do
