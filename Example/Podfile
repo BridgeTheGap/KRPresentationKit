@@ -3,8 +3,8 @@ use_frameworks!
 target 'KRPresentationKit_Example' do
   pod 'KRPresentationKit', :path => '../'
 
-  # target 'KRPresentationKit_Tests' do
-  #   inherit! :search_paths
-  #   pod 'FBSnapshotTestCase'
-  # end
+   target 'KRPresentationKit_Tests' do
+     inherit! :search_paths
+     pod 'KRPresentationKit', :path => '../'
+   end
 end

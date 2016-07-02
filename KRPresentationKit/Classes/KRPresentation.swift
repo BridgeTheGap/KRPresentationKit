@@ -34,11 +34,12 @@ public class KRViewController: UIViewController {
             guard vc.destinationFrame != CGRectZero else {
                 fatalError("\(vc.dynamicType).destinationFrame not set.\n`destinationFrame` needs to be set in order to use KRPresentationStyles.")
             }
+            
             transitioner = KRTransitioner(style, duration: duration)
             vc.modalPresentationStyle = .Custom
             vc.transitioningDelegate = transitioner
         }
-            
+        
         super.presentViewController(viewController, animated: true, completion: completion)
     }
     

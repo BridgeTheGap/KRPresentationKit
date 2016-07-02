@@ -80,6 +80,7 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
     public var backgroundColor = UIColor(white: 0.0, alpha: 0.4)
     public var isPresenting: Bool!
     internal private(set) var presenter: KRPresentationController!
+    private var snapshot: UIView?
     
     public init(_ transitionStyle: KRTransitionStyle, duration: Double) {
         self.transitionStyle = transitionStyle
@@ -92,6 +93,7 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
         presenter = KRPresentationController(presentedViewController: presented, presentingViewController: presenting)
         presenter.backgroundView.backgroundColor = backgroundColor
         presenter.duration = duration
+        
         return presenter
     }
     
@@ -125,54 +127,79 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
             let view = animatingVC.view
             view.frame = destinationFrame
             
-            if useSnapshot {
+            if useSnapshot && snapshot == nil {
                 let (shadowOpacity, autoResizing) = (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints)
                 (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (0, true)
-                let snapshot = view.snapshotViewAfterScreenUpdates(true)
-                snapshot.frame = destinationFrame
+                snapshot = view.snapshotViewAfterScreenUpdates(true)
+                snapshot!.frame = destinationFrame
                 (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (shadowOpacity, autoResizing)
-                return snapshot
+                return snapshot!
             } else {
-                return view
+                return snapshot ?? view
             }
         }()
         containerView.addSubview(animatingView)
         
         if isPresenting! {
-            switch transitionStyle {
-            case .SlideUp(let f):
-                let function = f ?? .EaseInOutCubic
-                animatingView.frame.origin.y += containerView.frame.height
-                animatingView.animateY(destinationFrame.origin.y, duration: duration, function: function) {
-                    if useSnapshot {
-                        animatingView.removeFromSuperview()
-                        containerView.addSubview(transitionContext.viewForKey(TransitionKey.ToView)!)
-                    }
-                    completeTransition()
+            let completion = {
+                if useSnapshot {
+                    animatingView.removeFromSuperview()
+                    containerView.addSubview(transitionContext.viewForKey(TransitionKey.ToView)!)
                 }
-            default:
-                break
+                completeTransition()
             }
-        } else {
-            if useSnapshot { transitionContext.viewForKey(TransitionKey.FromView)!.removeFromSuperview() }
+            
+            var animations: [AnimationDescriptor]!
+            var function: FunctionType!
             
             switch transitionStyle {
             case .SlideUp(let f):
-                let function = f ?? .EaseInOutCubic
-                let destinationY = animatingView.frame.origin.y + containerView.frame.height
-                animatingView.animateY(destinationY, duration: duration, function: function) {
-                    animatingView.removeFromSuperview()
-                    completeTransition()
-                }
+                function = f ?? .EaseInOutCubic
+                animatingView.frame.origin.y += containerView.frame.height
+                animations = animatingView.chainY(destinationFrame.origin.y, duration: duration, function: function)
+
             default:
                 break
             }
+            
+            if !useSnapshot {
+                animatingView.layer.shadowOpacity = 0.0
+                animations = animations + animatingView.chainShadowOpacity(1.0, duration: duration)
+            }
+            
+            KRAnimation.chain(animations, completion: completion)
+        } else {
+            if useSnapshot { transitionContext.viewForKey(TransitionKey.FromView)!.removeFromSuperview() }
+            let completion = {
+                animatingView.removeFromSuperview()
+                completeTransition()
+            }
+            
+            var animations: [AnimationDescriptor]!
+            var function: FunctionType!
+            
+            switch transitionStyle {
+            case .SlideUp(let f):
+                function = f?.converseFunction() ?? .EaseInOutCubic
+                let destinationY = animatingView.frame.origin.y + containerView.frame.height
+                animations = animatingView.chainY(destinationY, duration: duration, function: function)
+
+            default:
+                break
+            }
+            
+            if !useSnapshot {
+                animations = animations + animatingView.chainShadowOpacity(0.0, duration: duration)
+            }
+            
+            KRAnimation.chain(animations, completion: completion)
         }
     }
     
     public func animationEnded(transitionCompleted: Bool) {
-        if transitionCompleted {
+        if !isPresenting && transitionCompleted {
             presenter = nil
+            snapshot = nil
         }
     }
 }

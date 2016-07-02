@@ -1,5 +1,5 @@
 PODS:
-  - KRAnimationKit (0.8.3):
+  - KRAnimationKit (0.8.6):
     - KRTimingFunction
   - KRPresentationKit (0.1.0):
     - KRAnimationKit
@@ -13,10 +13,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KRAnimationKit: c36764ae700cd16b929a0f645d3c5dcdb49ba136
+  KRAnimationKit: b1d7cd577ca9b518a631d8ddf1d53c17f3b5710a
   KRPresentationKit: 585e7ad6303018e469209fc8eac284a1939baba8
   KRTimingFunction: 78e502786e657c880a890b675633a766a54240a0
 
-PODFILE CHECKSUM: 206f563874109258ab71df93a9ea3f6580682872
+PODFILE CHECKSUM: 0cf34d4481d48f02055e9382c6bc83674ddc67e8
 
 COCOAPODS: 1.0.1
