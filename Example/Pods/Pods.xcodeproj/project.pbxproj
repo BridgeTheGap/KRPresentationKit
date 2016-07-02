@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031BAB821D26459A00131892 /* KRTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BAB811D26459A00131892 /* KRTransition.swift */; };
+		03BC56EC1D26828900E5B115 /* KRPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BC56E81D267F6B00E5B115 /* KRPresentation.swift */; };
 		1BD9134DC67EA80E89F861AB61B3A181 /* KRTimingFunction-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4E0476942EB64EC4142E15A88DB10A /* KRTimingFunction-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD8DE0AE37BB14AF0307903ADF8F5A5 /* KRTimingFunction-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8A0F3369B19F58882A2934A745BBD /* KRTimingFunction-dummy.m */; };
 		3D41005E71DAF73EA93AA57907E07F13 /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB7148A9555FE755478D565D161888F /* Convenience.swift */; };
@@ -70,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		029A24EB740890E51511551D8379D028 /* Convenience.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Convenience.swift; path = KRAnimationKit/Classes/Convenience.swift; sourceTree = "<group>"; };
+		031BAB811D26459A00131892 /* KRTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRTransition.swift; sourceTree = "<group>"; };
+		03BC56E81D267F6B00E5B115 /* KRPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRPresentation.swift; sourceTree = "<group>"; };
 		0B4E7FA6EE99EEED6B3A78F2108424B4 /* KRPresentationKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KRPresentationKit-dummy.m"; sourceTree = "<group>"; };
 		148010EB4CA7A5A63C8F160D9CFA3ED6 /* KRAnimationKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KRAnimationKit.xcconfig; sourceTree = "<group>"; };
 		1C1B263CF2F5FED885704A476DFED420 /* KRTimingFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KRTimingFunction.swift; path = KRTimingFunction/Classes/KRTimingFunction.swift; sourceTree = "<group>"; };
@@ -175,6 +179,8 @@
 			children = (
 				7DB7148A9555FE755478D565D161888F /* Convenience.swift */,
 				2D19D1FC3321D3236041E41ED5FBA137 /* CustomPresentation.swift */,
+				031BAB811D26459A00131892 /* KRTransition.swift */,
+				03BC56E81D267F6B00E5B115 /* KRPresentation.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -480,6 +486,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D41005E71DAF73EA93AA57907E07F13 /* Convenience.swift in Sources */,
+				03BC56EC1D26828900E5B115 /* KRPresentation.swift in Sources */,
+				031BAB821D26459A00131892 /* KRTransition.swift in Sources */,
 				E2D74974FCC296EDB9A1D46BB8977C8E /* CustomPresentation.swift in Sources */,
 				FE917C1357379A56E70F2D27887C5DB3 /* KRPresentationKit-dummy.m in Sources */,
 			);

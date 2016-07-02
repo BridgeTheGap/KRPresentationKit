@@ -9,7 +9,7 @@
 import UIKit
 import KRPresentationKit
 
-class ViewController: CustomPresentationViewController {
+class ViewController: KRViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,12 @@ class ViewController: CustomPresentationViewController {
     }
 
     @IBAction func presentAction(sender: AnyObject) {
-        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC")
-        presentViewController(pvc, completion: nil)
+        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
+        presentViewController(pvc, style: .SlideUp(.EaseInOutCubic), completion: nil)
+    }
+    
+    @IBAction func dismissSegue(segue: UIStoryboardSegue) {
+        
     }
 }
 

@@ -28,13 +28,6 @@ public enum PresentationStyle {
     case NoAnimation
 }
 
-public enum ContentAnimation {
-    case None
-    case FadeIn
-    case FadeInOut
-    case FadeOut
-}
-
 public protocol CustomPresentable: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {}
 
 public class BackgroundSeparableViewController: UIViewController {
@@ -60,7 +53,7 @@ public class BackgroundSeparableViewController: UIViewController {
     }
     
     public var presentationStyle: PresentationStyle = .SlideUp(.EaseOutCubic)
-    public var contentAnimation: ContentAnimation = .None
+    public var contentAnimation: ContentAnimationStyle = .None
     public var contentAnimationDuration = 0.3
     
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
