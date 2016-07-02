@@ -26,8 +26,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="KRPresentationKit_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7UZ-hY-ijn"/>
-                        <viewControllerLayoutGuide type="bottom" id="qDz-cn-ko9"/>
+                        <viewControllerLayoutGuide type="top" id="oph-aE-fFg"/>
+                        <viewControllerLayoutGuide type="bottom" id="hgG-oK-Btq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -57,8 +57,8 @@
             <objects>
                 <viewController storyboardIdentifier="PresentedVC" id="Ens-Y7-mX8" customClass="PresentedViewController" customModule="KRPresentationKit_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xN5-tU-N9W"/>
-                        <viewControllerLayoutGuide type="bottom" id="vC0-lS-8HE"/>
+                        <viewControllerLayoutGuide type="top" id="Rm5-41-bB2"/>
+                        <viewControllerLayoutGuide type="bottom" id="CSv-sz-VfY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4y4-ME-Qaf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -68,21 +68,21 @@
                                 <rect key="frame" x="270" y="270" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="aRn-Xq-T1G"/>
-                                    <constraint firstAttribute="width" constant="60" id="uPz-0w-f0O"/>
+                                    <constraint firstAttribute="width" constant="60" id="acf-zS-Hfk"/>
+                                    <constraint firstAttribute="height" constant="60" id="j5V-G0-656"/>
                                 </constraints>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bHH-gl-Ezb" kind="unwind" unwindAction="dismissSegue:" id="psJ-93-kMH"/>
+                                    <action selector="dismissAction:" destination="Ens-Y7-mX8" eventType="touchUpInside" id="3gi-Rr-QlP"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Thh-P7-TVB" firstAttribute="centerY" secondItem="4y4-ME-Qaf" secondAttribute="centerY" id="EEM-TX-sqi"/>
-                            <constraint firstItem="Thh-P7-TVB" firstAttribute="centerX" secondItem="4y4-ME-Qaf" secondAttribute="centerX" id="XiW-aq-QuR"/>
+                            <constraint firstItem="Thh-P7-TVB" firstAttribute="centerY" secondItem="4y4-ME-Qaf" secondAttribute="centerY" id="43O-Zc-y4C"/>
+                            <constraint firstItem="Thh-P7-TVB" firstAttribute="centerX" secondItem="4y4-ME-Qaf" secondAttribute="centerX" id="a7n-Os-Sg7"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -103,11 +103,9 @@
                         <userDefinedRuntimeAttribute type="rect" keyPath="destinationFrame">
                             <rect key="value" x="166" y="242" width="437" height="539"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="useSnapshot" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE2-Ry-m8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="bHH-gl-Ezb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="952" y="1420"/>
         </scene>

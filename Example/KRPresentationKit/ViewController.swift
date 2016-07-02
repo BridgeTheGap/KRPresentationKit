@@ -23,7 +23,7 @@ class ViewController: KRViewController {
 
     @IBAction func presentAction(sender: AnyObject) {
         let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
-        presentViewController(pvc, style: .SlideUp(.EaseOutBack), completion: nil)
+        presentViewController(pvc, style: .Popup(.EaseOutBack), completion: nil)
     }
     
     @IBAction func dismissSegue(segue: UIStoryboardSegue) {

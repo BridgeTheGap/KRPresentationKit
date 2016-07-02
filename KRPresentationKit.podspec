@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KRPresentationKit'
-  s.version          = '0.1.0'
+  s.version          = '0.6.0'
   s.summary          = 'A custom animation modal presentation library.'
 
 # This description is used to generate tags and improve search results.
@@ -33,6 +33,7 @@ as well as the functionality to define a custom animation.
 
   s.source_files = 'KRPresentationKit/Classes/**/*'
   s.dependency 'KRAnimationKit'
+
   # s.resource_bundles = {
   #   'KRPresentationKit' => ['KRPresentationKit/Assets/*.png']
   # }

@@ -35,6 +35,15 @@ public class KRViewController: UIViewController {
                 fatalError("\(vc.dynamicType).destinationFrame not set.\n`destinationFrame` needs to be set in order to use KRPresentationStyles.")
             }
             
+            switch style {
+            case .Overlay, .Popup:
+                if !vc.useSnapshot {
+                    print("\(style) manipulates transform, which in turn mangles the appearance of views using auto layout. `\(vc.dynamicType).useSnapshot` will be set to `true`.");
+                    vc.useSnapshot = true
+                }
+            default: break
+            }
+            
             transitioner = KRTransitioner(style, duration: duration)
             vc.modalPresentationStyle = .Custom
             vc.transitioningDelegate = transitioner
