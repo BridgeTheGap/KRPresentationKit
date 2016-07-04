@@ -174,10 +174,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
         
         if isPresenting {
             completion = {
-                if useSnapshot {
-                    animatingView.removeFromSuperview()
-                    containerView.addSubview(transitionContext.viewForKey(TransitionKey.ToView)!)
-                }
+                if useSnapshot { containerView.addSubview(transitionContext.viewForKey(TransitionKey.ToView)!) }
                 transitionContext.completeTransition(true)
             }
             
@@ -202,9 +199,10 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     }
     
     public func animationEnded(transitionCompleted: Bool) {
+        snapshot?.removeFromSuperview()
+        
         if !isPresenting && transitionCompleted {
             presenter = nil
-            snapshot?.removeFromSuperview()
             snapshot = nil
         }
     }
@@ -264,6 +262,7 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
                 snapshot = view.snapshotViewAfterScreenUpdates(true)
                 snapshot!.frame = finalFrame
                 (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (shadowOpacity, autoResizing)
+                view.hidden = true
                 return snapshot!
             } else {
                 return snapshot ?? view
@@ -279,6 +278,7 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
         
         if isPresenting {
             completion = {
+                if useSnapshot { animatingVC.contentView.hidden = false }
                 bgView.insertSubview(animatingVC.contentView, atIndex: contentViewIndex)
                 animatingVC.contentView.translatesAutoresizingMaskIntoConstraints = contentViewAutoResizing
                 NSLayoutConstraint.activateConstraints(constraints)
@@ -308,9 +308,10 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
     }
     
     public func animationEnded(transitionCompleted: Bool) {
+        snapshot?.removeFromSuperview()
+        
         if !isPresenting && transitionCompleted {
             presenter = nil
-            snapshot?.removeFromSuperview()
             snapshot = nil
         }
     }

@@ -37,7 +37,7 @@ class ViewController: KRViewController {
             }
         }
         bvc.loadView()
-        presentViewController(bvc, style: .SlideUp(.EaseOutQuart), completion: nil)
+        presentViewController(bvc, style: .Popup(.EaseOutQuart), completion: nil)
     }
     
     @IBAction func dismissSegue(segue: UIStoryboardSegue) {
