@@ -1,5 +1,5 @@
 //
-//  KRPresentation.swift
+//  KRViewController.swift
 //  Pods
 //
 //  Created by Joshua Park on 7/1/16.
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KRAnimationKit
 
 public enum ContentAnimationStyle {
     case None
@@ -15,15 +16,27 @@ public enum ContentAnimationStyle {
     case FadeOut
 }
 
-public class KRContentViewController: UIViewController {
+public protocol ContentAnimatable {
+    var destinationFrame: CGRect { get set }
+    var useSnapshot: Bool { get set }
+    var viewAnimDuration: Double? { get set }
+    var viewAnimStyle: ContentAnimationStyle { get set }
+}
+
+public class KRContentViewController: UIViewController, ContentAnimatable {
     @IBInspectable public var destinationFrame: CGRect = CGRectZero
     @IBInspectable public var useSnapshot: Bool = false
     public var viewAnimDuration: Double?
     public var viewAnimStyle: ContentAnimationStyle = .None
 }
 
+public class KROverlayViewController: KRContentViewController {
+    @IBOutlet public weak var contentView: UIView!
+    public var backgroundAnim: ((Double, Bool) -> [AnimationDescriptor])!
+}
+
 public class KRViewController: UIViewController {
-    var transitioner: KRTransitioner?
+    var transitioner: protocol<UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>!
     
     override final public func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
         presentViewController(viewControllerToPresent, style: .SlideUp(.EaseInOutCubic), completion: completion)
@@ -44,7 +57,15 @@ public class KRViewController: UIViewController {
             default: break
             }
             
-            transitioner = KRTransitioner(style, duration: duration)
+            if let overlayVC = vc as? KROverlayViewController {
+                guard overlayVC.contentView != nil else {
+                    fatalError("\(vc.dynamicType).contentView not set.\n`contentView` needs to be set in order to use KRPresentationStyles.")
+                }
+                transitioner = KROverlayTransitioner(style, duration: duration)
+            } else {
+                transitioner = KRContentTransitioner(style, duration: duration)
+            }
+            
             vc.modalPresentationStyle = .Custom
             vc.transitioningDelegate = transitioner
         }

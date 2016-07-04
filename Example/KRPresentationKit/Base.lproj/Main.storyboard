@@ -33,24 +33,109 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-gt-BcF">
-                                <rect key="frame" x="344" y="857" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-gt-BcF">
+                                <rect key="frame" x="30" y="490" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="PRESENT">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="YEx-ot-8U3"/>
+                                    <constraint firstAttribute="width" constant="80" id="rxO-Zs-tU9"/>
+                                </constraints>
+                                <state key="normal" title="Content">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="presentAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZjN-Oa-yDq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vta-fQ-Htr">
+                                <rect key="frame" x="118" y="490" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="2lo-40-aGV"/>
+                                    <constraint firstAttribute="height" constant="80" id="ctQ-88-b1Z"/>
+                                </constraints>
+                                <state key="normal" title="BG">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="presentBGAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f5A-kP-ekv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hgG-oK-Btq" firstAttribute="top" secondItem="7HC-gt-BcF" secondAttribute="bottom" constant="30" id="94k-TI-mSr"/>
+                            <constraint firstItem="Vta-fQ-Htr" firstAttribute="centerY" secondItem="7HC-gt-BcF" secondAttribute="centerY" id="Zjd-wm-O2G"/>
+                            <constraint firstItem="7HC-gt-BcF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="qx7-XZ-toV"/>
+                            <constraint firstItem="Vta-fQ-Htr" firstAttribute="leading" secondItem="7HC-gt-BcF" secondAttribute="trailing" constant="8" id="vFl-fm-OmG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="D3A-e8-XAL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961.71875" y="684.9609375"/>
+        </scene>
+        <!--Background View Controller-->
+        <scene sceneID="wrd-Q4-JTb">
+            <objects>
+                <viewController storyboardIdentifier="BackgroundVC" id="ONk-1z-GUH" customClass="BackgroundViewController" customModule="KRPresentationKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Flw-Xi-vcd"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Vt-Ba-Hia"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ogy-Qz-Vv4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZQ-7b-Eae">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saN-Sc-d8J">
+                                        <rect key="frame" x="90" y="34" width="60" height="60"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Hide">
+                                            <color key="titleColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hideAction:" destination="ONk-1z-GUH" eventType="touchUpInside" id="p7O-XT-bj4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="uTE-dz-aDd"/>
+                                    <constraint firstAttribute="height" constant="128" id="zfb-Yv-WaN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerY" secondItem="Ogy-Qz-Vv4" secondAttribute="centerY" id="R72-gE-Vv7"/>
+                            <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerX" secondItem="Ogy-Qz-Vv4" secondAttribute="centerX" id="Rfo-A9-9Un"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="e2Z-NU-Tlv" appends="YES" id="GkD-5T-htd"/>
+                        </connections>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="rect" keyPath="destinationFrame">
+                            <rect key="value" x="264" y="448" width="240" height="128"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="contentView" destination="7ZQ-7b-Eae" id="fo7-MA-w5K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lcj-LX-GsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="e2Z-NU-Tlv">
+                    <connections>
+                        <action selector="hideAction:" destination="ONk-1z-GUH" id="N6x-dh-Jhg"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="221" y="1420"/>
         </scene>
         <!--Presented View Controller-->
         <scene sceneID="hM4-pH-ORQ">

@@ -26,6 +26,20 @@ class ViewController: KRViewController {
         presentViewController(pvc, style: .Popup(.EaseOutBack), completion: nil)
     }
     
+    @IBAction func presentBGAction(sender: AnyObject) {
+        let bvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BackgroundVC") as! BackgroundViewController
+        bvc.backgroundAnim = {
+            if $1 {
+                bvc.view.alpha = 0.0
+                return bvc.view.chainAlpha(1.0, duration: $0)
+            } else {
+                return bvc.view.chainAlpha(0.0, duration: $0)
+            }
+        }
+        bvc.loadView()
+        presentViewController(bvc, style: .SlideUp(.EaseOutQuart), completion: nil)
+    }
+    
     @IBAction func dismissSegue(segue: UIStoryboardSegue) {
         
     }
