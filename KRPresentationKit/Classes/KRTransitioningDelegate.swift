@@ -31,7 +31,6 @@ internal protocol KRTransitioningDelegate: UIViewControllerTransitioningDelegate
     var transitionStyle: KRTransitionStyle { get set }
     var duration: Double { get set }
     var isPresenting: Bool { get set }
-    
 }
 
 private extension KRTransitioningDelegate {
@@ -224,6 +223,7 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
     
     public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
         presenter = KRPresentationController(presentedViewController: presented, presentingViewController: presenting)
+        
         return presenter
     }
     

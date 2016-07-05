@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -88,6 +89,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiV-RT-XOb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="r4X-VB-QkR">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZQ-7b-Eae">
                                 <rect key="frame" x="180" y="236" width="240" height="128"/>
                                 <subviews>
@@ -112,12 +121,13 @@
                         <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="FiV-RT-XOb" secondAttribute="bottom" id="2kX-1r-FzZ"/>
+                            <constraint firstItem="FiV-RT-XOb" firstAttribute="leading" secondItem="Ogy-Qz-Vv4" secondAttribute="leading" id="F7O-8y-opq"/>
                             <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerY" secondItem="Ogy-Qz-Vv4" secondAttribute="centerY" id="R72-gE-Vv7"/>
                             <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerX" secondItem="Ogy-Qz-Vv4" secondAttribute="centerX" id="Rfo-A9-9Un"/>
+                            <constraint firstAttribute="trailing" secondItem="FiV-RT-XOb" secondAttribute="trailing" id="cfs-LI-40b"/>
+                            <constraint firstItem="FiV-RT-XOb" firstAttribute="top" secondItem="Ogy-Qz-Vv4" secondAttribute="topMargin" id="wn5-rT-2v5"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="e2Z-NU-Tlv" appends="YES" id="GkD-5T-htd"/>
-                        </connections>
                     </view>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="rect" keyPath="destinationFrame">
@@ -129,11 +139,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcj-LX-GsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="e2Z-NU-Tlv">
-                    <connections>
-                        <action selector="hideAction:" destination="ONk-1z-GUH" id="N6x-dh-Jhg"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="221" y="1420"/>
         </scene>

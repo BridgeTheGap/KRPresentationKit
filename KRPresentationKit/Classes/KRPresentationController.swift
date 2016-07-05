@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class KRPresentationController: UIPresentationController {
+public class KRPresentationController: UIPresentationController, UIGestureRecognizerDelegate {
     override public func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
         presentedViewController.view.frame = frameOfPresentedViewInContainerView()
@@ -20,6 +20,23 @@ public class KRPresentationController: UIPresentationController {
     
     override public func frameOfPresentedViewInContainerView() -> CGRect {
         return containerView!.bounds
+    }
+    
+    override public func presentationTransitionWillBegin() {
+        if (containerView!.gestureRecognizers ?? []).isEmpty {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(bgTapAction(_:)))
+            tap.delegate = self
+            containerView!.addGestureRecognizer(tap)
+        }
+    }
+    
+    // MARK: - Gesture recognizer
+    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        return touch.view! !== (presentedViewController as! KROverlayViewController).contentView
+    }
+    
+    @objc private func bgTapAction(gr: UITapGestureRecognizer) {
+        presentingViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -55,11 +72,5 @@ public class KRContentPresentationController: KRPresentationController {
         presentedViewController.transitionCoordinator()!.animateAlongsideTransition({ (context) in
             self.backgroundView.animateAlpha(0.0, duration: self.duration)
             }, completion: nil)
-    }
-    
-    // MARK: - Private
-    
-    @objc private func bgTapAction(gr: UITapGestureRecognizer) {
-        presentingViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }

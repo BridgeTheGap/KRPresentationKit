@@ -58,6 +58,7 @@ public class KRViewController: UIViewController {
             }
             
             if let overlayVC = vc as? KROverlayViewController {
+                overlayVC.loadView()
                 guard overlayVC.contentView != nil else {
                     fatalError("\(vc.dynamicType).contentView not set.\n`contentView` needs to be set in order to use KRPresentationStyles.")
                 }
