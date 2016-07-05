@@ -21,6 +21,7 @@ public protocol ContentAnimatable {
     var useSnapshot: Bool { get set }
     var viewAnimDuration: Double? { get set }
     var viewAnimStyle: ContentAnimationStyle { get set }
+    weak var sourceVC: KRViewController? { get set }
 }
 
 public class KRContentViewController: UIViewController, ContentAnimatable {
@@ -28,6 +29,7 @@ public class KRContentViewController: UIViewController, ContentAnimatable {
     @IBInspectable public var useSnapshot: Bool = false
     public var viewAnimDuration: Double?
     public var viewAnimStyle: ContentAnimationStyle = .None
+    public weak var sourceVC: KRViewController?
 }
 
 public class KROverlayViewController: KRContentViewController {
@@ -36,13 +38,21 @@ public class KROverlayViewController: KRContentViewController {
 }
 
 public class KRViewController: UIViewController {
-    var transitioner: protocol<UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>!
+    var transitioner: KRTransitioningDelegate?
     
     override final public func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
-        presentViewController(viewControllerToPresent, style: .SlideUp(.EaseInOutCubic), completion: completion)
+        if flag {
+            presentViewController(viewControllerToPresent, style: .SlideUp(.EaseInOutCubic), completion: completion)
+        } else {
+            super.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
+        }
     }
     
     public func presentViewController(viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle, completion: (() -> Void)?) {
+        presentViewController(viewController, duration: duration, style: style, isFading: false, completion: completion)
+    }
+    
+    private func presentViewController(viewController: UIViewController, duration: Double, style: KRTransitionStyle, isFading: Bool, completion: (() -> Void)?) {
         if let vc = viewController as? KRContentViewController {
             guard vc.destinationFrame != CGRectZero else {
                 fatalError("\(vc.dynamicType).destinationFrame not set.\n`destinationFrame` needs to be set in order to use KRPresentationStyles.")
@@ -64,9 +74,12 @@ public class KRViewController: UIViewController {
                 }
                 transitioner = KROverlayTransitioner(style, duration: duration)
             } else {
-                transitioner = KRContentTransitioner(style, duration: duration)
+                if !isFading {
+                    transitioner = KRContentTransitioner(style, duration: duration)
+                }
             }
             
+            vc.sourceVC = self
             vc.modalPresentationStyle = .Custom
             vc.transitioningDelegate = transitioner
         }
@@ -75,16 +88,12 @@ public class KRViewController: UIViewController {
     }
     
     public func fadeToViewController(viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle,  completion: (() -> Void)?) {
-        dismissViewController(duration: duration) {
-            self.presentViewController(viewController, duration: duration, style: style, completion: completion)
+        if let transitioner = presentedViewController!.transitioningDelegate as? KRContentTransitioner {
+            transitioner.isFading = true
         }
-    }
-    
-    final override public func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
-        dismissViewController(flag, completion: completion)
-    }
-    
-    public func dismissViewController(flag: Bool = true, duration: Double = 0.5, completion: (() -> Void)?) {
-        super.dismissViewControllerAnimated(flag, completion: completion)
+        
+        dismissViewControllerAnimated(true) {
+            self.presentViewController(viewController, duration: duration, style: style, isFading: true, completion: completion)
+        }
     }
 }

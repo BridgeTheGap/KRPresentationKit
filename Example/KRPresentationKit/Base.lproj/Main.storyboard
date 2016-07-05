@@ -154,14 +154,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUq-A4-FNd">
+                                <rect key="frame" x="230" y="270" width="60" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="JOv-qi-yd8"/>
+                                    <constraint firstAttribute="width" constant="60" id="x1e-QG-QUK"/>
+                                </constraints>
+                                <state key="normal" title="Switch">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchAction:" destination="Ens-Y7-mX8" eventType="touchUpInside" id="zKX-x5-zB1"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thh-P7-TVB">
-                                <rect key="frame" x="270" y="270" width="60" height="60"/>
+                                <rect key="frame" x="310" y="270" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="acf-zS-Hfk"/>
                                     <constraint firstAttribute="height" constant="60" id="j5V-G0-656"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Dismiss">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -172,7 +186,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Thh-P7-TVB" firstAttribute="centerY" secondItem="4y4-ME-Qaf" secondAttribute="centerY" id="43O-Zc-y4C"/>
-                            <constraint firstItem="Thh-P7-TVB" firstAttribute="centerX" secondItem="4y4-ME-Qaf" secondAttribute="centerX" id="a7n-Os-Sg7"/>
+                            <constraint firstAttribute="centerX" secondItem="eUq-A4-FNd" secondAttribute="centerX" constant="40" id="K7M-19-Lnd"/>
+                            <constraint firstItem="Thh-P7-TVB" firstAttribute="centerX" secondItem="4y4-ME-Qaf" secondAttribute="centerX" constant="40" id="a7n-Os-Sg7"/>
+                            <constraint firstItem="eUq-A4-FNd" firstAttribute="centerY" secondItem="4y4-ME-Qaf" secondAttribute="centerY" id="lg2-jp-4Xq"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

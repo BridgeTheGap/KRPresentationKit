@@ -41,14 +41,21 @@ public class KRPresentationController: UIPresentationController, UIGestureRecogn
 }
 
 public class KRContentPresentationController: KRPresentationController {
-    var backgroundView = UIView()
-    var duration: Double!
+    var backgroundView = UIView() {
+        didSet {
+            backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bgTapAction(_:))))
+        }
+    }
     
-    override public init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
+    public init(presentedViewController: UIViewController, presentingViewController: UIViewController, backgroundView: UIView) {
         super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
         
-        backgroundView.alpha = 0.0
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bgTapAction(_:))))
+        self.backgroundView = backgroundView
+    }
+    
+    convenience override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
+        self.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController, backgroundView: UIView())
     }
     
     override public func containerViewWillLayoutSubviews() {
@@ -61,16 +68,28 @@ public class KRContentPresentationController: KRPresentationController {
     }
     
     override public func presentationTransitionWillBegin() {
-        containerView!.insertSubview(backgroundView, atIndex: 0)
+        let transitioningDelegate = presentedViewController.transitioningDelegate as! KRContentTransitioner
         
-        presentedViewController.transitionCoordinator()!.animateAlongsideTransition({ (context) in
-            self.backgroundView.animateAlpha(1.0, duration: self.duration)
-            }, completion: nil)
+        if transitioningDelegate.isFading {
+            containerView!.insertSubview(backgroundView, atIndex: 0)
+        } else {
+            backgroundView.alpha = 0.0
+            containerView!.insertSubview(backgroundView, atIndex: 0)
+            presentedViewController.transitionCoordinator()!.animateAlongsideTransition({ (context) in
+                self.backgroundView.animateAlpha(1.0, duration: transitioningDelegate.duration)
+                }, completion: nil)
+        }
     }
     
     override public func dismissalTransitionWillBegin() {
-        presentedViewController.transitionCoordinator()!.animateAlongsideTransition({ (context) in
-            self.backgroundView.animateAlpha(0.0, duration: self.duration)
-            }, completion: nil)
+        let transitioningDelegate = presentedViewController.transitioningDelegate as! KRContentTransitioner
+        
+        if transitioningDelegate.isFading {
+            presentingViewController.view.addSubview(backgroundView)
+        } else {
+            presentedViewController.transitionCoordinator()!.animateAlongsideTransition({ (context) in
+                self.backgroundView.animateAlpha(0.0, duration: transitioningDelegate.duration)
+                }, completion: nil)
+        }
     }
 }

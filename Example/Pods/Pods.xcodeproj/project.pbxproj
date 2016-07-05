@@ -404,8 +404,8 @@
 				6159C371AFC06ED8366914FCBD7E43AC /* Convenience.swift */,
 				48D4E67B8A12801238FB56807CA0BD68 /* CustomPresentation.swift */,
 				DA19FE74FBD4636CA332B3F8D25C67C3 /* KRViewController.swift */,
-				8426AD48C0DF55A4D4A8EBC5958E718D /* KRPresentationController.swift */,
 				ECC8563C28A977AF1F9F44FCC4DA711C /* KRTransitioningDelegate.swift */,
+				8426AD48C0DF55A4D4A8EBC5958E718D /* KRPresentationController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

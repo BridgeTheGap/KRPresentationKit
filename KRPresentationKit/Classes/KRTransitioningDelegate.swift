@@ -112,6 +112,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     public var duration: Double
     public var backgroundColor = UIColor(white: 0.0, alpha: 0.4)
     public var isPresenting: Bool = true
+    public var isFading: Bool = false
     internal private(set) var presenter: KRContentPresentationController!
     private var snapshot: UIView?
     
@@ -123,14 +124,14 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     // MARK: - Transitioning delegate
     
     public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        presenter = KRContentPresentationController(presentedViewController: presented, presentingViewController: presenting)
+        presenter = KRContentPresentationController(presentedViewController: presented, presentingViewController: presenting, backgroundView: isFading ? presenter.backgroundView : UIView())
         presenter.backgroundView.backgroundColor = backgroundColor
-        presenter.duration = duration
         
         return presenter
     }
     
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        isPresenting = true
         return self
     }
     
@@ -175,6 +176,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
             completion = {
                 if useSnapshot { containerView.addSubview(transitionContext.viewForKey(TransitionKey.ToView)!) }
                 transitionContext.completeTransition(true)
+                self.isFading = false
             }
             
             if !useSnapshot && animatingView.layer.shadowOpacity > 0.0 {
@@ -184,6 +186,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
             }
         } else {
             if useSnapshot { transitionContext.viewForKey(TransitionKey.FromView)!.removeFromSuperview() }
+            
             completion = {
                 animatingView.removeFromSuperview()
                 transitionContext.completeTransition(true)
@@ -199,11 +202,6 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     
     public func animationEnded(transitionCompleted: Bool) {
         snapshot?.removeFromSuperview()
-        
-        if !isPresenting && transitionCompleted {
-            presenter = nil
-            snapshot = nil
-        }
     }
 }
 
@@ -228,6 +226,7 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
     }
     
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        isPresenting = true
         return self
     }
     
@@ -309,10 +308,5 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
     
     public func animationEnded(transitionCompleted: Bool) {
         snapshot?.removeFromSuperview()
-        
-        if !isPresenting && transitionCompleted {
-            presenter = nil
-            snapshot = nil
-        }
     }
 }
