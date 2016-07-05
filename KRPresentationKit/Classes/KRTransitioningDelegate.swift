@@ -174,7 +174,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
         
         if isPresenting {
             completion = {
-                if useSnapshot { containerView.addSubview(transitionContext.viewForKey(TransitionKey.ToView)!) }
+                if useSnapshot { containerView.addSubview(animatingVC.view) }
                 transitionContext.completeTransition(true)
                 self.isFading = false
             }
@@ -185,11 +185,12 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
                 animations = animations + animatingView.chainShadowOpacity(shadowOpacity, duration: duration)
             }
         } else {
-            if useSnapshot { transitionContext.viewForKey(TransitionKey.FromView)!.removeFromSuperview() }
+            if useSnapshot { animatingVC.view.removeFromSuperview() }
             
             completion = {
                 animatingView.removeFromSuperview()
                 transitionContext.completeTransition(true)
+                self.snapshot = nil
             }
             
             if !useSnapshot && animatingView.layer.shadowOpacity > 0.0 {

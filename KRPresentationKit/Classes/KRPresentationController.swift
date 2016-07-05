@@ -41,11 +41,7 @@ public class KRPresentationController: UIPresentationController, UIGestureRecogn
 }
 
 public class KRContentPresentationController: KRPresentationController {
-    var backgroundView = UIView() {
-        didSet {
-            backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bgTapAction(_:))))
-        }
-    }
+    var backgroundView: UIView!
     
     public init(presentedViewController: UIViewController, presentingViewController: UIViewController, backgroundView: UIView) {
         super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)

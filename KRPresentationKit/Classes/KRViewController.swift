@@ -74,7 +74,9 @@ public class KRViewController: UIViewController {
                 }
                 transitioner = KROverlayTransitioner(style, duration: duration)
             } else {
-                if !isFading {
+                if isFading {
+                    transitioner!.transitionStyle = style
+                } else {
                     transitioner = KRContentTransitioner(style, duration: duration)
                 }
             }
@@ -91,7 +93,7 @@ public class KRViewController: UIViewController {
         if let transitioner = presentedViewController!.transitioningDelegate as? KRContentTransitioner {
             transitioner.isFading = true
         }
-        
+
         dismissViewControllerAnimated(true) {
             self.presentViewController(viewController, duration: duration, style: style, isFading: true, completion: completion)
         }
