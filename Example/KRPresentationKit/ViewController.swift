@@ -22,21 +22,34 @@ class ViewController: KRViewController {
     }
 
     @IBAction func presentAction(sender: AnyObject) {
-        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
-        presentViewController(pvc, style: .Popup(.EaseOutBack), completion: nil)
+        if presentedViewController == nil {
+            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
+            pvc.sender = sender
+            presentViewController(pvc, style: .Popup(.EaseOutBack), completion: nil)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func presentBGAction(sender: AnyObject) {
-        let bvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BackgroundVC") as! BackgroundViewController
-        bvc.backgroundAnim = {
-            if $1 {
-                bvc.view.alpha = 0.0
-                return bvc.view.chainAlpha(1.0, duration: $0)
-            } else {
-                return bvc.view.chainAlpha(0.0, duration: $0)
+        if presentedViewController == nil {
+            let bvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BackgroundVC") as! BackgroundViewController
+            let view = bvc.view as! KRView
+            view.sender = sender
+            view.allowsUserInteraction = true
+            
+            bvc.backgroundAnim = {
+                if $1 {
+                    bvc.view.alpha = 0.0
+                    return bvc.view.chainAlpha(1.0, duration: $0)
+                } else {
+                    return bvc.view.chainAlpha(0.0, duration: $0)
+                }
             }
+            presentViewController(bvc, style: .Popup(.EaseOutBack), completion: nil)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
         }
-        presentViewController(bvc, style: .Popup(.EaseOutBack), completion: nil)
     }
     
     @IBAction func dismissSegue(segue: UIStoryboardSegue) {

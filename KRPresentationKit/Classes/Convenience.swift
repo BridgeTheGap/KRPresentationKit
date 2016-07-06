@@ -23,3 +23,9 @@ internal extension CGRect {
         }
     }
 }
+
+internal extension CGColor {
+    func getUIColor() -> UIColor {
+        return UIColor(CGColor: self)
+    }
+}

@@ -30,6 +30,7 @@ public class KRContentViewController: UIViewController, ContentAnimatable {
     public var viewAnimDuration: Double?
     public var viewAnimStyle: ContentAnimationStyle = .None
     public weak var sourceVC: KRViewController?
+    public weak var sender: AnyObject?
 }
 
 public class KROverlayViewController: KRContentViewController {
@@ -68,7 +69,9 @@ public class KRViewController: UIViewController {
             }
             
             if let overlayVC = vc as? KROverlayViewController {
+                let sender = (overlayVC.view as! KRView).sender
                 overlayVC.loadView()
+                (overlayVC.view as! KRView).sender = sender
                 guard overlayVC.contentView != nil else {
                     fatalError("\(vc.dynamicType).contentView not set.\n`contentView` needs to be set in order to use KRPresentationStyles.")
                 }

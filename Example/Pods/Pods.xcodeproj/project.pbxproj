@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		039F9F241D2BA99200E0366C /* KRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039F9F231D2BA99200E0366C /* KRView.swift */; };
 		0DC0C6ABABA748337EE6FAE933B68442 /* Pods-KRPresentationKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4335566D53B600501FDC4A5F53914938 /* Pods-KRPresentationKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0FF13529600C5BBA4AD4253C4F71E82D /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB8B86DE582203C9D4D551AF0548543 /* Animation.swift */; };
 		100E6D60E1644DD1460BF1AF239121C4 /* KRAnimationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A336A3B12DE0118C5F162577334F5E0 /* KRAnimationKit.framework */; };
@@ -106,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		00C678038A735E89F44FCEB2A51777A6 /* KRAnimationKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KRAnimationKit.xcconfig; sourceTree = "<group>"; };
+		039F9F231D2BA99200E0366C /* KRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRView.swift; sourceTree = "<group>"; };
 		0768E8DA504171A634D7651825A83011 /* KRAnimationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KRAnimationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D8B745F9E1E5B3E52D330CDAFC5F52 /* Pods-KRPresentationKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		0B4E7FA6EE99EEED6B3A78F2108424B4 /* KRPresentationKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KRPresentationKit-dummy.m"; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			children = (
 				6159C371AFC06ED8366914FCBD7E43AC /* Convenience.swift */,
 				48D4E67B8A12801238FB56807CA0BD68 /* CustomPresentation.swift */,
+				039F9F231D2BA99200E0366C /* KRView.swift */,
 				DA19FE74FBD4636CA332B3F8D25C67C3 /* KRViewController.swift */,
 				ECC8563C28A977AF1F9F44FCC4DA711C /* KRTransitioningDelegate.swift */,
 				8426AD48C0DF55A4D4A8EBC5958E718D /* KRPresentationController.swift */,
@@ -606,6 +609,7 @@
 				6B77B01D7DC3116366D664CE7D7761EE /* CustomPresentation.swift in Sources */,
 				8910E709D8FAFB783B66718EB2EE9CEB /* KRPresentationController.swift in Sources */,
 				C4E526FDF14BC49371B344018FA16265 /* KRPresentationKit-dummy.m in Sources */,
+				039F9F241D2BA99200E0366C /* KRView.swift in Sources */,
 				FC7CD98C9EE0F05F5A907475EDC3827A /* KRTransitioningDelegate.swift in Sources */,
 				1A2CF976074CA42ED23CA4286ACBB841 /* KRViewController.swift in Sources */,
 			);

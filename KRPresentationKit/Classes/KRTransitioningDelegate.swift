@@ -124,7 +124,11 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     // MARK: - Transitioning delegate
     
     public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        presenter = KRContentPresentationController(presentedViewController: presented, presentingViewController: presenting, backgroundView: isFading ? presenter.backgroundView : UIView())
+        guard let vc = presented as? KRContentViewController else {
+            fatalError("\(presented) passed to \(#function) as `presented`. Use \(self) only for KRContentViewControllers.")
+        }
+        
+        presenter = KRContentPresentationController(presentedViewController: presented, presentingViewController: presenting, backgroundView: isFading ? presenter.backgroundView : KRView(sender: vc.sender) ?? UIView())
         presenter.backgroundView.backgroundColor = backgroundColor
         
         return presenter
