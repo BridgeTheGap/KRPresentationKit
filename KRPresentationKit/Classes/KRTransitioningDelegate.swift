@@ -24,7 +24,11 @@ public enum KRTransitionStyle {
     case SlideRight(FunctionType?)
     case Overlay(FunctionType?)
     case Popup(FunctionType?)
-    case Custom((() -> Void) -> Void)
+    case Custom((view: UIView, duration: Double) -> [AnimationDescriptor], (view: UIView, duration: Double) -> [AnimationDescriptor])
+    
+    public static func getCustomAnimations(presentAnim: (view: UIView, duration: Double) -> [AnimationDescriptor], dismissAnim: (view: UIView, duration: Double) -> [AnimationDescriptor]) -> KRTransitionStyle {
+        return self.Custom(presentAnim, dismissAnim)
+    }
 }
 
 internal protocol KRTransitioningDelegate: UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
@@ -69,8 +73,8 @@ private extension KRTransitioningDelegate {
                 
                 animations = animatingView.chainScale2D(1.0, duration: duration, function: function) +
                     animatingView.chainAlpha(1.0, duration: duration, function: function)
-            default:
-                fatalError("KRTransitionStyle.Custom not supported yet.")
+            case .Custom(let presentingAnim, _):
+                animations = presentingAnim(view: animatingView, duration: duration)
             }
         } else {
             switch transitionStyle {
@@ -98,8 +102,8 @@ private extension KRTransitioningDelegate {
                 function = f ?? .EaseOutQuint
                 animations = animatingView.chainScale2D(0.1, duration: duration, function: function) +
                     animatingView.chainAlpha(0.0, duration: duration, function: function)
-            default:
-                fatalError("KRTransitionStyle.Custom not supported yet.")
+            case .Custom(_, let dismissingAnim):
+                animations = dismissingAnim(view: animatingView, duration: duration)
             }
         }
         

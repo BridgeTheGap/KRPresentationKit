@@ -193,6 +193,19 @@ public struct KRAnimation {
                 
                 propDic[animDesc.view] = viewProp
                 animDic[animDesc.view] = viewAnims
+                
+                if needsSnapshotAnimation(animDesc.view, animDesc: animDesc) {
+                    let contentView = animDesc.view.subviews[0]
+                    let contentViewProp = propDic[contentView] ?? ViewProperties(view: contentView)
+                    var contentViewAnims = animDic[contentView] ?? [CAAnimation]()
+                    let contentAnim = getSnapshotAnimation(animDesc, viewProperties: contentViewProp, setDelay: true)
+                    
+                    contentAnim.beginTime = anim.beginTime
+                    contentViewAnims.append(contentAnim)
+                    
+                    propDic[contentView] = contentViewProp
+                    animDic[contentView] = contentViewAnims
+                }
             } else {
                 var animGroupDic = [UIView: CAAnimationGroup]()
                 var segmentDuration: Double! = nil
@@ -217,6 +230,26 @@ public struct KRAnimation {
 
                     propDic[animDesc.view] = viewProp
                     animGroupDic[animDesc.view] = animGroup
+                    
+                    if needsSnapshotAnimation(animDesc.view, animDesc: animDesc) {
+                        let contentView = animDesc.view.subviews[0]
+                        let contentViewProp = propDic[contentView] ?? ViewProperties(view: contentView)
+                        let contentViewAnimGroup = animGroupDic[contentView] ?? {
+                            let animGroup = CAAnimationGroup()
+                            animGroup.beginTime = totalDuration + animDesc.delay
+                            animGroup.duration = animDesc.duration
+                            animGroup.fillMode = kCAFillModeForwards
+                            animGroup.animations = [CAAnimation]()
+                            animGroup.removedOnCompletion = false
+                            
+                            return animGroup
+                            }()
+
+                        contentViewAnimGroup.animations!.append(getSnapshotAnimation(animDesc, viewProperties: contentViewProp, setDelay: false))
+
+                        propDic[contentView] = contentViewProp
+                        animGroupDic[contentView] = contentViewAnimGroup
+                    }
                 }
                 
                 for (view, animGroup) in animGroupDic {
@@ -257,8 +290,8 @@ public struct KRAnimation {
         return CGFloat(b) + scale * CGFloat(e - b)
     }
     
-    internal static func animate(animDescription: AnimationDescriptor, reverses: Bool, repeatCount: Float, completion: (() -> Void)?) {
-        let view = animDescription.view
+    internal static func animate(animDesc: AnimationDescriptor, reverses: Bool, repeatCount: Float, completion: (() -> Void)?) {
+        let view = animDesc.view
         let updatedProperties = ViewProperties(view: view)
         
         CATransaction.begin()
@@ -273,16 +306,25 @@ public struct KRAnimation {
             CATransaction.commit()
         }
         
-        let anim = getAnimation(animDescription, viewProperties: updatedProperties, setDelay: true)
+        let anim = getAnimation(animDesc, viewProperties: updatedProperties, setDelay: true)
         anim.beginTime += view.layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
         anim.autoreverses = reverses
         anim.repeatCount = repeatCount
         
         view.layer.addAnimation(anim, forKey: nil)
         
+        if needsSnapshotAnimation(view, animDesc: animDesc) {
+            let contentView = view.subviews[0]
+            let contentAnim = getSnapshotAnimation(animDesc, viewProperties: updatedProperties, setDelay: true)
+            contentAnim.beginTime += contentView.layer.convertTime(CACurrentMediaTime(), toLayer: nil)
+            contentAnim.autoreverses = reverses
+            contentAnim.repeatCount = repeatCount
+            contentView.layer.addAnimation(contentAnim, forKey: nil)
+        }
+        
         CATransaction.commit()
     }
-
+    
     private static func getAnimation(animDesc: AnimationDescriptor, viewProperties: ViewProperties, setDelay: Bool) -> CAAnimation {
         if animDesc.property == .Frame {
             let frameAnimations = animDesc.getFrameAnimations()
@@ -606,8 +648,7 @@ public struct KRAnimation {
             let e = animDesc.endValue as! CGFloat
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                return NSValue(CATransform3D: CATransform3DRotate(b, e * scale, 1.0, 0.0, 0.0))
+                return NSValue(CATransform3D: CATransform3DRotate(b, e * $0, 1.0, 0.0, 0.0))
             }
             
             viewProperties.transform = CATransform3DRotate(b, e, 1.0, 0.0, 0.0)
@@ -617,8 +658,7 @@ public struct KRAnimation {
             let e = animDesc.endValue as! CGFloat
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                return NSValue(CATransform3D: CATransform3DRotate(b, e * scale, 0.0, 1.0, 0.0))
+                return NSValue(CATransform3D: CATransform3DRotate(b, e * $0, 0.0, 1.0, 0.0))
             }
             
             viewProperties.transform = CATransform3DRotate(b, e, 0.0, 1.0, 0.0)
@@ -628,8 +668,7 @@ public struct KRAnimation {
             let e = animDesc.endValue as! CGFloat
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                return NSValue(CATransform3D: CATransform3DRotate(b, e * scale, 0.0, 0.0, 1.0))
+                return NSValue(CATransform3D: CATransform3DRotate(b, e * $0, 0.0, 0.0, 1.0))
             }
             
             viewProperties.transform = CATransform3DRotate(b, e, 0.0, 0.0, 1.0)
@@ -689,8 +728,7 @@ public struct KRAnimation {
             let e = animDesc.endValue as! CGFloat
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                let c = CATransform3DTranslate(b, e * scale, 0.0, 0.0)
+                let c = CATransform3DTranslate(b, e * $0, 0.0, 0.0)
                 
                 return NSValue(CATransform3D: c)
             }
@@ -702,8 +740,7 @@ public struct KRAnimation {
             let e = animDesc.endValue as! CGFloat
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                let c = CATransform3DTranslate(b, 0.0, e * scale, 0.0)
+                let c = CATransform3DTranslate(b, 0.0, e * $0, 0.0)
                 
                 return NSValue(CATransform3D: c)
             }
@@ -715,8 +752,7 @@ public struct KRAnimation {
             let e = animDesc.endValue as! CGFloat
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                let c = CATransform3DTranslate(b, 0.0, 0.0, e * scale)
+                let c = CATransform3DTranslate(b, 0.0, 0.0, e * $0)
                 
                 return NSValue(CATransform3D: c)
             }
@@ -728,8 +764,7 @@ public struct KRAnimation {
             let e = (animDesc.endValue as! NSValue).CGSizeValue()
             
             f = {
-                let scale = getScaledValue(0.0, 1.0, $0)
-                let c = CATransform3DTranslate(b, e.width * scale, e.height * scale, 0.0)
+                let c = CATransform3DTranslate(b, e.width * $0, e.height * $0, 0.0)
                 
                 return NSValue(CATransform3D: c)
             }
@@ -825,5 +860,26 @@ public struct KRAnimation {
         }
         
         return values
+    }
+    
+    private static func needsSnapshotAnimation(view: UIView, animDesc: AnimationDescriptor) -> Bool {
+        return String(view.dynamicType) == "_UIReplicantView" && [AnimatableProperty.Frame, .Size, .SizeWidth, .SizeHeight].contains(animDesc.property)
+    }
+    
+    private static func getSnapshotAnimation(animDesc: AnimationDescriptor, viewProperties: ViewProperties, setDelay: Bool) -> CAAnimation {
+        let contentView = animDesc.view.subviews[0]
+        var contentAnimDesc: AnimationDescriptor!
+        
+        if animDesc.property == .Frame {
+            var frame = (animDesc.endValue as! NSValue).CGRectValue()
+            frame.origin = CGPointZero
+            let endValue = NSValue(CGRect: frame)
+            contentAnimDesc = AnimationDescriptor(view: contentView, delay: animDesc.delay, property: animDesc.property, endValue: endValue, duration: animDesc.duration, function: animDesc.function)
+        } else {
+            contentView.layer.anchorPoint = CGPointZero
+            contentAnimDesc = AnimationDescriptor(view: contentView, delay: animDesc.delay, property: animDesc.property, endValue: animDesc.endValue, duration: animDesc.duration, function: animDesc.function)
+        }
+        
+        return getAnimation(contentAnimDesc, viewProperties: ViewProperties(view: contentView), setDelay: setDelay)
     }
 }

@@ -61,12 +61,28 @@
                                     <action selector="presentBGAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f5A-kP-ekv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1U-1z-Ec6">
+                                <rect key="frame" x="206" y="490" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="PQm-Z0-Hdm"/>
+                                    <constraint firstAttribute="height" constant="80" id="TYD-GH-S37"/>
+                                </constraints>
+                                <state key="normal" title="Custom">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="customAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UEO-Px-Gv4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hgG-oK-Btq" firstAttribute="top" secondItem="7HC-gt-BcF" secondAttribute="bottom" constant="30" id="94k-TI-mSr"/>
+                            <constraint firstItem="o1U-1z-Ec6" firstAttribute="centerY" secondItem="Vta-fQ-Htr" secondAttribute="centerY" id="9wA-hJ-bGV"/>
                             <constraint firstItem="Vta-fQ-Htr" firstAttribute="centerY" secondItem="7HC-gt-BcF" secondAttribute="centerY" id="Zjd-wm-O2G"/>
                             <constraint firstItem="7HC-gt-BcF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="qx7-XZ-toV"/>
+                            <constraint firstItem="o1U-1z-Ec6" firstAttribute="leading" secondItem="Vta-fQ-Htr" secondAttribute="trailing" constant="8" id="teG-yC-VmT"/>
                             <constraint firstItem="Vta-fQ-Htr" firstAttribute="leading" secondItem="7HC-gt-BcF" secondAttribute="trailing" constant="8" id="vFl-fm-OmG"/>
                         </constraints>
                     </view>

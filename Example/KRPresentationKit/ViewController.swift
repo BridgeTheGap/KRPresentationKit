@@ -8,6 +8,7 @@
 
 import UIKit
 import KRPresentationKit
+import KRAnimationKit
 
 class ViewController: KRViewController {
 
@@ -52,8 +53,23 @@ class ViewController: KRViewController {
         }
     }
     
-    @IBAction func dismissSegue(segue: UIStoryboardSegue) {
-        
+    @IBAction func customAction(sender: AnyObject) {
+        if presentedViewController == nil {
+            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
+            pvc.sender = sender
+            pvc.useSnapshot = true
+            let style = KRTransitionStyle.getCustomAnimations({ (view, duration) -> [AnimationDescriptor] in
+                let frame = pvc.destinationFrame
+                view.frame = (sender as! UIButton).frame
+                
+                return view.chainFrame(frame, duration: duration, function: .EaseOutBack)
+            }) { (view, duration) -> [AnimationDescriptor] in
+                return view.chainFrame((sender as! UIButton).frame, duration: duration, function: .EaseInCubic)
+            }
+            presentViewController(pvc, style: style, completion: nil)
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 }
 

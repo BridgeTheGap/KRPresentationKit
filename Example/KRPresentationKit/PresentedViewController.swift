@@ -15,7 +15,7 @@ class PresentedViewController: KRContentViewController {
     @IBAction func switchAction(sender: UIButton) {
         let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
         let styles: [KRTransitionStyle] = [.SlideUp(nil), .SlideDown(nil), .SlideLeft(nil), .SlideRight(nil), .Popup(nil), .Overlay(nil)]
-        sourceVC?.fadeToViewController(pvc, style: styles[Int(arc4random()) % 6], completion: nil)
+        sourceVC?.fadeToViewController(pvc, style: styles[Int(UInt32(arc4random()) % 5)], completion: nil)
     }
     
     @IBAction func dismissAction(sender: UIButton) {

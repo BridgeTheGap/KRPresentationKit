@@ -1,6 +1,6 @@
 {
   "name": "KRPresentationKit",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "summary": "A custom animation modal presentation library.",
   "description": "KRPresentationKit makes custom modal presentation easy by providing useful default animations,\nas well as the functionality to define a custom animation.",
   "homepage": "https://github.com/BridgeTheGap/KRPresentationKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/BridgeTheGap/KRPresentationKit.git",
-    "tag": "0.6.0"
+    "tag": "0.7.0"
   },
   "platforms": {
     "ios": "8.0"
