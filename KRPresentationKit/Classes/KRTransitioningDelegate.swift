@@ -11,23 +11,23 @@ import KRAnimationKit
 
 private typealias TransitionKey = String
 private extension TransitionKey {
-    static var FromVC: String { return UITransitionContextFromViewControllerKey }
-    static var ToVC: String { return UITransitionContextToViewControllerKey }
-    static var FromView: String { return UITransitionContextFromViewKey }
-    static var ToView: String { return UITransitionContextToViewKey }
+    static var FromVC: String { return UITransitionContextViewControllerKey.from.rawValue }
+    static var ToVC: String { return UITransitionContextViewControllerKey.to.rawValue }
+    static var FromView: String { return UITransitionContextViewKey.from.rawValue }
+    static var ToView: String { return UITransitionContextViewKey.to.rawValue }
 }
 
 public enum KRTransitionStyle {
-    case SlideUp(FunctionType?)
-    case SlideDown(FunctionType?)
-    case SlideLeft(FunctionType?)
-    case SlideRight(FunctionType?)
-    case Overlay(FunctionType?)
-    case Popup(FunctionType?)
-    case Custom((view: UIView, duration: Double) -> [AnimationDescriptor], (view: UIView, duration: Double) -> [AnimationDescriptor])
+    case slideUp(FunctionType?)
+    case slideDown(FunctionType?)
+    case slideLeft(FunctionType?)
+    case slideRight(FunctionType?)
+    case overlay(FunctionType?)
+    case popup(FunctionType?)
+    case custom((_ view: UIView, _ duration: Double) -> [AnimationDescriptor], (_ view: UIView, _ duration: Double) -> [AnimationDescriptor])
     
-    public static func getCustomAnimations(presentAnim: (view: UIView, duration: Double) -> [AnimationDescriptor], dismissAnim: (view: UIView, duration: Double) -> [AnimationDescriptor]) -> KRTransitionStyle {
-        return self.Custom(presentAnim, dismissAnim)
+    public static func getCustomAnimations(_ presentAnim: @escaping (_ view: UIView, _ duration: Double) -> [AnimationDescriptor], dismissAnim: @escaping (_ view: UIView, _ duration: Double) -> [AnimationDescriptor]) -> KRTransitionStyle {
+        return self.custom(presentAnim, dismissAnim)
     }
 }
 
@@ -38,72 +38,72 @@ internal protocol KRTransitioningDelegate: UIViewControllerTransitioningDelegate
 }
 
 private extension KRTransitioningDelegate {
-    func getAnimationsForView(animatingView: UIView, containerView: UIView, finalFrame: CGRect) -> [AnimationDescriptor] {
+    func getAnimations(for animatingView: UIView, containerView: UIView, finalFrame: CGRect) -> [AnimationDescriptor] {
         var animations: [AnimationDescriptor]!
         var function: FunctionType!
         
         if isPresenting {
             switch transitionStyle {
-            case .SlideUp(let f):
-                function = f ?? .EaseOutQuint
+            case .slideUp(let f):
+                function = f ?? .easeOutQuint
                 animatingView.frame.origin.y += containerView.frame.height
-                animations = animatingView.chainY(finalFrame.origin.y, duration: duration, function: function)
-            case .SlideDown(let f):
-                function = f ?? .EaseOutQuint
+                animations = animatingView.chain(y: finalFrame.origin.y, duration: duration, function: function)
+            case .slideDown(let f):
+                function = f ?? .easeOutQuint
                 animatingView.frame.origin.y -= containerView.frame.height
-                animations = animatingView.chainY(finalFrame.origin.y, duration: duration, function: function)
-            case .SlideLeft(let f):
-                function = f ?? .EaseOutQuint
+                animations = animatingView.chain(y: finalFrame.origin.y, duration: duration, function: function)
+            case .slideLeft(let f):
+                function = f ?? .easeOutQuint
                 animatingView.frame.origin.x += containerView.frame.width
-                animations = animatingView.chainX(finalFrame.origin.x, duration: duration, function: function)
-            case .SlideRight(let f):
-                function = f ?? .EaseOutQuint
+                animations = animatingView.chain(x: finalFrame.origin.x, duration: duration, function: function)
+            case .slideRight(let f):
+                function = f ?? .easeOutQuint
                 animatingView.frame.origin.x -= containerView.frame.width
-                animations = animatingView.chainX(finalFrame.origin.x, duration: duration, function: function)
-            case .Overlay(let f):
-                function = f ?? .EaseOutQuint
+                animations = animatingView.chain(x: finalFrame.origin.x, duration: duration, function: function)
+            case .overlay(let f):
+                function = f ?? .easeOutQuint
                 animatingView.alpha = 0.0
                 animatingView.layer.transform = CATransform3DMakeScale(2.0, 2.0, 1.0)
-                animations = animatingView.chainScale2D(1.0, duration: duration, function: function) +
-                    animatingView.chainAlpha(1.0, duration: duration, function: function)
-            case .Popup(let f):
-                function = f ?? .EaseOutQuint
+                animations = animatingView.chain(scale2D: 1.0, duration: duration, function: function) +
+                    animatingView.chain(alpha: 1.0, duration: duration, function: function)
+            case .popup(let f):
+                function = f ?? .easeOutQuint
                 animatingView.alpha = 0.0
                 animatingView.layer.transform = CATransform3DMakeScale(0.0, 0.0, 1.0)
                 
-                animations = animatingView.chainScale2D(1.0, duration: duration, function: function) +
-                    animatingView.chainAlpha(1.0, duration: duration, function: function)
-            case .Custom(let presentingAnim, _):
-                animations = presentingAnim(view: animatingView, duration: duration)
+                animations = animatingView.chain(scale2D: 1.0, duration: duration, function: function) +
+                    animatingView.chain(alpha: 1.0, duration: duration, function: function)
+            case .custom(let presentingAnim, _):
+                animations = presentingAnim(animatingView, duration)
             }
         } else {
             switch transitionStyle {
-            case .SlideUp(let f):
-                function = f?.converseFunction() ?? .EaseOutQuint
+            case .slideUp(let f):
+                function = f?.converseFunction() ?? .easeOutQuint
                 let finalY = animatingView.frame.origin.y + containerView.frame.height
-                animations = animatingView.chainY(finalY, duration: duration, function: function)
-            case .SlideDown(let f):
-                function = f?.converseFunction() ?? .EaseOutQuint
+                animations = animatingView.chain(y: finalY, duration: duration, function: function)
+            case .slideDown(let f):
+                function = f?.converseFunction() ?? .easeOutQuint
                 let finalY = animatingView.frame.origin.y - containerView.frame.height
-                animations = animatingView.chainY(finalY, duration: duration, function: function)
-            case .SlideLeft(let f):
-                function = f?.converseFunction() ?? .EaseOutQuint
+                animations = animatingView.chain(y: finalY, duration: duration, function: function)
+            case .slideLeft(let f):
+                function = f?.converseFunction() ?? .easeOutQuint
                 let finalX = animatingView.frame.origin.x + containerView.frame.width
-                animations = animatingView.chainX(finalX, duration: duration, function: function)
-            case .SlideRight(let f):
-                function = f?.converseFunction() ?? .EaseOutQuint
+                animations = animatingView.chain(x: finalX, duration: duration, function: function)
+            case .slideRight(let f):
+                function = f?.converseFunction() ?? .easeOutQuint
                 let finalX = animatingView.frame.origin.x - containerView.frame.width
-                animations = animatingView.chainX(finalX, duration: duration, function: function)
-            case .Overlay(let f):
-                function = f ?? .EaseOutQuint
-                animations = animatingView.chainScale2D(2.0, duration: duration, function: function) +
-                    animatingView.chainAlpha(0.0, duration: duration, function: function)
-            case .Popup(let f):
-                function = f ?? .EaseOutQuint
-                animations = animatingView.chainScale2D(0.1, duration: duration, function: function) +
-                    animatingView.chainAlpha(0.0, duration: duration, function: function)
-            case .Custom(_, let dismissingAnim):
-                animations = dismissingAnim(view: animatingView, duration: duration)
+                animations = animatingView.chain(x: finalX, duration: duration, function: function)
+            case .overlay(let f):
+                function = f ?? .easeOutQuint
+                animations = animatingView.chain(scale2D: 2.0, duration: duration, function: function) +
+                    animatingView.chain(alpha: 0.0, duration: duration, function: function)
+            case .popup(let f):
+                function = f ?? .easeOutQuint
+                animations = animatingView.chain(scale2D: 0.1, duration: duration, function: function) +
+                    animatingView.chain(alpha: 0.0, duration: duration, function: function)
+            case .custom(_, let dismissingAnim):
+                animations = dismissingAnim(animatingView, duration)
             }
         }
         
@@ -111,12 +111,12 @@ private extension KRTransitioningDelegate {
     }
 }
 
-public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
-    public var transitionStyle: KRTransitionStyle
-    public var duration: Double
-    public var backgroundColor = UIColor(white: 0.0, alpha: 0.4)
-    public var isPresenting: Bool = true
-    public var isFading: Bool = false
+open class KRContentTransitioner: NSObject, KRTransitioningDelegate {
+    open var transitionStyle: KRTransitionStyle
+    open var duration: Double
+    open var backgroundColor = UIColor(white: 0.0, alpha: 0.4)
+    open var isPresenting: Bool = true
+    open var isFading: Bool = false
     internal private(set) var presenter: KRContentPresentationController!
     private var snapshot: UIView?
     
@@ -127,7 +127,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     
     // MARK: - Transitioning delegate
     
-    public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+    open func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         guard let vc = presented as? KRContentViewController else {
             fatalError("\(presented) passed to \(#function) as `presented`. Use \(self) only for KRContentViewControllers.")
         }
@@ -138,46 +138,50 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
         return presenter
     }
     
-    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         isPresenting = true
         return self
     }
     
-    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         isPresenting = false
         return self
     }
     
     // MARK: - Animated transitioning
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
     
-    public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView()!
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
         let vcKey = isPresenting ? TransitionKey.ToVC : TransitionKey.FromVC
-        let animatingVC = transitionContext.viewControllerForKey(vcKey) as! KRContentViewController
+        let animatingVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: vcKey)) as! KRContentViewController
         let useSnapshot = animatingVC.useSnapshot
-        let finalFrame = transitionContext.finalFrameForViewController(animatingVC)
+        let finalFrame = transitionContext.finalFrame(for: animatingVC)
         let animatingView = { () -> UIView in
             let view = animatingVC.view
-            view.frame = finalFrame
+            view?.frame = finalFrame
             
             if useSnapshot && snapshot == nil {
-                let (shadowOpacity, autoResizing) = (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints)
-                (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (0, true)
-                snapshot = view.snapshotViewAfterScreenUpdates(true)
+                let (shadowOpacity, autoResizing) = (view?.layer.shadowOpacity, view?.translatesAutoresizingMaskIntoConstraints)
+                view?.layer.shadowOpacity = 0.0
+                view?.translatesAutoresizingMaskIntoConstraints = true
+                
+                snapshot = view?.snapshotView(afterScreenUpdates: true)
                 snapshot!.frame = finalFrame
-                (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (shadowOpacity, autoResizing)
+                view?.layer.shadowOpacity = shadowOpacity!
+                view?.translatesAutoresizingMaskIntoConstraints = autoResizing!
+                
                 return snapshot!
             } else {
-                return snapshot ?? view
+                return snapshot ?? view!
             }
         }()
         containerView.addSubview(animatingView)
         
-        var animations = getAnimationsForView(animatingView, containerView: containerView, finalFrame: finalFrame)
+        var animations = getAnimations(for: animatingView, containerView: containerView, finalFrame: finalFrame)
         var completion: () -> Void
         
         if isPresenting {
@@ -190,7 +194,7 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
             if !useSnapshot && animatingView.layer.shadowOpacity > 0.0 {
                 let shadowOpacity = animatingView.layer.shadowOpacity
                 animatingView.layer.shadowOpacity = 0.0
-                animations = animations + animatingView.chainShadowOpacity(shadowOpacity, duration: duration)
+                animations = animations + animatingView.chain(shadowOpacity: shadowOpacity, duration: duration)
             }
         } else {
             if useSnapshot { animatingVC.view.removeFromSuperview() }
@@ -202,23 +206,23 @@ public class KRContentTransitioner: NSObject, KRTransitioningDelegate {
             }
             
             if !useSnapshot && animatingView.layer.shadowOpacity > 0.0 {
-                animations = animations + animatingView.chainShadowOpacity(0.0, duration: duration)
+                animations = animations + animatingView.chain(shadowOpacity: 0.0, duration: duration)
             }
         }
         
         KRAnimation.chain(animations, completion: completion)
     }
     
-    public func animationEnded(transitionCompleted: Bool) {
+    open func animationEnded(_ transitionCompleted: Bool) {
         snapshot?.removeFromSuperview()
     }
 }
 
-public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
-    public var transitionStyle: KRTransitionStyle
-    public var duration: Double
-    public var isPresenting: Bool = true
-    internal private(set) var presenter: KRPresentationController!
+open class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
+    open var transitionStyle: KRTransitionStyle
+    open var duration: Double
+    open var isPresenting: Bool = true
+    internal fileprivate(set) var presenter: KRPresentationController!
     private var snapshot: UIView?
     
     public init(_ transitionStyle: KRTransitionStyle, duration: Double) {
@@ -228,68 +232,73 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
     
     // MARK: - Transitioning delegate
     
-    public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-        presenter = KRPresentationController(presentedViewController: presented, presentingViewController: presenting)
+    open func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        presenter = KRPresentationController(presentedViewController: presented, presenting: presenting)
         
         return presenter
     }
     
-    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         isPresenting = true
         return self
     }
     
-    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         isPresenting = false
         return self
     }
     
     // MARK: - Animated transitioning
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
     
-    public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView()!
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
         let vcKey = isPresenting ? TransitionKey.ToVC : TransitionKey.FromVC
-        let animatingVC = transitionContext.viewControllerForKey(vcKey) as! KROverlayViewController
+        let animatingVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: vcKey)) as! KROverlayViewController
         let bgView = animatingVC.view
-        let constraints = bgView.constraints
+        let constraints = bgView?.constraints
         let finalFrame = animatingVC.destinationFrame
         let useSnapshot = animatingVC.useSnapshot
-        let contentViewIndex = bgView.subviews.indexOf(animatingVC.contentView)!
+        let contentViewIndex = bgView?.subviews.index(of: animatingVC.contentView)!
         let contentViewAutoResizing = animatingVC.contentView.translatesAutoresizingMaskIntoConstraints
         let animatingView = { () -> UIView in
             let view = animatingVC.contentView
-            view.frame = finalFrame
+            view?.frame = finalFrame
             
             if useSnapshot && snapshot == nil {
-                let (shadowOpacity, autoResizing) = (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints)
-                (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (0, true)
-                snapshot = view.snapshotViewAfterScreenUpdates(true)
+                let (shadowOpacity, autoResizing) = (view?.layer.shadowOpacity, view?.translatesAutoresizingMaskIntoConstraints)
+                view?.layer.shadowOpacity = 0.0
+                view?.translatesAutoresizingMaskIntoConstraints = true
+                
+                snapshot = view?.snapshotView(afterScreenUpdates: true)
                 snapshot!.frame = finalFrame
-                (view.layer.shadowOpacity, view.translatesAutoresizingMaskIntoConstraints) = (shadowOpacity, autoResizing)
-                view.hidden = true
+                
+                view?.layer.shadowOpacity = shadowOpacity!
+                view?.translatesAutoresizingMaskIntoConstraints = autoResizing!
+                
+                view?.isHidden = true
                 return snapshot!
             } else {
-                return snapshot ?? view
+                return snapshot ?? view!
             }
         }()
         
-        containerView.insertSubview(bgView, atIndex: 0)
+        containerView.insertSubview(bgView!, at: 0)
         containerView.addSubview(animatingView)
         animatingView.translatesAutoresizingMaskIntoConstraints = true
         
-        var animations = animatingVC.backgroundAnim(duration, isPresenting) + getAnimationsForView(animatingView, containerView: containerView, finalFrame: finalFrame)
+        var animations = animatingVC.backgroundAnim(duration, isPresenting) + getAnimations(for: animatingView, containerView: containerView, finalFrame: finalFrame)
         var completion: (() -> Void)!
         
         if isPresenting {
             completion = {
-                if useSnapshot { animatingVC.contentView.hidden = false }
-                bgView.insertSubview(animatingVC.contentView, atIndex: contentViewIndex)
+                if useSnapshot { animatingVC.contentView.isHidden = false }
+                bgView?.insertSubview(animatingVC.contentView, at: contentViewIndex!)
                 animatingVC.contentView.translatesAutoresizingMaskIntoConstraints = contentViewAutoResizing
-                NSLayoutConstraint.activateConstraints(constraints)
+                NSLayoutConstraint.activate(constraints!)
                 
                 transitionContext.completeTransition(true)
             }
@@ -297,10 +306,10 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
             if !useSnapshot && animatingView.layer.shadowOpacity > 0.0 {
                 let shadowOpacity = animatingView.layer.shadowOpacity
                 animatingView.layer.shadowOpacity = 0.0
-                animations = animations + animatingView.chainShadowOpacity(shadowOpacity, duration: duration)
+                animations = animations + animatingView.chain(shadowOpacity: shadowOpacity, duration: duration)
             }
         } else {
-            if useSnapshot { transitionContext.viewForKey(TransitionKey.FromView)!.removeFromSuperview() }
+            if useSnapshot { transitionContext.view(forKey: UITransitionContextViewKey(rawValue: TransitionKey.FromView))!.removeFromSuperview() }
             
             completion = {
                 animatingView.removeFromSuperview()
@@ -308,14 +317,14 @@ public class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
             }
             
             if !useSnapshot && animatingView.layer.shadowOpacity > 0.0 {
-                animations = animations + animatingView.chainShadowOpacity(0.0, duration: duration)
+                animations = animations + animatingView.chain(shadowOpacity: 0.0, duration: duration)
             }
         }
 
         KRAnimation.chain(animations, completion: completion)
     }
     
-    public func animationEnded(transitionCompleted: Bool) {
+    open func animationEnded(_ transitionCompleted: Bool) {
         snapshot?.removeFromSuperview()
     }
 }

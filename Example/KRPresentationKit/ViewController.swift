@@ -22,19 +22,19 @@ class ViewController: KRViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func presentAction(sender: AnyObject) {
+    @IBAction func presentAction(_ sender: AnyObject) {
         if presentedViewController == nil {
-            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
+            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC") as! PresentedViewController
             pvc.sender = sender
-            presentViewController(pvc, style: .Popup(.EaseOutBack), completion: nil)
+            present(pvc, style: .popup(.easeOutBack), completion: nil)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func presentBGAction(sender: AnyObject) {
+    @IBAction func presentBGAction(_ sender: AnyObject) {
         if presentedViewController == nil {
-            let bvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("BackgroundVC") as! BackgroundViewController
+            let bvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BackgroundVC") as! BackgroundViewController
             let view = bvc.view as! KRView
             view.sender = sender
             view.allowsUserInteraction = true
@@ -42,33 +42,33 @@ class ViewController: KRViewController {
             bvc.backgroundAnim = {
                 if $1 {
                     bvc.view.alpha = 0.0
-                    return bvc.view.chainAlpha(1.0, duration: $0)
+                    return bvc.view.chain(alpha: 1.0, duration: $0)
                 } else {
-                    return bvc.view.chainAlpha(0.0, duration: $0)
+                    return bvc.view.chain(alpha: 0.0, duration: $0)
                 }
             }
-            presentViewController(bvc, style: .Popup(.EaseOutBack), completion: nil)
+            present(bvc, style: .popup(.easeOutBack), completion: nil)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func customAction(sender: AnyObject) {
+    @IBAction func customAction(_ sender: AnyObject) {
         if presentedViewController == nil {
-            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
+            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC") as! PresentedViewController
             pvc.sender = sender
             pvc.useSnapshot = true
             let style = KRTransitionStyle.getCustomAnimations({ (view, duration) -> [AnimationDescriptor] in
                 let frame = pvc.destinationFrame
                 view.frame = (sender as! UIButton).frame
                 
-                return view.chainFrame(frame, duration: duration, function: .EaseOutBack)
+                return view.chain(frame: frame, duration: duration, function: .easeOutBack)
             }) { (view, duration) -> [AnimationDescriptor] in
-                return view.chainFrame((sender as! UIButton).frame, duration: duration, function: .EaseInCubic)
+                return view.chain(frame: (sender as! UIButton).frame, duration: duration, function: .easeInCubic)
             }
-            presentViewController(pvc, style: style, completion: nil)
+            present(pvc, style: style, completion: nil)
         } else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
 }

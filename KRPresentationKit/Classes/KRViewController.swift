@@ -10,10 +10,10 @@ import UIKit
 import KRAnimationKit
 
 public enum ContentAnimationStyle {
-    case None
-    case FadeIn
-    case FadeInOut
-    case FadeOut
+    case none
+    case fadeIn
+    case fadeInOut
+    case fadeOut
 }
 
 public protocol ContentAnimatable {
@@ -24,45 +24,45 @@ public protocol ContentAnimatable {
     weak var sourceVC: KRViewController? { get set }
 }
 
-public class KRContentViewController: UIViewController, ContentAnimatable {
-    @IBInspectable public var destinationFrame: CGRect = CGRectZero
-    @IBInspectable public var useSnapshot: Bool = false
-    public var viewAnimDuration: Double?
-    public var viewAnimStyle: ContentAnimationStyle = .None
-    public weak var sourceVC: KRViewController?
-    public weak var sender: AnyObject?
+open class KRContentViewController: UIViewController, ContentAnimatable {
+    @IBInspectable open var destinationFrame: CGRect = CGRect.zero
+    @IBInspectable open var useSnapshot: Bool = false
+    open var viewAnimDuration: Double?
+    open var viewAnimStyle: ContentAnimationStyle = .none
+    open weak var sourceVC: KRViewController?
+    open weak var sender: AnyObject?
 }
 
-public class KROverlayViewController: KRContentViewController {
-    @IBOutlet public weak var contentView: UIView!
-    public var backgroundAnim: ((Double, Bool) -> [AnimationDescriptor])!
+open class KROverlayViewController: KRContentViewController {
+    @IBOutlet open weak var contentView: UIView!
+    open var backgroundAnim: ((Double, Bool) -> [AnimationDescriptor])!
 }
 
-public class KRViewController: UIViewController {
+open class KRViewController: UIViewController {
     var transitioner: KRTransitioningDelegate?
     
-    override final public func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+    override final public func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
         if flag {
-            presentViewController(viewControllerToPresent, style: .SlideUp(.EaseInOutCubic), completion: completion)
+            present(viewControllerToPresent, style: .slideUp(.easeInOutCubic), completion: completion)
         } else {
-            super.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
         }
     }
     
-    public func presentViewController(viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle, completion: (() -> Void)?) {
-        presentViewController(viewController, duration: duration, style: style, isFading: false, completion: completion)
+    open func present(_ viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle, completion: (() -> Void)?) {
+        present(viewController, duration: duration, style: style, isFading: false, completion: completion)
     }
     
-    private func presentViewController(viewController: UIViewController, duration: Double, style: KRTransitionStyle, isFading: Bool, completion: (() -> Void)?) {
+    private func present(_ viewController: UIViewController, duration: Double, style: KRTransitionStyle, isFading: Bool, completion: (() -> Void)?) {
         if let vc = viewController as? KRContentViewController {
-            guard vc.destinationFrame != CGRectZero else {
-                fatalError("\(vc.dynamicType).destinationFrame not set.\n`destinationFrame` needs to be set in order to use KRPresentationStyles.")
+            guard vc.destinationFrame != CGRect.zero else {
+                fatalError("\(type(of: vc)).destinationFrame not set.\n`destinationFrame` needs to be set in order to use KRPresentationStyles.")
             }
             
             switch style {
-            case .Overlay, .Popup:
+            case .overlay, .popup:
                 if !vc.useSnapshot {
-                    print("\(style) manipulates transform, which in turn mangles the appearance of views using auto layout. `\(vc.dynamicType).useSnapshot` will be set to `true`.");
+                    print("\(style) manipulates transform, which in turn mangles the appearance of views using auto layout. `\(type(of: vc)).useSnapshot` will be set to `true`.");
                     vc.useSnapshot = true
                 }
             default: break
@@ -73,7 +73,7 @@ public class KRViewController: UIViewController {
                 overlayVC.loadView()
                 (overlayVC.view as! KRView).sender = sender
                 guard overlayVC.contentView != nil else {
-                    fatalError("\(vc.dynamicType).contentView not set.\n`contentView` needs to be set in order to use KRPresentationStyles.")
+                    fatalError("\(type(of: vc)).contentView not set.\n`contentView` needs to be set in order to use KRPresentationStyles.")
                 }
                 transitioner = KROverlayTransitioner(style, duration: duration)
             } else {
@@ -85,20 +85,20 @@ public class KRViewController: UIViewController {
             }
             
             vc.sourceVC = self
-            vc.modalPresentationStyle = .Custom
+            vc.modalPresentationStyle = .custom
             vc.transitioningDelegate = transitioner
         }
         
-        super.presentViewController(viewController, animated: true, completion: completion)
+        super.present(viewController, animated: true, completion: completion)
     }
     
-    public func fadeToViewController(viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle,  completion: (() -> Void)?) {
+    open func fade(to viewController: UIViewController, duration: Double = 0.5, style: KRTransitionStyle,  completion: (() -> Void)?) {
         if let transitioner = presentedViewController!.transitioningDelegate as? KRContentTransitioner {
             transitioner.isFading = true
         }
 
-        dismissViewControllerAnimated(true) {
-            self.presentViewController(viewController, duration: duration, style: style, isFading: true, completion: completion)
+        dismiss(animated: true) {
+            self.present(viewController, duration: duration, style: style, isFading: true, completion: completion)
         }
     }
 }

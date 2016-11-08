@@ -9,7 +9,7 @@
 import UIKit
 
 internal var Screen: UIScreen {
-    return UIScreen.mainScreen()
+    return UIScreen.main
 }
 
 internal extension CGRect {
@@ -26,6 +26,6 @@ internal extension CGRect {
 
 internal extension CGColor {
     func getUIColor() -> UIColor {
-        return UIColor(CGColor: self)
+        return UIColor(cgColor: self)
     }
 }

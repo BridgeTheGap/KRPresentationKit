@@ -12,13 +12,13 @@ import KRPresentationKit
 class PresentedViewController: KRContentViewController {
     @IBOutlet weak var label: UILabel!
     
-    @IBAction func switchAction(sender: UIButton) {
-        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("PresentedVC") as! PresentedViewController
-        let styles: [KRTransitionStyle] = [.SlideUp(nil), .SlideDown(nil), .SlideLeft(nil), .SlideRight(nil), .Popup(nil), .Overlay(nil)]
-        sourceVC?.fadeToViewController(pvc, style: styles[Int(UInt32(arc4random()) % 5)], completion: nil)
+    @IBAction func switchAction(_ sender: UIButton) {
+        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC") as! PresentedViewController
+        let styles: [KRTransitionStyle] = [.slideUp(nil), .slideDown(nil), .slideLeft(nil), .slideRight(nil), .popup(nil), .overlay(nil)]
+        sourceVC?.fade(to: pvc, style: styles[Int(UInt32(arc4random()) % 5)], completion: nil)
     }
     
-    @IBAction func dismissAction(sender: UIButton) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismissAction(_ sender: UIButton) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

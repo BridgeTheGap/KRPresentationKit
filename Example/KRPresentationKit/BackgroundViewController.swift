@@ -10,7 +10,7 @@ import UIKit
 import KRPresentationKit
 
 class BackgroundViewController: KROverlayViewController {
-    @IBAction func hideAction(sender: AnyObject) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func hideAction(_ sender: AnyObject) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
