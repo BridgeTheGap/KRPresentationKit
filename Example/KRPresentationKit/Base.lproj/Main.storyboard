@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zc7-Ks-FSU">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Zc7-Ks-FSU">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -30,53 +35,53 @@
                         <viewControllerLayoutGuide type="bottom" id="hgG-oK-Btq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-gt-BcF">
-                                <rect key="frame" x="30" y="490" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="30" y="914" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="YEx-ot-8U3"/>
                                     <constraint firstAttribute="width" constant="80" id="rxO-Zs-tU9"/>
                                 </constraints>
                                 <state key="normal" title="Content">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="presentAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZjN-Oa-yDq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vta-fQ-Htr">
-                                <rect key="frame" x="118" y="490" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="118" y="914" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="2lo-40-aGV"/>
                                     <constraint firstAttribute="height" constant="80" id="ctQ-88-b1Z"/>
                                 </constraints>
                                 <state key="normal" title="BG">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="presentBGAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f5A-kP-ekv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1U-1z-Ec6">
-                                <rect key="frame" x="206" y="490" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="206" y="914" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="PQm-Z0-Hdm"/>
                                     <constraint firstAttribute="height" constant="80" id="TYD-GH-S37"/>
                                 </constraints>
                                 <state key="normal" title="Custom">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="customAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UEO-Px-Gv4"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hgG-oK-Btq" firstAttribute="top" secondItem="7HC-gt-BcF" secondAttribute="bottom" constant="30" id="94k-TI-mSr"/>
                             <constraint firstItem="o1U-1z-Ec6" firstAttribute="centerY" secondItem="Vta-fQ-Htr" secondAttribute="centerY" id="9wA-hJ-bGV"/>
@@ -92,6 +97,44 @@
             </objects>
             <point key="canvasLocation" x="961.71875" y="684.9609375"/>
         </scene>
+        <!--Temp View Controller-->
+        <scene sceneID="NYs-LZ-o5p">
+            <objects>
+                <viewController storyboardIdentifier="TempVC" id="rve-m5-K7s" customClass="TempViewController" customModule="KRPresentationKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZkR-dI-BT8"/>
+                        <viewControllerLayoutGuide type="bottom" id="YSJ-kC-cRa"/>
+                    </layoutGuides>
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="GQ1-Fp-inH">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOT-yt-XSg">
+                                <rect key="frame" x="344" y="472.5" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.46666666670000001" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="UOT-yt-XSg" secondAttribute="height" multiplier="1:1" id="ZJd-Qf-6xQ"/>
+                                    <constraint firstAttribute="width" constant="80" id="yz7-dm-HBs"/>
+                                </constraints>
+                                <state key="normal" title="HIDE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="action:" destination="rve-m5-K7s" eventType="touchUpInside" id="PW1-BJ-Of5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="UOT-yt-XSg" firstAttribute="centerY" secondItem="GQ1-Fp-inH" secondAttribute="centerY" id="NfO-D4-iIZ"/>
+                            <constraint firstItem="UOT-yt-XSg" firstAttribute="centerX" secondItem="GQ1-Fp-inH" secondAttribute="centerX" id="Ygx-SE-2Yl"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEf-qm-PrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1608" y="685"/>
+        </scene>
         <!--Background View Controller-->
         <scene sceneID="wrd-Q4-JTb">
             <objects>
@@ -101,31 +144,32 @@
                         <viewControllerLayoutGuide type="bottom" id="0Vt-Ba-Hia"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ogy-Qz-Vv4" customClass="KRView" customModule="KRPresentationKit">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZQ-7b-Eae">
-                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                                <rect key="frame" x="264" y="448" width="240" height="128"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saN-Sc-d8J">
                                         <rect key="frame" x="90" y="34" width="60" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Hide">
-                                            <color key="titleColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="hideAction:" destination="ONk-1z-GUH" eventType="touchUpInside" id="p7O-XT-bj4"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="uTE-dz-aDd"/>
                                     <constraint firstAttribute="height" constant="128" id="zfb-Yv-WaN"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerY" secondItem="Ogy-Qz-Vv4" secondAttribute="centerY" id="R72-gE-Vv7"/>
@@ -154,39 +198,39 @@
                         <viewControllerLayoutGuide type="bottom" id="CSv-sz-VfY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4y4-ME-Qaf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUq-A4-FNd">
-                                <rect key="frame" x="230" y="270" width="60" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="314" y="482" width="60" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="JOv-qi-yd8"/>
                                     <constraint firstAttribute="width" constant="60" id="x1e-QG-QUK"/>
                                 </constraints>
                                 <state key="normal" title="Switch">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="switchAction:" destination="Ens-Y7-mX8" eventType="touchUpInside" id="zKX-x5-zB1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thh-P7-TVB">
-                                <rect key="frame" x="310" y="270" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="394" y="482" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="acf-zS-Hfk"/>
                                     <constraint firstAttribute="height" constant="60" id="j5V-G0-656"/>
                                 </constraints>
                                 <state key="normal" title="Dismiss">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="dismissAction:" destination="Ens-Y7-mX8" eventType="touchUpInside" id="3gi-Rr-QlP"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Thh-P7-TVB" firstAttribute="centerY" secondItem="4y4-ME-Qaf" secondAttribute="centerY" id="43O-Zc-y4C"/>
                             <constraint firstAttribute="centerX" secondItem="eUq-A4-FNd" secondAttribute="centerX" constant="40" id="K7M-19-Lnd"/>

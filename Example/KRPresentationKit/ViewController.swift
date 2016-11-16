@@ -8,9 +8,8 @@
 
 import UIKit
 import KRPresentationKit
-import KRAnimationKit
 
-class ViewController: KRViewController {
+class ViewController: KRViewController, CustomPresenting {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,23 +52,30 @@ class ViewController: KRViewController {
         }
     }
     
+    var transitioner: KRTransitioner?
+    
     @IBAction func customAction(_ sender: AnyObject) {
-        if presentedViewController == nil {
-            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC") as! PresentedViewController
-            pvc.sender = sender
-            pvc.useSnapshot = true
-            let style = KRTransitionStyle.getCustomAnimations({ (view, duration) -> [AnimationDescriptor] in
-                let frame = pvc.destinationFrame
-                view.frame = (sender as! UIButton).frame
-                
-                return view.chain(frame: frame, duration: duration, function: .easeOutBack)
-            }) { (view, duration) -> [AnimationDescriptor] in
-                return view.chain(frame: (sender as! UIButton).frame, duration: duration, function: .easeInCubic)
-            }
-            present(pvc, style: style, completion: nil)
-        } else {
-            dismiss(animated: true, completion: nil)
+        if transitioner == nil {
+            let attribs = TransitionAttributes(initial: [.alpha(0.1), .rotation(-360), .scale(0.1)], timingFunction: .easeInOutCubic, duration: 1.0)
+//            let attribs = TransitionAnimation(initial: [.alpha(0.1), .scale(0.1), .rotation(180.0)], duration: 1.0)
+            transitioner = KRTransitioner(attributes: attribs)
         }
+
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TempVC")
+        vc.transitioningDelegate = transitioner
+        vc.modalPresentationStyle = .custom
+
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func action(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
+class TempViewController: UIViewController {
+    @IBAction func action(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+}

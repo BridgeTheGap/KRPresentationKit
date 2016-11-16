@@ -1,3 +1,4 @@
+#if false
 //
 //  CustomPresentation.swift
 //  Custom Presentation v 0.9.3 (Animatable Contents)
@@ -8,14 +9,6 @@
 
 import UIKit
 import KRAnimationKit
-
-private typealias TransitionKey = String
-private extension TransitionKey {
-    static var FromVC: String { return UITransitionContextViewControllerKey.from.rawValue }
-    static var ToVC: String { return UITransitionContextViewControllerKey.to.rawValue }
-    static var FromView: String { return UITransitionContextViewKey.from.rawValue }
-    static var ToView: String { return UITransitionContextViewKey.to.rawValue }
-}
 
 public enum PresentationStyle {
     case slideUp(FunctionType?)
@@ -229,7 +222,7 @@ extension CustomPresentationViewController: CustomPresentable {
             transitionContext.completeTransition(success)
         }
         
-        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: TransitionKey.ToVC))!
+        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: TransitionKey.toVC))!
         let containerView = transitionContext.containerView
         
         if toVC.isBeingPresented {    // Presentation
@@ -256,7 +249,7 @@ extension CustomPresentationViewController: CustomPresentable {
                 }
             }
         } else {    // Dismissal
-            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: TransitionKey.FromVC)) as! BackgroundSeparableViewController
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: TransitionKey.fromVC)) as! BackgroundSeparableViewController
             
             switch fromVC.contentAnimation {
             case .fadeInOut, .fadeOut:
@@ -374,3 +367,4 @@ extension CustomPresentationViewController: CustomPresentable {
         }
     }
 }
+#endif

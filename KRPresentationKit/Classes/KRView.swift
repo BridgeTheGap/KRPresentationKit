@@ -22,7 +22,7 @@ open class KRView: UIView {
     
     override open var backgroundColor: UIColor? {
         get {
-            return fillLayer.fillColor?.getUIColor()
+            return fillLayer.fillColor?.uiColor
         }
         set {
             fillLayer.fillColor = newValue?.cgColor

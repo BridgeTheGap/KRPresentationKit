@@ -1,3 +1,4 @@
+#if false
 //
 //  KRTransitioningDelegate.swift
 //  Pods
@@ -9,12 +10,12 @@
 import UIKit
 import KRAnimationKit
 
-private typealias TransitionKey = String
-private extension TransitionKey {
-    static var FromVC: String { return UITransitionContextViewControllerKey.from.rawValue }
-    static var ToVC: String { return UITransitionContextViewControllerKey.to.rawValue }
-    static var FromView: String { return UITransitionContextViewKey.from.rawValue }
-    static var ToView: String { return UITransitionContextViewKey.to.rawValue }
+internal typealias TransitionKey = String
+internal extension TransitionKey {
+    static var fromVC: String { return UITransitionContextViewControllerKey.from.rawValue }
+    static var toVC: String { return UITransitionContextViewControllerKey.to.rawValue }
+    static var fromView: String { return UITransitionContextViewKey.from.rawValue }
+    static var toView: String { return UITransitionContextViewKey.to.rawValue }
 }
 
 public enum KRTransitionStyle {
@@ -37,7 +38,7 @@ internal protocol KRTransitioningDelegate: UIViewControllerTransitioningDelegate
     var isPresenting: Bool { get set }
 }
 
-private extension KRTransitioningDelegate {
+fileprivate extension KRTransitioningDelegate {
     func getAnimations(for animatingView: UIView, containerView: UIView, finalFrame: CGRect) -> [AnimationDescriptor] {
         var animations: [AnimationDescriptor]!
         var function: FunctionType!
@@ -156,7 +157,7 @@ open class KRContentTransitioner: NSObject, KRTransitioningDelegate {
     
     open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
-        let vcKey = isPresenting ? TransitionKey.ToVC : TransitionKey.FromVC
+        let vcKey = isPresenting ? TransitionKey.toVC : TransitionKey.fromVC
         let animatingVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: vcKey)) as! KRContentViewController
         let useSnapshot = animatingVC.useSnapshot
         let finalFrame = transitionContext.finalFrame(for: animatingVC)
@@ -256,7 +257,7 @@ open class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
     
     open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
-        let vcKey = isPresenting ? TransitionKey.ToVC : TransitionKey.FromVC
+        let vcKey = isPresenting ? TransitionKey.toVC : TransitionKey.fromVC
         let animatingVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey(rawValue: vcKey)) as! KROverlayViewController
         let bgView = animatingVC.view
         let constraints = bgView?.constraints
@@ -309,7 +310,7 @@ open class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
                 animations = animations + animatingView.chain(shadowOpacity: shadowOpacity, duration: duration)
             }
         } else {
-            if useSnapshot { transitionContext.view(forKey: UITransitionContextViewKey(rawValue: TransitionKey.FromView))!.removeFromSuperview() }
+            if useSnapshot { transitionContext.view(forKey: UITransitionContextViewKey(rawValue: TransitionKey.fromView))!.removeFromSuperview() }
             
             completion = {
                 animatingView.removeFromSuperview()
@@ -328,3 +329,4 @@ open class KROverlayTransitioner: NSObject, KRTransitioningDelegate {
         snapshot?.removeFromSuperview()
     }
 }
+#endif

@@ -505,7 +505,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EDFF0619E29AFD14D221730E /* Pods-KRPresentationKit_Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78S7RATURK;
 				INFOPLIST_FILE = KRPresentationKit/Info.plist;
@@ -522,7 +522,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7E0D19EF3FA1CD75D53BADFA /* Pods-KRPresentationKit_Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 78S7RATURK;
 				INFOPLIST_FILE = KRPresentationKit/Info.plist;
