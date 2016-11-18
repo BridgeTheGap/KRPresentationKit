@@ -539,7 +539,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5782475EEC5A7CDEEB6815A9 /* Pods-KRPresentationKit_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				DEVELOPMENT_TEAM = 78S7RATURK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -561,7 +561,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 737E417C3E561546108DD906 /* Pods-KRPresentationKit_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				DEVELOPMENT_TEAM = 78S7RATURK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

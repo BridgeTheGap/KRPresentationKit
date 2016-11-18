@@ -23,76 +23,6 @@ public enum Attribute {
     case translation(CGSize)
 }
 
-public enum FunctionType {
-    case linear
-    
-    case easeInSine
-    case easeOutSine
-    case easeInOutSine
-    
-    case easeInQuad
-    case easeOutQuad
-    case easeInOutQuad
-    
-    case easeInCubic
-    case easeOutCubic
-    case easeInOutCubic
-    
-    case easeInQuart
-    case easeOutQuart
-    case easeInOutQuart
-    
-    case easeInQuint
-    case easeOutQuint
-    case easeInOutQuint
-    
-    case easeInExpo
-    case easeOutExpo
-    case easeInOutExpo
-    
-    case easeInCirc
-    case easeOutCirc
-    case easeInOutCirc
-    
-    case easeInBack
-    case easeOutBack
-    case easeInOutBack
-    
-    case easeInElastic
-    case easeOutElastic
-    case easeInOutElastic
-    
-    case easeInBounce
-    case easeOutBounce
-    case easeInOutBounce
-    
-    public func converseFunction() -> FunctionType {
-        switch self {
-        case .easeInSine: return .easeOutSine
-        case .easeOutSine: return .easeInSine
-        case .easeInQuad: return .easeOutQuad
-        case .easeOutQuad: return .easeInQuad
-        case .easeInCubic: return .easeOutCubic
-        case .easeOutCubic: return .easeInCubic
-        case .easeInQuart: return .easeOutQuart
-        case .easeOutQuart: return .easeInQuart
-        case .easeInQuint: return .easeOutQuint
-        case .easeOutQuint: return .easeInQuint
-        case .easeInExpo: return .easeOutExpo
-        case .easeOutExpo: return .easeInExpo
-        case .easeInCirc: return .easeOutCirc
-        case .easeOutCirc: return .easeInCirc
-        case .easeInBack: return .easeOutBack
-        case .easeOutBack: return .easeInBack
-        case .easeInElastic: return .easeOutElastic
-        case .easeOutElastic: return .easeInElastic
-        case .easeInBounce: return .easeOutBounce
-        case .easeOutBounce: return .easeInBounce
-        default: return self
-        }
-    }
-}
-
 public protocol TransitionDataType {
     var initial: [Attribute] { get set }
     var duration: Double { get set }
@@ -136,15 +66,15 @@ public protocol CustomBackgroundProvider {
     var contentView: UIView! { get set }
 }
 
-//protocol ContentAnimatable {
-//    
-//}
+protocol ContentAnimatable {
+    
+}
 
 internal class PresentationController: UIPresentationController {
     override var containerView: UIView? {
         get {
-            if let vc = presentedViewController as? CustomBackgroundProvider {
-                return (vc as! UIViewController).view
+            if presentedViewController is CustomBackgroundProvider {
+                return presentedViewController.view
             } else {
                 return super.containerView
             }
@@ -223,6 +153,7 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if isPresenting {
             let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
+
             let targetAttrib = apply(attributes: attributes.initial, to: toView)
             let completion = { (didComplete: Bool) in
                 if !didComplete { toView.removeFromSuperview() }
@@ -235,16 +166,23 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
                 UIView.animate(withDuration: animation.duration,
                                delay: 0.0,
                                options: animation.options,
-                               animations: { self.set(view: toView, using: targetAttrib) })
+                               animations: { self.apply(attributes: targetAttrib, to: toView) })
                 { (_) in
                     // TODO: Check if animation completion status should be a factor to revert
                     completion(!transitionContext.transitionWasCancelled)
                 }
             } else {
-                KRAnimation.chain(animation(for: toView, using: targetAttrib)) {
+                CATransaction.begin()
+                CATransaction.setCompletionBlock {
                     completion(!transitionContext.transitionWasCancelled)
                 }
-                set(view: toView, using: targetAttrib)
+                let animGroup = CAAnimationGroup()
+                animGroup.animations = animation(for: toView, using: targetAttrib)
+                animGroup.duration = attributes.duration
+                
+                toView.layer.add(animGroup, forKey: nil)
+                CATransaction.commit()
+                apply(attributes: targetAttrib, to: toView)
             }
         } else {
             let fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
@@ -257,14 +195,25 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
                 UIView.animate(withDuration: animation.duration,
                                delay: 0.0,
                                options: animation.options,
-                               animations: { self.set(view: fromView, using: animation.initial) })
+                               animations: { self.apply(attributes: animation.initial, to: fromView) })
                 { (_) in
                     completion(!transitionContext.transitionWasCancelled)
                 }
             } else {
-                KRAnimation.chain(animation(for: fromView, using: attributes.initial)) {
+                let animKey = "KRPresentationAnimationKey"
+                CATransaction.begin()
+                CATransaction.setCompletionBlock {
                     completion(!transitionContext.transitionWasCancelled)
+                    fromView.layer.removeAnimation(forKey: animKey)
                 }
+                let animGroup = CAAnimationGroup()
+                animGroup.animations = animation(for: fromView, using: attributes.initial)
+                animGroup.duration = attributes.duration
+                animGroup.fillMode = kCAFillModeForwards
+                animGroup.isRemovedOnCompletion = false
+                
+                fromView.layer.add(animGroup, forKey: animKey)
+                CATransaction.commit()
             }
         }
     }
@@ -312,64 +261,141 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
         return targetAttrib
     }
     
-    private func animation(for toView: UIView, using targetAttributes: [Attribute]) -> [AnimationDescriptor] {
+    private func animation(for toView: UIView, using targetAttributes: [Attribute]) -> [CAAnimation] {
         guard let attributes = attributes as? TransitionAttributes else {
             fatalError("<KRPresentationKit> - Failed to cast `attributes` as TransitionAttributes.")
         }
         
-        let d = attributes.duration
-        let f = attributes.timingFunction
+        var animations = [CAAnimation]()
+        let numberOfFrames = attributes.duration * 60.0
+        var scales = [Double]()
         
-        var anim = [AnimationDescriptor]()
+        for i in 0 ... Int(numberOfFrames) {
+            let rt = Double(i) / numberOfFrames
+            scales.append(TimingFunction.value(using: attributes.timingFunction, rt: rt, b: 0.0, c: 1.0, d: attributes.duration))
+        }
+        
+        var frameAttrib: CGRect?
+        var tAttrib = [(String, Any)]()
         
         for attrib in targetAttributes {
+            let anim = CAKeyframeAnimation()
+            anim.duration = attributes.duration
+            
             switch attrib {
-            case .alpha(let alpha):
-                anim += toView.chain(alpha: alpha, duration: d, function: f)
+            case .alpha(let opacity):
+                let c = Float(opacity) - toView.layer.opacity
+                
+                anim.keyPath = "opacity"
+                anim.values = scales.map { toView.layer.opacity + c * Float($0) }
             case .frame(let frame):
-                anim += toView.chain(frame: frame, duration: d, function: f)
+                frameAttrib = frame
+                continue
             case .opacity(let opacity):
-                anim += toView.chain(opacity: opacity, duration: d, function: f)
-            case .origin(let origin):
-                anim += toView.chain(origin: origin, duration: d, function: f)
+                let c = opacity - toView.layer.opacity
+                
+                anim.keyPath = "opacity"
+                anim.values = scales.map { toView.layer.opacity + c * Float($0) }
+            case .origin(var origin):
+                let c = (origin.x - toView.frame.origin.x, origin.y - toView.frame.origin.y)
+                let size = toView.bounds.size
+                anim.keyPath = "position"
+                anim.values = scales.map {
+                    let point = (toView.layer.position.x + c.0 * CGFloat($0),
+                                 toView.layer.position.y + c.1 * CGFloat($0))
+                    return NSValue(cgPoint: CGPoint(x: point.0, y: point.1))
+                }
             case .position(let position):
-                anim += toView.chain(position: position, duration: d, function: f)
+                let c = (position.x - toView.layer.position.x, position.y - toView.layer.position.y)
+                
+                anim.keyPath = "position"
+                anim.values = scales.map {
+                    let point = (toView.layer.position.x + c.0 * CGFloat($0),
+                                 toView.layer.position.y + c.1 * CGFloat($0))
+                    return NSValue(cgPoint: CGPoint(x: point.0, y: point.1))
+                }
             case .rotation(let rotation):
-                anim += toView.chain(rotationDeg: rotation, duration: d, function: f)
+                tAttrib.append(("angle", radians(from: rotation)))
+                continue
             case .scale(let scale):
-                anim += toView.chain(scale2D: scale, duration: d, function: f)
+                tAttrib.append(("scale", scale))
+                continue
             case .size(let size):
-                anim += toView.chain(size: size, duration: d, function: f)
+                let c = (size.width - toView.bounds.size.width, size.height - toView.bounds.size.height)
+                
+                anim.keyPath = "bounds.size"
+                anim.values = scales.map {
+                    let size = (toView.bounds.size.width + c.0 * CGFloat($0),
+                                toView.bounds.size.height + c.1 * CGFloat($0))
+                    return NSValue(cgSize: CGSize(width: size.0, height: size.1))
+                }
             case .translation(let translation):
-                anim += toView.chain(translation2D: translation, duration: d, function: f)
+                tAttrib.append(("translation", translation))
+                continue
             }
+            
+            animations.append(anim)
         }
-        return anim
-    }
-    
-    private func set(view: UIView, using targetAttributes: [Attribute]) {
-        for attrib in targetAttributes {
-            switch attrib {
-            case .alpha(let alpha):
-                view.alpha = alpha
-            case .frame(let frame):
-                view.frame = frame
-            case .opacity(let opacity):
-                view.layer.opacity = opacity
-            case .origin(let origin):
-                view.frame.origin = origin
-            case .position(let position):
-                view.layer.position = position
-            case .rotation(let rotation):
-                let angle = radians(from: rotation)
-                view.layer.transform = CATransform3DRotate(view.layer.transform, angle, 0.0, 0.0, 1.0)
-            case .scale(let scale):
-                view.layer.transform = CATransform3DScale(view.layer.transform, scale, scale, 1.0)
-            case .size(let size):
-                view.bounds.size = size
-            case .translation(let translation):
-                view.layer.transform = CATransform3DTranslate(view.layer.transform, translation.width, translation.height, 0.0)
+        
+        if let frame = frameAttrib {
+            let posAnim = CAKeyframeAnimation(keyPath: "position")
+            posAnim.values = [NSValue]()
+            posAnim.duration = attributes.duration
+            
+            let sizeAnim = CAKeyframeAnimation(keyPath: "bounds.size")
+            sizeAnim.values = [NSValue]()
+            sizeAnim.duration = attributes.duration
+            
+            let posC = (frame.origin.x - toView.frame.origin.x, frame.origin.y - toView.frame.origin.y)
+            let sizeC = (frame.size.width - toView.bounds.size.width, frame.size.height - toView.bounds.size.height)
+            
+            for s in scales {
+                let offset = (sizeC.0 * toView.layer.anchorPoint.x * CGFloat(s),
+                              sizeC.1 * toView.layer.anchorPoint.y * CGFloat(s))
+                let point = (toView.layer.position.x + posC.0 * CGFloat(s) + offset.0,
+                             toView.layer.position.y + posC.1 * CGFloat(s) + offset.1)
+                let size = (toView.bounds.size.width + sizeC.0 * CGFloat(s),
+                            toView.bounds.size.height + sizeC.1 * CGFloat(s))
+                            
+                posAnim.values?.append(NSValue(cgPoint: CGPoint(x: point.0, y: point.1)))
+                sizeAnim.values?.append(NSValue(cgSize: CGSize(width: size.0, height: size.1)))
             }
+            
+            animations += [posAnim, sizeAnim]
         }
+        
+        if !tAttrib.isEmpty {
+            if !self.isPresenting {
+                tAttrib.reverse()
+                
+                let index = (rotation: tAttrib.index { $0.0 == "angle" },
+                             translation: tAttrib.index { $0.0 == "translation" })
+                if let rIndex = index.rotation, let tIndex = index.translation {
+                    (tAttrib[rIndex], tAttrib[tIndex]) = (tAttrib[tIndex], tAttrib[rIndex])
+                }
+            }
+            
+            let anim = CAKeyframeAnimation(keyPath: "transform")
+            anim.duration = attributes.duration
+            anim.values = scales.map { (s) in
+                let t = tAttrib.reduce(toView.layer.transform) { (t, attrib) in
+                    switch attrib.0 {
+                    case "angle":
+                        return CATransform3DRotate(t, (attrib.1 as! CGFloat) * CGFloat(s), 0.0, 0.0, 1.0)
+                    case "scale":
+                        let scale = attrib.1 as! CGFloat
+                        let value = 1.0 + (scale - 1.0) * CGFloat(s)
+                        return CATransform3DScale(t, value, value, 1.0)
+                    default:
+                        let trans = attrib.1 as! CGSize
+                        return CATransform3DTranslate(t, trans.width * CGFloat(s), trans.height * CGFloat(s), 0.0)
+                    }
+                }
+                return NSValue(caTransform3D: t)
+            }
+            animations.append(anim)
+        }
+        
+        return animations
     }
 }

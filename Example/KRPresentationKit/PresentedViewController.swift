@@ -5,7 +5,7 @@
 //  Created by Joshua Park on 4/6/16.
 //  Copyright © 2016 KnowRe. All rights reserved.
 //
-
+#if false
 import UIKit
 import KRPresentationKit
 
@@ -22,3 +22,4 @@ class PresentedViewController: KRContentViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
+#endif

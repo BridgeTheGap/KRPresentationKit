@@ -9,8 +9,10 @@
 import UIKit
 import KRPresentationKit
 
-class ViewController: KRViewController, CustomPresenting {
-
+class ViewController: UIViewController, CustomPresenting {
+    
+    var transitioner: KRTransitioner?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,49 +24,35 @@ class ViewController: KRViewController, CustomPresenting {
     }
 
     @IBAction func presentAction(_ sender: AnyObject) {
-        if presentedViewController == nil {
-            let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC") as! PresentedViewController
-            pvc.sender = sender
-            present(pvc, style: .popup(.easeOutBack), completion: nil)
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
+
     }
     
     @IBAction func presentBGAction(_ sender: AnyObject) {
-        if presentedViewController == nil {
-            let bvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BackgroundVC") as! BackgroundViewController
-            let view = bvc.view as! KRView
-            view.sender = sender
-            view.allowsUserInteraction = true
-            
-            bvc.backgroundAnim = {
-                if $1 {
-                    bvc.view.alpha = 0.0
-                    return bvc.view.chain(alpha: 1.0, duration: $0)
-                } else {
-                    return bvc.view.chain(alpha: 0.0, duration: $0)
-                }
-            }
-            present(bvc, style: .popup(.easeOutBack), completion: nil)
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
+
     }
-    
-    var transitioner: KRTransitioner?
     
     @IBAction func customAction(_ sender: AnyObject) {
         if transitioner == nil {
-            let attribs = TransitionAttributes(initial: [.alpha(0.1), .rotation(-360), .scale(0.1)], timingFunction: .easeInOutCubic, duration: 1.0)
-//            let attribs = TransitionAnimation(initial: [.alpha(0.1), .scale(0.1), .rotation(180.0)], duration: 1.0)
+            let frame = (sender as! UIButton).frame
+            let attrib: [Attribute] = [
+                .alpha(0.0),
+//                .origin(CGPoint(x: 0.0, y: self.view.frame.maxY)),
+//                .frame(frame),
+//                .position(CGPoint(x: frame.midX, y: frame.midY)),
+                .scale(0.01),
+                .translation(CGSize(width: 0.0, height: -512.0)),
+                .rotation(-360.0),
+                ]
+            let attribs = TransitionAttributes(initial: attrib, timingFunction: .easeInOutCubic, duration: 1.0)
+//            let attribs = TransitionAnimation(initial: attrib, duration: 1.0)
             transitioner = KRTransitioner(attributes: attribs)
         }
 
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TempVC")
         vc.transitioningDelegate = transitioner
         vc.modalPresentationStyle = .custom
-
+        vc.view.frame.size.height = 512.0
+        
         present(vc, animated: true, completion: nil)
     }
     
