@@ -226,7 +226,7 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 78S7RATURK;
+						DevelopmentTeam = 8HCBQJDHQ6;
 						LastSwiftMigration = 0810;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -540,7 +540,7 @@
 			baseConfigurationReference = 5782475EEC5A7CDEEB6815A9 /* Pods-KRPresentationKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				DEVELOPMENT_TEAM = 78S7RATURK;
+				DEVELOPMENT_TEAM = 8HCBQJDHQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -562,7 +562,7 @@
 			baseConfigurationReference = 737E417C3E561546108DD906 /* Pods-KRPresentationKit_Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				DEVELOPMENT_TEAM = 78S7RATURK;
+				DEVELOPMENT_TEAM = 8HCBQJDHQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

@@ -69,8 +69,25 @@ public protocol CustomBackgroundProvider: NSObjectProtocol {
     var dismissalAnimation: (() -> Void)? { get }
 }
 
-public protocol CrossfadingTransition {
-    
+public protocol CrossfadingTransition: CustomPresenting {
+    func fade(to viewController: UIViewController, using transitioner: KRTransitioner?, completion: (() -> Void)?)
+}
+
+public extension CrossfadingTransition {
+    func fade(to viewController: UIViewController, using transitioner: KRTransitioner?, completion: (() -> Void)?) {
+        let me = self as! UIViewController
+        
+        me.dismiss(animated: true, completion: {
+            let transitioner = { () -> KRTransitioner? in
+                if let transitioner = transitioner { self.transitioner = transitioner }
+                return self.transitioner
+            }()
+            
+            viewController.transitioningDelegate = transitioner
+            viewController.modalPresentationStyle = .custom
+            me.present(viewController, animated: true, completion: completion)
+        })
+    }
 }
 
 protocol ContentAnimatable: NSObjectProtocol {

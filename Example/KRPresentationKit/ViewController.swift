@@ -9,7 +9,7 @@
 import UIKit
 import KRPresentationKit
 
-class ViewController: UIViewController, CustomPresenting, ContainerViewDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, CrossfadingTransition, ContainerViewDelegate, UIGestureRecognizerDelegate {
     
     var transitioner: KRTransitioner?
     var containerView: UIView?
@@ -97,9 +97,25 @@ class ViewController: UIViewController, CustomPresenting, ContainerViewDelegate,
 }
 
 class PresentedViewController: UIViewController {
+
+    @IBAction func fade(_ sender: Any) {
+        let navController = presentingViewController as! UINavigationController
+        guard let presenting = navController.viewControllers.first as? CrossfadingTransition else { return }
+        
+        let attribs = TransitionAttributes(initial: [.alpha(0.0), .scale(0.01)], duration: 0.5)
+        let transitioner = KRTransitioner(attributes: attribs)
+        transitioner.containerViewDelegate = presenting as! ContainerViewDelegate
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC")
+        vc.view.frame = CGRect(x: 166, y: 242, width: 437, height: 539)
+        
+        presenting.fade(to: vc, using: transitioner, completion: nil)
+    }
+    
     @IBAction func dismiss(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
 }
 
 class BackgroundViewController: UIViewController, CustomBackgroundProvider, UIGestureRecognizerDelegate {
