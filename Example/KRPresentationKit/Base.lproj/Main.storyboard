@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -66,28 +65,12 @@
                                     <action selector="presentBGAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f5A-kP-ekv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1U-1z-Ec6">
-                                <rect key="frame" x="206" y="914" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="PQm-Z0-Hdm"/>
-                                    <constraint firstAttribute="height" constant="80" id="TYD-GH-S37"/>
-                                </constraints>
-                                <state key="normal" title="Custom">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="customAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UEO-Px-Gv4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hgG-oK-Btq" firstAttribute="top" secondItem="7HC-gt-BcF" secondAttribute="bottom" constant="30" id="94k-TI-mSr"/>
-                            <constraint firstItem="o1U-1z-Ec6" firstAttribute="centerY" secondItem="Vta-fQ-Htr" secondAttribute="centerY" id="9wA-hJ-bGV"/>
                             <constraint firstItem="Vta-fQ-Htr" firstAttribute="centerY" secondItem="7HC-gt-BcF" secondAttribute="centerY" id="Zjd-wm-O2G"/>
                             <constraint firstItem="7HC-gt-BcF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="qx7-XZ-toV"/>
-                            <constraint firstItem="o1U-1z-Ec6" firstAttribute="leading" secondItem="Vta-fQ-Htr" secondAttribute="trailing" constant="8" id="teG-yC-VmT"/>
                             <constraint firstItem="Vta-fQ-Htr" firstAttribute="leading" secondItem="7HC-gt-BcF" secondAttribute="trailing" constant="8" id="vFl-fm-OmG"/>
                         </constraints>
                     </view>
@@ -97,44 +80,6 @@
             </objects>
             <point key="canvasLocation" x="961.71875" y="684.9609375"/>
         </scene>
-        <!--Temp View Controller-->
-        <scene sceneID="NYs-LZ-o5p">
-            <objects>
-                <viewController storyboardIdentifier="TempVC" id="rve-m5-K7s" customClass="TempViewController" customModule="KRPresentationKit_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZkR-dI-BT8"/>
-                        <viewControllerLayoutGuide type="bottom" id="YSJ-kC-cRa"/>
-                    </layoutGuides>
-                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="GQ1-Fp-inH">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOT-yt-XSg">
-                                <rect key="frame" x="344" y="472.5" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.1333333333" green="0.46666666670000001" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="UOT-yt-XSg" secondAttribute="height" multiplier="1:1" id="ZJd-Qf-6xQ"/>
-                                    <constraint firstAttribute="width" constant="80" id="yz7-dm-HBs"/>
-                                </constraints>
-                                <state key="normal" title="HIDE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="action:" destination="rve-m5-K7s" eventType="touchUpInside" id="PW1-BJ-Of5"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="UOT-yt-XSg" firstAttribute="centerY" secondItem="GQ1-Fp-inH" secondAttribute="centerY" id="NfO-D4-iIZ"/>
-                            <constraint firstItem="UOT-yt-XSg" firstAttribute="centerX" secondItem="GQ1-Fp-inH" secondAttribute="centerX" id="Ygx-SE-2Yl"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tEf-qm-PrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1608" y="685"/>
-        </scene>
         <!--Background View Controller-->
         <scene sceneID="wrd-Q4-JTb">
             <objects>
@@ -143,7 +88,7 @@
                         <viewControllerLayoutGuide type="top" id="Flw-Xi-vcd"/>
                         <viewControllerLayoutGuide type="bottom" id="0Vt-Ba-Hia"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ogy-Qz-Vv4" customClass="KRView" customModule="KRPresentationKit">
+                    <view key="view" contentMode="scaleToFill" id="Ogy-Qz-Vv4">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -158,7 +103,7 @@
                                             <color key="titleColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="hideAction:" destination="ONk-1z-GUH" eventType="touchUpInside" id="p7O-XT-bj4"/>
+                                            <action selector="action:" destination="ONk-1z-GUH" eventType="touchUpInside" id="mGq-Kt-FXb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -175,17 +120,21 @@
                             <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerY" secondItem="Ogy-Qz-Vv4" secondAttribute="centerY" id="R72-gE-Vv7"/>
                             <constraint firstItem="7ZQ-7b-Eae" firstAttribute="centerX" secondItem="Ogy-Qz-Vv4" secondAttribute="centerX" id="Rfo-A9-9Un"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="t4c-PE-6Kv" appends="YES" id="giF-8v-9hF"/>
+                        </connections>
                     </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="rect" keyPath="destinationFrame">
-                            <rect key="value" x="264" y="448" width="240" height="128"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="contentView" destination="7ZQ-7b-Eae" id="fo7-MA-w5K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcj-LX-GsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="t4c-PE-6Kv">
+                    <connections>
+                        <action selector="bgAction:" destination="ONk-1z-GUH" id="wUq-qe-1tp"/>
+                        <outlet property="delegate" destination="ONk-1z-GUH" id="L9d-Am-BDM"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="221" y="1420"/>
         </scene>
@@ -226,7 +175,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="dismissAction:" destination="Ens-Y7-mX8" eventType="touchUpInside" id="3gi-Rr-QlP"/>
+                                    <action selector="dismiss:" destination="Ens-Y7-mX8" eventType="touchUpInside" id="hWd-nc-gOv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -252,11 +201,6 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="rect" keyPath="destinationFrame">
-                            <rect key="value" x="166" y="242" width="437" height="539"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE2-Ry-m8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

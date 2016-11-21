@@ -9,8 +9,6 @@
 import UIKit
 import KRTimingFunction
 
-// Preferably use protocols so presented controllers can also present other VCs
-
 public enum Attribute {
     case alpha(CGFloat)
     case frame(CGRect)
@@ -40,8 +38,9 @@ public struct TransitionAnimation: TransitionDataType {
 
 public struct TransitionAttributes: TransitionDataType {
     public var initial: [Attribute]
-    public var timingFunction: FunctionType
     public var duration: Double
+    public var timingFunction: FunctionType
+    public var shouldInvertForDismissal: Bool = true
     
     public init() {
         self.initial = [Attribute]()
@@ -54,65 +53,103 @@ public struct TransitionAttributes: TransitionDataType {
     }
 }
 
-public protocol CustomPresenting {
+public protocol CustomPresenting: NSObjectProtocol {
     var transitioner: KRTransitioner? { get set }
 }
 
-public protocol CustomPresented {
+public protocol ContainerViewDelegate: NSObjectProtocol {
+    func prepare(containerView: UIView, for transitionID: String?)
+    func animate(containerView: UIView, for transitionID: String?, isPresenting: Bool)
+    func finalize(containerView: UIView, for transitionID: String?, isPresenting: Bool)
+}
+
+public protocol CustomBackgroundProvider: NSObjectProtocol {
+    var contentView: UIView! { get set }
+    var presentationAnimation: (() -> Void)? { get }
+    var dismissalAnimation: (() -> Void)? { get }
+}
+
+public protocol CrossfadingTransition {
     
 }
 
-public protocol CustomBackgroundProvider {
-    var contentView: UIView! { get set }
-}
-
-protocol ContentAnimatable {
+protocol ContentAnimatable: NSObjectProtocol {
     
 }
 
 internal class PresentationController: UIPresentationController {
-    override var containerView: UIView? {
-        get {
-            if presentedViewController is CustomBackgroundProvider {
-                return presentedViewController.view
-            } else {
-                return super.containerView
-            }
-        }
+    weak var containerViewDelegate: ContainerViewDelegate?
+    fileprivate var transitionID: String?
+    
+    override func presentationTransitionWillBegin() {
+        let id = transitionID
+        containerViewDelegate?.prepare(containerView: containerView!, for: id)
+        
+        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak delegate = self.containerViewDelegate] (context) in
+            UIView.animate(withDuration: context.transitionDuration, animations: { 
+                delegate?.animate(containerView: context.containerView, for: id, isPresenting: true)
+            })
+        }, completion: { [weak delegate = self.containerViewDelegate] (context) in
+            delegate?.finalize(containerView: context.containerView, for: id, isPresenting: true)
+        })
     }
+    
+    override func dismissalTransitionWillBegin() {
+        let id = transitionID
+        
+        presentedViewController.transitionCoordinator?.animate(alongsideTransition:{ [weak delegate = self.containerViewDelegate] (context) in
+            UIView.animate(withDuration: context.transitionDuration, animations: {
+                delegate?.animate(containerView: context.containerView, for: id, isPresenting: false)
+            })
+        }, completion: { [weak delegate = self.containerViewDelegate] (context) in
+            delegate?.finalize(containerView: context.containerView, for: id, isPresenting: false)
+        })
+    }
+}
+
+internal class BackgroundPresentationController: UIPresentationController {
     
     override var presentedView: UIView? {
-        get {
-            if let vc = presentedViewController as? CustomBackgroundProvider {
-                return vc.contentView
-            } else {
-                return super.presentedView
-            }
-        }
+        return backgroundProvider.contentView
     }
     
-    // Add background tap to hide
+    override var frameOfPresentedViewInContainerView: CGRect {
+        return backgroundProvider.contentView.frame
+    }
+    
+    private var backgroundProvider: CustomBackgroundProvider {
+        return presentedViewController as! CustomBackgroundProvider
+    }
+    
+    // MARK: - Presentation
+
     override func presentationTransitionWillBegin() {
-        super.presentationTransitionWillBegin()
+        containerView?.insertSubview(presentedViewController.view, at: 0)
+        
+        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+            if let anim = self.backgroundProvider.presentationAnimation {
+                UIView.animate(withDuration: context.transitionDuration, animations: anim)
+            }
+        }, completion: nil)
     }
+
+    // MARK: - Dismissal
     
-    override func containerViewWillLayoutSubviews() {
-        super.containerViewWillLayoutSubviews()
-    }
-    
-    override func containerViewDidLayoutSubviews() {
-        super.containerViewDidLayoutSubviews()
-    }
-    
-    override func presentationTransitionDidEnd(_ completed: Bool) {
-        super.presentationTransitionDidEnd(completed)
+    override func dismissalTransitionWillBegin() {
+        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
+            if let anim = self.backgroundProvider.dismissalAnimation {
+                UIView.animate(withDuration: context.transitionDuration, animations: anim)
+            }
+        }, completion: nil)
     }
 }
 
 public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
+    public var transitionID: String?
     public var attributes: TransitionDataType
-    private(set) var isPresenting = true
-    internal private(set) var presenter: PresentationController?
+    public weak var containerViewDelegate: ContainerViewDelegate?
+    internal private(set) var isPresenting = true
+    internal private(set) var presenter: UIPresentationController?
     
     public init(attributes: TransitionDataType) {
         self.attributes = attributes
@@ -135,10 +172,13 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
     }
     
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        if presented is CustomBackgroundProvider {
-            presenter = PresentationController(presentedViewController: presented, presenting: presenting)
-        } else {
-            presenter = PresentationController(presentedViewController: presented, presenting: presenting)
+        
+        if containerViewDelegate != nil {
+            let presenter = PresentationController(presentedViewController: presented, presenting: presenting)
+            (presenter.containerViewDelegate, presenter.transitionID) = (containerViewDelegate, transitionID)
+            self.presenter = presenter
+        } else if presented is CustomBackgroundProvider {
+            presenter = BackgroundPresentationController(presentedViewController: presented, presenting: presenting)
         }
         
         return presenter
@@ -151,7 +191,10 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
+        
         if isPresenting {
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
             let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
 
             let targetAttrib = apply(attributes: attributes.initial, to: toView)
@@ -160,7 +203,7 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
                 transitionContext.completeTransition(didComplete)
             }
             
-            transitionContext.containerView.addSubview(toView)
+            if !(toVC is CustomBackgroundProvider) { containerView.addSubview(toView) }
             
             if let animation = attributes as? TransitionAnimation {
                 UIView.animate(withDuration: animation.duration,
@@ -176,11 +219,15 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
                 CATransaction.setCompletionBlock {
                     completion(!transitionContext.transitionWasCancelled)
                 }
-                let animGroup = CAAnimationGroup()
-                animGroup.animations = animation(for: toView, using: targetAttrib)
-                animGroup.duration = attributes.duration
                 
-                toView.layer.add(animGroup, forKey: nil)
+                if attributes.duration > 0.0 {
+                    let animGroup = CAAnimationGroup()
+                    animGroup.animations = animation(for: toView, using: targetAttrib)
+                    animGroup.duration = attributes.duration
+                    
+                    toView.layer.add(animGroup, forKey: nil)
+                }
+                
                 CATransaction.commit()
                 apply(attributes: targetAttrib, to: toView)
             }
@@ -206,20 +253,20 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
                     completion(!transitionContext.transitionWasCancelled)
                     fromView.layer.removeAnimation(forKey: animKey)
                 }
-                let animGroup = CAAnimationGroup()
-                animGroup.animations = animation(for: fromView, using: attributes.initial)
-                animGroup.duration = attributes.duration
-                animGroup.fillMode = kCAFillModeForwards
-                animGroup.isRemovedOnCompletion = false
                 
-                fromView.layer.add(animGroup, forKey: animKey)
+                if attributes.duration > 0.0 {
+                    let animGroup = CAAnimationGroup()
+                    animGroup.animations = animation(for: fromView, using: attributes.initial)
+                    animGroup.duration = attributes.duration
+                    animGroup.fillMode = kCAFillModeForwards
+                    animGroup.isRemovedOnCompletion = false
+                    
+                    fromView.layer.add(animGroup, forKey: animKey)
+                }
+
                 CATransaction.commit()
             }
         }
-    }
-    
-    public func animationEnded(_ transitionCompleted: Bool) {
-        print("YOLO")
     }
     
     // MARK: - Private
@@ -272,7 +319,9 @@ public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UI
         
         for i in 0 ... Int(numberOfFrames) {
             let rt = Double(i) / numberOfFrames
-            scales.append(TimingFunction.value(using: attributes.timingFunction, rt: rt, b: 0.0, c: 1.0, d: attributes.duration))
+            let function = !isPresenting && attributes.shouldInvertForDismissal ?
+                attributes.timingFunction.inverse : attributes.timingFunction
+            scales.append(TimingFunction.value(using: function, rt: rt, b: 0.0, c: 1.0, d: attributes.duration))
         }
         
         var frameAttrib: CGRect?
