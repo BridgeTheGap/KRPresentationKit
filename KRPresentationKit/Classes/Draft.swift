@@ -78,20 +78,12 @@ public extension CrossfadingTransition {
         let me = self as! UIViewController
         
         me.dismiss(animated: true, completion: {
-            let transitioner = { () -> KRTransitioner? in
-                if transitioner === self.transitioner {
-                    let t = KRTransitioner(attributes: transitioner!.attributes)
-                    t.transitionID = transitioner!.transitionID
-                    t.containerViewDelegate = transitioner!.containerViewDelegate
-                    return t
-                } else {
-                    return transitioner
-                }
+            self.transitioner = {
+                guard transitioner != nil else { return nil }
+                return transitioner === self.transitioner ? transitioner!.copied() : transitioner
             }()
             
-            self.transitioner = transitioner
-            
-            viewController.transitioningDelegate = transitioner
+            viewController.transitioningDelegate = self.transitioner
             viewController.modalPresentationStyle = .custom
             me.present(viewController, animated: true, completion: completion)
         })
@@ -169,19 +161,30 @@ internal class BackgroundPresentationController: UIPresentationController {
     }
 }
 
-public class KRTransitioner: NSObject, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
+public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
     public var transitionID: String?
     public var attributes: TransitionDataType
     public weak var containerViewDelegate: ContainerViewDelegate?
     internal private(set) var isPresenting = true
     internal private(set) var presenter: UIPresentationController?
     
-    public init(attributes: TransitionDataType) {
+    public required init(attributes: TransitionDataType) {
         self.attributes = attributes
     }
     
     public override convenience init() {
         self.init(attributes: TransitionAttributes())
+    }
+    
+    public func copied() -> KRTransitioner {
+        return copy() as! KRTransitioner
+    }
+    
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let t = type(of: self).init(attributes: attributes)
+        t.transitionID = transitionID
+        t.containerViewDelegate = containerViewDelegate
+        return t
     }
     
     // MARK: - Transitioning delegate
