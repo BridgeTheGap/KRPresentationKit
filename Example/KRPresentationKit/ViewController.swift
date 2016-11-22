@@ -106,9 +106,9 @@ class PresentedViewController: UIViewController {
         let navController = presentingViewController as! UINavigationController
         guard let presenting = navController.viewControllers.first as? CrossfadingTransition else { return }
         
-//        let attribs = TransitionAttributes(initial: [.alpha(0.0), .scale(0.01)], duration: 0.5)
-//        let transitioner = KRTransitioner(attributes: attribs)
-        let transitioner = presenting.transitioner!
+        let attribs = TransitionAttributes(initial: [.alpha(0.0), .scale(0.01)], duration: 0.5)
+        let transitioner = KRTransitioner(attributes: attribs)
+//        let transitioner = presenting.transitioner!
         transitioner.containerViewDelegate = presenting as? ContainerViewDelegate
         
         let size = CGSize(width: min(UIScreen.main.bounds.width * 0.75, 450.0),

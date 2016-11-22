@@ -57,6 +57,10 @@ public protocol CustomPresenting: NSObjectProtocol {
     var transitioner: KRTransitioner? { get set }
 }
 
+public protocol CustomPresented: NSObjectProtocol {
+    var customPresenting: CustomPresenting? { get set }
+}
+
 public protocol ContainerViewDelegate: NSObjectProtocol {
     func prepare(containerView: UIView, for transitionID: String?)
     func animate(containerView: UIView, for transitionID: String?, isPresenting: Bool)
@@ -77,11 +81,14 @@ public extension CrossfadingTransition {
     func fade(to viewController: UIViewController, using transitioner: KRTransitioner?, completion: (() -> Void)?) {
         let me = self as! UIViewController
         
+        let crossfadingView = (self.transitioner?.presenter as? CrossfadingPresentation)?.prepareFadeTransition()
+        
         me.dismiss(animated: true, completion: {
             self.transitioner = {
                 guard transitioner != nil else { return nil }
                 return transitioner === self.transitioner ? transitioner!.copied() : transitioner
             }()
+            self.transitioner?.crossfadingView = crossfadingView
             
             viewController.transitioningDelegate = self.transitioner
             viewController.modalPresentationStyle = .custom
@@ -90,24 +97,28 @@ public extension CrossfadingTransition {
     }
 }
 
-protocol ContentAnimatable: NSObjectProtocol {
-    
+internal protocol CrossfadingPresentation {
+    var crossfadingView: UIView? { get set }
+    func prepareFadeTransition() -> UIView?
 }
 
-internal class PresentationController: UIPresentationController {
+internal class PresentationController: UIPresentationController, CrossfadingPresentation {
     weak var containerViewDelegate: ContainerViewDelegate?
-    fileprivate var transitionID: String?
+    var transitionID: String?
+    var crossfadingView: UIView?
     
     override func presentationTransitionWillBegin() {
         let id = transitionID
         containerViewDelegate?.prepare(containerView: containerView!, for: id)
         
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak delegate = self.containerViewDelegate] (context) in
-            UIView.animate(withDuration: context.transitionDuration, animations: { 
+            UIView.animate(withDuration: context.transitionDuration, animations: {
+                self.crossfadingView?.alpha = 0.0
                 delegate?.animate(containerView: context.containerView, for: id, isPresenting: true)
             })
-        }, completion: { [weak delegate = self.containerViewDelegate] (context) in
-            delegate?.finalize(containerView: context.containerView, for: id, isPresenting: true)
+            }, completion: { [weak delegate = self.containerViewDelegate] (context) in
+                self.crossfadingView?.removeFromSuperview()
+                delegate?.finalize(containerView: context.containerView, for: id, isPresenting: true)
         })
     }
     
@@ -122,10 +133,37 @@ internal class PresentationController: UIPresentationController {
             delegate?.finalize(containerView: context.containerView, for: id, isPresenting: false)
         })
     }
+    
+    func prepareFadeTransition() -> UIView? {
+        guard let containerView = containerView else { return nil }
+        
+        DispatchQueue.global(qos: .userInteractive).sync {
+            let originalStatus = presentedView!.isHidden
+            presentedView!.isHidden = true
+            
+            UIGraphicsBeginImageContextWithOptions(containerView.bounds.size, false, 0.0)
+            containerView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            crossfadingView = UIView(frame: containerView.frame)
+            crossfadingView?.layer.contents = image?.cgImage
+            
+            presentedView!.isHidden = originalStatus
+        }
+
+        crossfadingView!.addSubview(presentedView!)
+        presentingViewController.view.addSubview(crossfadingView!)
+        
+        containerView.isHidden = true
+        
+        return crossfadingView
+    }
 }
 
-internal class BackgroundPresentationController: UIPresentationController {
-    
+internal class BackgroundPresentationController: UIPresentationController, CrossfadingPresentation {
+    var crossfadingView: UIView?
+
     override var presentedView: UIView? {
         return backgroundProvider.contentView
     }
@@ -138,20 +176,19 @@ internal class BackgroundPresentationController: UIPresentationController {
         return presentedViewController as! CustomBackgroundProvider
     }
     
-    // MARK: - Presentation
-
     override func presentationTransitionWillBegin() {
         containerView?.insertSubview(presentedViewController.view, at: 0)
         
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
-            if let anim = self.backgroundProvider.presentationAnimation {
-                UIView.animate(withDuration: context.transitionDuration, animations: anim)
-            }
-        }, completion: nil)
+            UIView.animate(withDuration: context.transitionDuration, animations: {
+                self.crossfadingView?.alpha = 0.0
+                self.backgroundProvider.presentationAnimation?()
+            })
+        }, completion: { (_) in
+            self.crossfadingView?.removeFromSuperview()
+        })
     }
 
-    // MARK: - Dismissal
-    
     override func dismissalTransitionWillBegin() {
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
             if let anim = self.backgroundProvider.dismissalAnimation {
@@ -159,14 +196,43 @@ internal class BackgroundPresentationController: UIPresentationController {
             }
         }, completion: nil)
     }
+    
+    func prepareFadeTransition() -> UIView? {
+        guard let containerView = containerView else { return nil }
+        
+        DispatchQueue.global(qos: .userInteractive).sync {
+            let originalStatus = backgroundProvider.contentView.isHidden
+            backgroundProvider.contentView.isHidden = true
+
+            UIGraphicsBeginImageContextWithOptions(containerView.bounds.size, false, 0.0)
+            containerView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            crossfadingView = UIView(frame: containerView.frame)
+            crossfadingView?.layer.contents = image?.cgImage
+            
+            backgroundProvider.contentView.isHidden = originalStatus
+        }
+        
+        crossfadingView!.addSubview(presentedView!)
+        presentingViewController.view.addSubview(crossfadingView!)
+        
+        containerView.isHidden = true
+        
+        return crossfadingView
+    }
 }
 
 public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
     public var transitionID: String?
     public var attributes: TransitionDataType
     public weak var containerViewDelegate: ContainerViewDelegate?
-    internal private(set) var isPresenting = true
+    
     internal private(set) var presenter: UIPresentationController?
+    internal var crossfadingView: UIView?
+    
+    private var isPresenting = true
     
     public required init(attributes: TransitionDataType) {
         self.attributes = attributes
@@ -184,6 +250,7 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
         let t = type(of: self).init(attributes: attributes)
         t.transitionID = transitionID
         t.containerViewDelegate = containerViewDelegate
+        
         return t
     }
     
@@ -204,11 +271,17 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
         if containerViewDelegate != nil {
             let presenter = PresentationController(presentedViewController: presented, presenting: presenting)
             (presenter.containerViewDelegate, presenter.transitionID) = (containerViewDelegate, transitionID)
+            presenter.crossfadingView = crossfadingView
+            
             self.presenter = presenter
         } else if presented is CustomBackgroundProvider {
-            presenter = BackgroundPresentationController(presentedViewController: presented, presenting: presenting)
+            let presenter = BackgroundPresentationController(presentedViewController: presented, presenting: presenting)
+            presenter.crossfadingView = crossfadingView
+            
+            self.presenter = presenter
         }
         
+        crossfadingView = nil
         return presenter
     }
     
