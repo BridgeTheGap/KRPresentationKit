@@ -40,10 +40,13 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
         transitioner = KRTransitioner(attributes: attribs)
         transitioner?.containerViewDelegate = self
         
+        let size = CGSize(width: min(UIScreen.main.bounds.width * 0.75, 450.0),
+                          height: UIScreen.main.bounds.height * 0.5)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC")
         vc.transitioningDelegate = transitioner
         vc.modalPresentationStyle = .custom
-        vc.view.frame = CGRect(x: 166, y: 242, width: 437, height: 539)
+        vc.view.frame = CGRect(origin: CGPoint.zero, size: size)
+        vc.view.center = self.view.center
         
         present(vc, animated: true, completion: nil)
     }
@@ -66,6 +69,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
         vc.transitioningDelegate = transitioner
         vc.modalPresentationStyle = .custom
         vc.view.backgroundColor = UIColor.clear
+        vc.view.layoutIfNeeded()
         
         present(vc, animated: true, completion: nil)
     }
@@ -102,12 +106,16 @@ class PresentedViewController: UIViewController {
         let navController = presentingViewController as! UINavigationController
         guard let presenting = navController.viewControllers.first as? CrossfadingTransition else { return }
         
-        let attribs = TransitionAttributes(initial: [.alpha(0.0), .scale(0.01)], duration: 0.5)
-        let transitioner = KRTransitioner(attributes: attribs)
-        transitioner.containerViewDelegate = presenting as! ContainerViewDelegate
+//        let attribs = TransitionAttributes(initial: [.alpha(0.0), .scale(0.01)], duration: 0.5)
+//        let transitioner = KRTransitioner(attributes: attribs)
+        let transitioner = presenting.transitioner!
+        transitioner.containerViewDelegate = presenting as? ContainerViewDelegate
         
+        let size = CGSize(width: min(UIScreen.main.bounds.width * 0.75, 450.0),
+                          height: UIScreen.main.bounds.height * 0.5)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PresentedVC")
-        vc.view.frame = CGRect(x: 166, y: 242, width: 437, height: 539)
+        vc.view.frame = CGRect(origin: CGPoint.zero, size: size)
+        vc.view.center = self.view.center
         
         presenting.fade(to: vc, using: transitioner, completion: nil)
     }

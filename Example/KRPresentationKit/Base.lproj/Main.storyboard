@@ -157,7 +157,7 @@
                                     <constraint firstAttribute="height" constant="60" id="JOv-qi-yd8"/>
                                     <constraint firstAttribute="width" constant="60" id="x1e-QG-QUK"/>
                                 </constraints>
-                                <state key="normal" title="Switch">
+                                <state key="normal" title="Fade">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -191,7 +191,7 @@
                                 <integer key="value" value="6"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                <integer key="value" value="1"/>
+                                <real key="value" value="0.40000000000000002"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
                                 <size key="value" width="0.0" height="0.0"/>

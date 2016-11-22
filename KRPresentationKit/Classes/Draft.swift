@@ -79,9 +79,17 @@ public extension CrossfadingTransition {
         
         me.dismiss(animated: true, completion: {
             let transitioner = { () -> KRTransitioner? in
-                if let transitioner = transitioner { self.transitioner = transitioner }
-                return self.transitioner
+                if transitioner === self.transitioner {
+                    let t = KRTransitioner(attributes: transitioner!.attributes)
+                    t.transitionID = transitioner!.transitionID
+                    t.containerViewDelegate = transitioner!.containerViewDelegate
+                    return t
+                } else {
+                    return transitioner
+                }
             }()
+            
+            self.transitioner = transitioner
             
             viewController.transitioningDelegate = transitioner
             viewController.modalPresentationStyle = .custom
