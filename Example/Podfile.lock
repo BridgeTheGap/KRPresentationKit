@@ -1,8 +1,6 @@
 PODS:
-  - KRAnimationKit (0.12.0):
+  - KRPresentationKit (0.10.0):
     - KRTimingFunction
-  - KRPresentationKit (0.9.0):
-    - KRAnimationKit
   - KRTimingFunction (0.11.1)
 
 DEPENDENCIES:
@@ -13,8 +11,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KRAnimationKit: 10eef69519c379a5b2c7d047cee8e508280ee0dc
-  KRPresentationKit: c148463d25c620b157d8f228048adbfe4bf5a08b
+  KRPresentationKit: 4e0dc9ce00dc3a5095a53fe6275bfefe360334e4
   KRTimingFunction: 75bcffca1a1a7839fb55e4fa4dfc6f0c47df2535
 
 PODFILE CHECKSUM: f2a33e4ba7928c04169959845ee4836a48b4f659

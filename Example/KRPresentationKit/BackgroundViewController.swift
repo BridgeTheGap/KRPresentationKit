@@ -5,13 +5,35 @@
 //  Created by Joshua Park on 7/4/16.
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
-#if false
+
 import UIKit
 import KRPresentationKit
 
-class BackgroundViewController: KROverlayViewController {
-    @IBAction func hideAction(_ sender: AnyObject) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
+class BackgroundViewController: UIViewController, CustomPresented, CustomBackgroundProvider {
+    var customPresenting: UIViewController?
+    var contentView: UIView!
+    
+    lazy var presentationAnimation: (() -> Void)? = {
+        self.view.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+    }
+    
+    lazy var dismissalAnimation: (() -> Void)? = {
+        self.view.backgroundColor = UIColor.clear
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.clear
+        
+        contentView.layer.cornerRadius = 6.0
+        contentView.layer.shadowColor = UIColor(white: 0.0, alpha: 0.4).cgColor
+        contentView.layer.shadowOffset = CGSize.zero
+        contentView.layer.shadowRadius = 4.0
+        contentView.layer.shadowOpacity = 1.0
+    }
+    
+    @IBAction func action(_ sender: Any) {
+        customPresenting?.dismiss(animated: true, completion: nil)
     }
 }
-#endif

@@ -84,12 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/KRAnimationKit/KRAnimationKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/KRPresentationKit/KRPresentationKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/KRTimingFunction/KRTimingFunction.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/KRAnimationKit/KRAnimationKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/KRPresentationKit/KRPresentationKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/KRTimingFunction/KRTimingFunction.framework"
 fi

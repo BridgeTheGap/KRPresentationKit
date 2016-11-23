@@ -8,22 +8,6 @@
 
 import UIKit
 
-internal var Screen: UIScreen {
-    return UIScreen.main
-}
-
-internal extension CGRect {
-    var endPoint: CGPoint {
-        get {
-            return CGPoint(x: self.origin.x + self.width, y: self.origin.y + self.height)
-        }
-        set {
-            self.origin.x = newValue.x - self.width
-            self.origin.y = newValue.y - self.height
-        }
-    }
-}
-
 internal extension CGColor {
     var uiColor: UIColor {
         return UIColor(cgColor: self)
