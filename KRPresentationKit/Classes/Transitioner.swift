@@ -169,7 +169,7 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
                 
                 return p
             }
-            return nil
+            return UIPresentationController(presentedViewController: presented, presenting: presenting)
         }()
         
         return presenter
