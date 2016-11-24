@@ -13,7 +13,7 @@ public protocol CustomPresenting: NSObjectProtocol {
 }
 
 public protocol CustomPresented: NSObjectProtocol {
-    var customPresenting: UIViewController? { get set }
+    weak var customPresenting: UIViewController? { get set }
 }
 
 public protocol ContainerViewDelegate: NSObjectProtocol {
@@ -23,7 +23,7 @@ public protocol ContainerViewDelegate: NSObjectProtocol {
 }
 
 public protocol CustomBackgroundProvider: NSObjectProtocol {
-    var contentView: UIView! { get set }
+    weak var contentView: UIView! { get set }
     var presentationAnimation: (() -> Void)? { get }
     var dismissalAnimation: (() -> Void)? { get }
 }

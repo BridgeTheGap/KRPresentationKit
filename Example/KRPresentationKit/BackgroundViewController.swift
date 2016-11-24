@@ -11,14 +11,14 @@ import KRPresentationKit
 
 class BackgroundViewController: UIViewController, CustomPresented, CustomBackgroundProvider {
     var customPresenting: UIViewController?
-    var contentView: UIView!
+    weak var contentView: UIView!
     
-    lazy var presentationAnimation: (() -> Void)? = {
-        self.view.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+    lazy var presentationAnimation: (() -> Void)? = { [weak view = self.view] in
+        view?.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
     }
     
-    lazy var dismissalAnimation: (() -> Void)? = {
-        self.view.backgroundColor = UIColor.clear
+    lazy var dismissalAnimation: (() -> Void)? = { [weak view = self.view] in
+        view?.backgroundColor = UIColor.clear
     }
     
     override func viewDidLoad() {
@@ -35,5 +35,9 @@ class BackgroundViewController: UIViewController, CustomPresented, CustomBackgro
     
     @IBAction func action(_ sender: Any) {
         customPresenting?.dismiss(animated: true, completion: nil)
+    }
+    
+    deinit {
+        print("Deinit: \(type(of: self))")
     }
 }

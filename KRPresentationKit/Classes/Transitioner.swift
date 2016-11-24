@@ -263,9 +263,13 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
     }
     
     public func animationEnded(_ transitionCompleted: Bool) {
-        if state == .fadingIn {
+        switch state {
+        case .fadingIn:
             transitioningBackground?.removeFromSuperview()
             transitioningBackground = nil
+        case .dismissing, .fadingOut:
+            presenter = nil
+        default: break
         }
         
         state = .idle

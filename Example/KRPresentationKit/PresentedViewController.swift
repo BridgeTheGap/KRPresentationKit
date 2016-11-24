@@ -62,5 +62,8 @@ class PresentedViewController: UIViewController, CustomPresented {
     @IBAction func dismiss(_ sender: Any) {
         customPresenting?.dismiss(animated: true, completion: nil)
     }
-    
+ 
+    deinit {
+        print("Deinit: \(type(of: self))")
+    }
 }

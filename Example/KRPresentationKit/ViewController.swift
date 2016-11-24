@@ -191,4 +191,8 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view === containerView ? true : false
     }
+    
+    deinit {
+        print("Deinit: \(type(of: self))")
+    }
 }
