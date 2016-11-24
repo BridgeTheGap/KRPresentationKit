@@ -258,7 +258,9 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
                 
                 CATransaction.commit()
             }
-        default: fatalError("<KRPresentationKit> `KRTransitioner` is animating in an invalid state (.idle).")
+        default:
+            let didComplete = !transitionContext.transitionWasCancelled
+            transitionContext.completeTransition(didComplete)
         }
     }
     
