@@ -8,22 +8,22 @@
 
 import UIKit
 
-public protocol CustomPresenting: NSObjectProtocol {
+public protocol CustomPresenting: class {
     var transitioner: KRTransitioner? { get set }
 }
 
-public protocol CustomPresented: NSObjectProtocol {
+public protocol CustomPresented: class {
     weak var customPresenting: UIViewController? { get set }
 }
 
-public protocol ContainerViewDelegate: NSObjectProtocol {
+public protocol ContainerViewDelegate: class {
     func prepare(containerView: UIView, for transitioner: KRTransitioner)
     func animate(containerView: UIView, for transitioner: KRTransitioner)
     func finalize(containerView: UIView, for transitioner: KRTransitioner)
 }
 
-public protocol CustomBackgroundProvider: NSObjectProtocol {
-    weak var contentView: UIView! { get set }
+public protocol CustomBackgroundProvider: class {
+    weak var contentView: UIView! { get }
     var presentationAnimation: (() -> Void)? { get }
     var dismissalAnimation: (() -> Void)? { get }
 }

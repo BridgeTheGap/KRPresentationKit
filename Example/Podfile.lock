@@ -1,19 +1,19 @@
 PODS:
-  - KRPresentationKit (0.10.0):
-    - KRTimingFunction
-  - KRTimingFunction (0.11.1)
+  - KRPresentationKit (0.11.0):
+    - KRTimingFunction (~> 1.0.0)
+  - KRTimingFunction (1.0.0)
 
 DEPENDENCIES:
   - KRPresentationKit (from `../`)
 
 EXTERNAL SOURCES:
   KRPresentationKit:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  KRPresentationKit: 4e0dc9ce00dc3a5095a53fe6275bfefe360334e4
-  KRTimingFunction: 75bcffca1a1a7839fb55e4fa4dfc6f0c47df2535
+  KRPresentationKit: 150fe409245ce1f904ad80973e26b1880046a3a5
+  KRTimingFunction: f74a7630fb2e7e8daf7e619059cfedce1a76545b
 
 PODFILE CHECKSUM: f2a33e4ba7928c04169959845ee4836a48b4f659
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1
