@@ -9,18 +9,6 @@
 import UIKit
 import KRTimingFunction
 
-public enum Attribute {
-    case alpha(CGFloat)
-    case frame(CGRect)
-    case position(CGPoint)
-    case opacity(Float)
-    case origin(CGPoint)
-    case rotation(CGFloat)
-    case scale(CGFloat)
-    case size(CGSize)
-    case translation(CGSize)
-}
-
 public enum TransitionState {
     case idle
     case presenting
@@ -29,73 +17,19 @@ public enum TransitionState {
     case fadingOut
 }
 
-public protocol TransitionDataType {
-    var initial: [Attribute] { get set }
-    var duration: Double { get set }
-}
-
-public struct TransitionAnimation: TransitionDataType {
-    public var initial: [Attribute]
-    public var options: UIViewAnimationOptions
-    public var duration: Double
+public class KRTransitioner: NSObject, NSCopying,
+                             UIViewControllerTransitioningDelegate,
+                             UIViewControllerAnimatedTransitioning
+{
     
-    public init(initial: [Attribute], options: UIViewAnimationOptions = [], duration: Double) {
-        (self.initial, self.options, self.duration) = (initial, options, duration)
-    }
-}
-
-public struct TransitionAttributes: TransitionDataType {
-    public var initial: [Attribute]
-    public var duration: Double
-    public var timingFunction: FunctionType
-    public var shouldInvertForDismissal: Bool = true
-    
-    public init() {
-        self.initial = [Attribute]()
-        self.timingFunction = .easeInOutCubic
-        self.duration = 0.3
-    }
-    
-    public init(initial: [Attribute], timingFunction: FunctionType = .easeInOutCubic, duration: Double = 0.3) {
-        (self.initial, self.timingFunction, self.duration) = (initial, timingFunction, duration)
-    }
-}
-
-public protocol CrossfadingTransition: CustomPresenting {
-    func fade(to viewController: UIViewController,
-              using transitioner: KRTransitioner?,
-              fadeIncompletion: (() -> Void)?,
-              fadeOutCompletion: (() -> Void)?)
-}
-
-public extension CrossfadingTransition {
-    func fade(to viewController: UIViewController, using transitioner: KRTransitioner?,
-              fadeIncompletion: (() -> Void)? = nil, fadeOutCompletion: (() -> Void)? = nil)
-    {
-        let me = self as! UIViewController
-        var transitioner = transitioner
-        
-        if transitioner === self.transitioner { transitioner = self.transitioner!.copied() }
-        
-        self.transitioner?.fade(to: transitioner)
-        
-        me.dismiss(animated: true, completion: {
-            fadeIncompletion?()
-            self.transitioner = transitioner
-            
-            viewController.transitioningDelegate = self.transitioner
-            viewController.modalPresentationStyle = .custom
-            me.present(viewController, animated: true, completion: fadeOutCompletion)
-        })
-    }
-}
-
-public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
     public var transitionID: String?
+    
     public var attributes: TransitionDataType
+    
     public weak var containerViewDelegate: ContainerViewDelegate?
     
     public private(set) var state: TransitionState = .idle
+    
     public private(set) var transitioningBackground: UIView?
     
     internal private(set) var presenter: UIPresentationController?
@@ -141,17 +75,27 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
     
     // MARK: - Transitioning delegate
     
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented presented: UIViewController,
+                                    presenting: UIViewController,
+                                    source: UIViewController)
+        -> UIViewControllerAnimatedTransitioning?
+    {
         if state == .idle { state = .presenting }
         return self
     }
     
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forDismissed dismissed: UIViewController)
+        -> UIViewControllerAnimatedTransitioning?
+    {
         if state == .idle { state = .dismissing }
         return self
     }
     
-    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    public func presentationController(forPresented presented: UIViewController,
+                                       presenting: UIViewController?,
+                                       source: UIViewController)
+        -> UIPresentationController?
+    {
         if let presented = presented as? CustomPresented, source is CustomPresenting {
             presented.customPresenting = source
         }
@@ -177,7 +121,9 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
     
     // MARK: - Animated transitioning
     
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?)
+        -> TimeInterval
+    {
         return attributes.duration
     }
     
@@ -279,8 +225,12 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
     
     // MARK: - Private
     
-    @discardableResult private func apply(attributes: [Attribute], to view: UIView) -> [Attribute] {
+    @discardableResult
+    private func apply(attributes: [Attribute],
+                       to view: UIView) -> [Attribute]
+    {
         var targetAttrib = [Attribute]()
+        
         for attrib in attributes {
             switch attrib {
             case .alpha(let alpha):
@@ -316,7 +266,10 @@ public class KRTransitioner: NSObject, NSCopying, UIViewControllerTransitioningD
         return targetAttrib
     }
     
-    private func animation(for toView: UIView, using targetAttributes: [Attribute]) -> [CAAnimation] {
+    private func animation(for toView: UIView,
+                           using targetAttributes: [Attribute])
+        -> [CAAnimation]
+    {
         guard let attributes = attributes as? TransitionAttributes else {
             fatalError("<KRPresentationKit> - Failed to cast `attributes` as TransitionAttributes.")
         }

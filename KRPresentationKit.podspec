@@ -31,7 +31,8 @@ as well as the functionality to define a custom animation.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'KRPresentationKit/Classes/*.swift'
+  s.source_files = 'KRPresentationKit/Classes/**/*.swift',
+                   'KRPresentationKit/Extension/**/*.swift'
   s.dependency     'KRTimingFunction', '~> 1.0.0'
 
   # s.resource_bundles = {

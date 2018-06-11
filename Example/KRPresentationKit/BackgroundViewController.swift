@@ -10,8 +10,10 @@ import UIKit
 import KRPresentationKit
 
 class BackgroundViewController: UIViewController, CustomPresented, CustomBackgroundProvider {
+    
     var customPresenting: UIViewController?
-    weak var contentView: UIView!
+    
+    @IBOutlet weak var contentView: UIView!
     
     lazy var presentationAnimation: (() -> Void)? = { [weak view = self.view] in
         view?.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
@@ -32,7 +34,7 @@ class BackgroundViewController: UIViewController, CustomPresented, CustomBackgro
         contentView.layer.shadowRadius = 4.0
         contentView.layer.shadowOpacity = 1.0
     }
-    
+        
     @IBAction func action(_ sender: Any) {
         customPresenting?.dismiss(animated: true, completion: nil)
     }
