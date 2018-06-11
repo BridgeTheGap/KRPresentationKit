@@ -131,9 +131,12 @@ public class KRTransitioner: NSObject, NSCopying,
         let containerView = transitionContext.containerView
         
         switch state {
-        case .presenting, .fadingIn:
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
-            let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
+            
+        case .presenting,
+             .fadingIn:
+            
+            let toVC = transitionContext.viewController(forKey: .to)
+            let toView = transitionContext.view(forKey: .to)!
             
             let targetAttrib = apply(attributes: attributes.initial, to: toView)
             let completion = { (didComplete: Bool) in
@@ -169,8 +172,11 @@ public class KRTransitioner: NSObject, NSCopying,
                 CATransaction.commit()
                 apply(attributes: targetAttrib, to: toView)
             }
-        case .dismissing, .fadingOut:
-            let fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
+            
+        case .dismissing,
+             .fadingOut:
+            
+            let fromView = transitionContext.view(forKey: .from)!
             let completion = { (didComplete: Bool) in
                 if didComplete { fromView.removeFromSuperview() }
                 transitionContext.completeTransition(didComplete)
@@ -204,9 +210,12 @@ public class KRTransitioner: NSObject, NSCopying,
                 
                 CATransaction.commit()
             }
+            
         default:
+            
             let didComplete = !transitionContext.transitionWasCancelled
             transitionContext.completeTransition(didComplete)
+            
         }
     }
     
@@ -225,44 +234,21 @@ public class KRTransitioner: NSObject, NSCopying,
     
     // MARK: - Private
     
+    /**
+     Applies attributes to view and returns the old attributes of the view.
+     
+     - Parameters:
+        - attributes: The list of attributes to be applied.
+        - view: The view to apply `attributes` to.
+     */
     @discardableResult
     private func apply(attributes: [Attribute],
                        to view: UIView) -> [Attribute]
     {
         var targetAttrib = [Attribute]()
         
-        for attrib in attributes {
-            switch attrib {
-            case .alpha(let alpha):
-                targetAttrib.append(.alpha(view.alpha))
-                view.alpha = alpha
-            case .frame(let frame):
-                targetAttrib.append(.frame(view.frame))
-                view.frame = frame
-            case .opacity(let opacity):
-                targetAttrib.append(.opacity(view.layer.opacity))
-                view.layer.opacity = opacity
-            case .origin(let origin):
-                targetAttrib.append(.origin(view.frame.origin))
-                view.frame.origin = origin
-            case .position(let position):
-                targetAttrib.append(.position(view.layer.position))
-                view.layer.position = position
-            case .rotation(let rotation):
-                targetAttrib.append(.rotation(-rotation))
-                let angle = radians(from: rotation)
-                view.layer.transform = CATransform3DRotate(view.layer.transform, angle, 0.0, 0.0, 1.0)
-            case .scale(let scale):
-                targetAttrib.append(.scale(1.0/scale))
-                view.layer.transform = CATransform3DScale(view.layer.transform, scale, scale, 1.0)
-            case .size(let size):
-                targetAttrib.append(.size(view.bounds.size))
-                view.bounds.size = size
-            case .translation(let translation):
-                targetAttrib.append(.translation(CGSize(width: -translation.width, height: -translation.height)))
-                view.layer.transform = CATransform3DTranslate(view.layer.transform, translation.width, translation.height, 0.0)
-            }
-        }
+        attributes.forEach { targetAttrib.append($0.apply(to: view)) }
+        
         return targetAttrib
     }
     
