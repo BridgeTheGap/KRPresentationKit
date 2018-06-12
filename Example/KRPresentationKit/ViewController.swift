@@ -144,9 +144,13 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
     
     // MARK: - Container view delegate
     
-    func prepare(containerView: UIView, for transitioner: KRTransitioner) {
+    func prepare(containerView: UIView,
+                 for transitioner: KRTransitioner)
+    {
         switch transitioner.state {
-        case .presenting, .fadingIn:
+            
+        case .presenting,
+             .fadingIn:
             let tapGR = UITapGestureRecognizer(target: self, action: #selector(action(_:)))
             tapGR.delegate = self
             containerView.addGestureRecognizer(tapGR)
@@ -158,17 +162,24 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
                 containerView.backgroundColor = transitioner.transitioningBackground?.backgroundColor
                 transitioner.transitioningBackground?.backgroundColor = UIColor.clear
             }
+            
         case .fadingOut:
             transitioner.transitioningBackground?.backgroundColor = containerView.backgroundColor
             containerView.backgroundColor = UIColor.clear
+            
         default: break
+            
         }
     }
     
-    func animate(containerView: UIView, for transitioner: KRTransitioner) {
+    func animate(containerView: UIView,
+                 for transitioner: KRTransitioner)
+    {
         switch transitioner.state {
+            
         case .presenting:
             containerView.backgroundColor = chromeColor()
+            
         case .fadingIn:
             switch transitioner.transitionID ?? "" {
             case "fade1": containerView.backgroundColor = color1
@@ -176,9 +187,12 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
             default: containerView.backgroundColor = color3
             }
             transitioner.transitioningBackground?.backgroundColor = UIColor.clear
+            
         case.dismissing:
             containerView.backgroundColor = UIColor.clear
+            
         default: break
+            
         }
     }
     

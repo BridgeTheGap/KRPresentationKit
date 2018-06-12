@@ -102,18 +102,18 @@ public class KRTransitioner: NSObject, NSCopying,
         
         presenter = {
             if containerViewDelegate != nil {
-                let p = PresentationController(presentedViewController: presented, presenting: presenting)
-                p.containerViewDelegate = containerViewDelegate
-                p.transitioner = self
-                
-                return p
+                return DelegatingPresentationController(presentedViewController: presented,
+                                                        presenting: presenting,
+                                                        transitioner: self)
             } else if presented is CustomBackgroundProvider {
-                let p = BackgroundPresentationController(presentedViewController: presented, presenting: presenting)
+                let p = BackgroundPresentationController(presentedViewController: presented,
+                                                         presenting: presenting)
                 p.transitioner = self
                 
                 return p
             }
-            return UIPresentationController(presentedViewController: presented, presenting: presenting)
+            return UIPresentationController(presentedViewController: presented,
+                                            presenting: presenting)
         }()
         
         return presenter
@@ -138,7 +138,9 @@ public class KRTransitioner: NSObject, NSCopying,
             let toVC = transitionContext.viewController(forKey: .to)
             let toView = transitionContext.view(forKey: .to)!
             
-            let targetAttrib = apply(attributes: attributes.initial, to: toView)
+            let targetAttrib = apply(attributes: attributes.initial,
+                                     to: toView)
+            
             let completion = { (didComplete: Bool) in
                 if !didComplete { toView.removeFromSuperview() }
                 transitionContext.completeTransition(didComplete)

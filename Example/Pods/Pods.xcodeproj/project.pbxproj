@@ -12,9 +12,8 @@
 		2B27872CC36381C06E7CD87182A48AB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
 		34EDB671E2CA94865D169390FB6CE0FC /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E30647C6472BB44754E578F53C2EF /* Attribute.swift */; };
 		3957AACDB7350E50BFDDF7F22F5243FC /* KRTimingFunction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D787A84A5CF3CC6B0B71D0658EE83D /* KRTimingFunction.framework */; };
-		4773CFFA437515D8012C5B449DB94062 /* CrossfadingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE73DBABDCC691BB00F989594B9EA62 /* CrossfadingTransition.swift */; };
 		58FD0BC93503A8174FD94DBFABF57DE4 /* BackgroundPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */; };
-		5DB0683B990D6343C088C6A283B856C2 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18FBB1FC95F0DE75769528553FC2126 /* PresentationController.swift */; };
+		5DB0683B990D6343C088C6A283B856C2 /* DelegatingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */; };
 		5EB1B33FF3610678A38DD8F66568657D /* TransitionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ECE35BB48E2FD3247A59997259EBEE /* TransitionAttributes.swift */; };
 		603ABDED787C9EF88E39DD633815FD67 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE120E91D4CF4A56455931C557C4CBBF /* TransitionAnimation.swift */; };
 		6923A53A1C56822BB51E4D31DF20551E /* KRTimingFunction-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -121,10 +120,9 @@
 		B736027DB8D80255A56F13E6360E4768 /* Pods-KRPresentationKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KRPresentationKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BA19FDDED87965B2D0E45A656F896A3A /* KRPresentationKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KRPresentationKit-dummy.m"; sourceTree = "<group>"; };
 		BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRTimingFunction-umbrella.h"; sourceTree = "<group>"; };
-		BDE73DBABDCC691BB00F989594B9EA62 /* CrossfadingTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CrossfadingTransition.swift; sourceTree = "<group>"; };
 		BE120E91D4CF4A56455931C557C4CBBF /* TransitionAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
 		C18F60795760348D4ADA42AB1CDA557A /* KRPresentationKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRPresentationKit-prefix.pch"; sourceTree = "<group>"; };
-		C18FBB1FC95F0DE75769528553FC2126 /* PresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DelegatingPresentationController.swift; sourceTree = "<group>"; };
 		C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transitioner.swift; sourceTree = "<group>"; };
 		C8977BF4C103F58BEAAA5026B121FD61 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD736187229A9AD7CC0A287B1F20F5EA /* Pods-KRPresentationKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Example-frameworks.sh"; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				9388A20645F09BAD959EF6B1B8E835AD /* Controller */,
-				BDE73DBABDCC691BB00F989594B9EA62 /* CrossfadingTransition.swift */,
 				92A14E50F0C56E4B3B504CCF92E1B90E /* Presentation.swift */,
 			);
 			path = Presentation;
@@ -311,7 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */,
-				C18FBB1FC95F0DE75769528553FC2126 /* PresentationController.swift */,
+				C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -552,10 +549,9 @@
 				34EDB671E2CA94865D169390FB6CE0FC /* Attribute.swift in Sources */,
 				58FD0BC93503A8174FD94DBFABF57DE4 /* BackgroundPresentationController.swift in Sources */,
 				A00C32E0DBFC94779C518B92AAF3BFAD /* Convenience.swift in Sources */,
-				4773CFFA437515D8012C5B449DB94062 /* CrossfadingTransition.swift in Sources */,
 				F197AA58FC4B30479B4A8FAE2A1CDD78 /* KRPresentationKit-dummy.m in Sources */,
 				C06C6C1741A5B73F21A2E2A4E725D072 /* Presentation.swift in Sources */,
-				5DB0683B990D6343C088C6A283B856C2 /* PresentationController.swift in Sources */,
+				5DB0683B990D6343C088C6A283B856C2 /* DelegatingPresentationController.swift in Sources */,
 				603ABDED787C9EF88E39DD633815FD67 /* TransitionAnimation.swift in Sources */,
 				5EB1B33FF3610678A38DD8F66568657D /* TransitionAttributes.swift in Sources */,
 				774D8B74766B86C89081AEA3A427D866 /* TransitionDataType.swift in Sources */,

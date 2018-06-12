@@ -7,7 +7,15 @@
 
 import UIKit
 
+/**
+ A presentation controller that is provided when
+ the presented view controller itself provides a decorative background
+ and a content view that covers only a portion of the screen.
+ */
 internal class BackgroundPresentationController: UIPresentationController {
+    
+    private typealias TransitionClosure = (UIViewControllerTransitionCoordinatorContext) -> Void
+
     weak var transitioner: KRTransitioner?
     
     override var presentedView: UIView? {
@@ -25,19 +33,32 @@ internal class BackgroundPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         containerView?.insertSubview(presentedViewController.view, at: 0)
         
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
-            UIView.animate(withDuration: context.transitionDuration, animations: {
-                self.backgroundProvider.presentationAnimation?()
-            })
-        }, completion: nil)
+        let transition: TransitionClosure = { [weak self] (context) in
+            guard let weakSelf = self else { return }
+            guard let anim = weakSelf.backgroundProvider.presentationAnimation else { return }
+            
+            UIView.animate(withDuration: context.transitionDuration,
+                           animations: anim)
+        }
+        
+        presentedViewController
+            .transitionCoordinator?
+            .animate(alongsideTransition: transition)
     }
     
     override func dismissalTransitionWillBegin() {
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (context) in
-            if let anim = self.backgroundProvider.dismissalAnimation {
-                UIView.animate(withDuration: context.transitionDuration, animations: anim)
-            }
-        }, completion: nil)
+        let transition: TransitionClosure = { [weak self] (context) in
+            guard let weakSelf = self else { return }
+            guard let anim = weakSelf.backgroundProvider.dismissalAnimation else { return }
+            
+            UIView.animate(withDuration: context.transitionDuration,
+                           animations: anim)
+        }
+        
+        presentedViewController
+            .transitionCoordinator?
+            .animate(alongsideTransition: transition,
+                     completion: nil)
     }
 }
 
