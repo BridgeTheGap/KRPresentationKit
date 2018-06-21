@@ -8,30 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		02F4F73CE621A13A06760370C547D9ED /* Pods-KRPresentationKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E0F5A4FB11FC17689ECC77B099C533B /* Pods-KRPresentationKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		27B01BE556B76B64E5F29781922A1038 /* KRTimingFunction+CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0914561DD3C9202B508626E2ACD6D /* KRTimingFunction+CGFloat.swift */; };
-		2B27872CC36381C06E7CD87182A48AB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
-		34EDB671E2CA94865D169390FB6CE0FC /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E30647C6472BB44754E578F53C2EF /* Attribute.swift */; };
-		3957AACDB7350E50BFDDF7F22F5243FC /* KRTimingFunction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D787A84A5CF3CC6B0B71D0658EE83D /* KRTimingFunction.framework */; };
-		58FD0BC93503A8174FD94DBFABF57DE4 /* BackgroundPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */; };
-		5DB0683B990D6343C088C6A283B856C2 /* DelegatingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */; };
-		5EB1B33FF3610678A38DD8F66568657D /* KRTransitionParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ECE35BB48E2FD3247A59997259EBEE /* KRTransitionParameter.swift */; };
-		603ABDED787C9EF88E39DD633815FD67 /* UIViewAnimParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE120E91D4CF4A56455931C557C4CBBF /* UIViewAnimParameter.swift */; };
-		6923A53A1C56822BB51E4D31DF20551E /* KRTimingFunction-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		774D8B74766B86C89081AEA3A427D866 /* TransitionParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6219BF70FA6260FBD345070A5D1191 /* TransitionParameterType.swift */; };
-		8637DDAD6E8F4046BB0623AD13AB314E /* Transitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */; };
-		98C470C842E12D6759D0598892205B3C /* KRTimingFunction+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE43AC8B441C231A45CDC0E682F2DA /* KRTimingFunction+Float.swift */; };
+		2B3C6C9B7265181D8B71BC95630F6C34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
+		4D168F93871814A3D0C5F15AE581792B /* KRTimingFunction-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		519E1AA59A17BDED18570BAF83245B5E /* DelegatingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1620E12F1A523313C6FA6E303DF0B7EC /* DelegatingPresentationController.swift */; };
+		5D11C7EF8B7466C5CF1AD018BF17A895 /* UIViewAnimParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1FB29A7EAB65D287E518A3401EEADA /* UIViewAnimParameter.swift */; };
+		5DE6874C7886EE316ACE43CB6E65B27B /* KRTimingFunction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D787A84A5CF3CC6B0B71D0658EE83D /* KRTimingFunction.framework */; };
+		6288BC298C0C200AEE2DA9DC8E1E0EC2 /* KRPresentationKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 125C1815A4910D3905DB028A6C20C0DD /* KRPresentationKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6ED65F4740312B59925A28E1C329CEAC /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA03339AF42381D915522F1B790C8B37 /* Presentation.swift */; };
+		7A9167904DA57B0CD9005F364B2E8174 /* TransitionParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E50FE371A088F06748A5760F975054 /* TransitionParameterType.swift */; };
+		813482A303DFD1A254AA5AAA26EBE610 /* BackgroundPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED110B9789FD32E020FAD8653A8CA101 /* BackgroundPresentationController.swift */; };
+		830AC13F8910D899249898ADD412B410 /* KRTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE990397B2DCCD2C0D54F91FDD9F37 /* KRTimingFunction.swift */; };
+		8BD2BCCB061B66F1C33154C7E6D23896 /* KRTransitionParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8818ABDE9B238056A1FD43E9768371D0 /* KRTransitionParameter.swift */; };
+		933ED7EC209D91E43101E1231B511999 /* KRTimingFunction-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAFB1D27E6736FFDD901B533DFFD198 /* KRTimingFunction-dummy.m */; };
 		9C0077E88B20A0FDF7C725538A614196 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
-		A00C32E0DBFC94779C518B92AAF3BFAD /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114DDA7A436B1A04F2EE70068275D16 /* Convenience.swift */; };
-		C06C6C1741A5B73F21A2E2A4E725D072 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A14E50F0C56E4B3B504CCF92E1B90E /* Presentation.swift */; };
+		B21A7349F65F66EAACF84EF1032BD4AC /* KRPresentationKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19FDDED87965B2D0E45A656F896A3A /* KRPresentationKit-dummy.m */; };
+		B45AD43F2361A8E2D52457A27C5ABA0C /* KRTimingFunction+CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0914561DD3C9202B508626E2ACD6D /* KRTimingFunction+CGFloat.swift */; };
+		B7BDC79A8012618D7F24FA4E35959E73 /* KRTimingFunction+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE43AC8B441C231A45CDC0E682F2DA /* KRTimingFunction+Float.swift */; };
+		C530A8F160005B69D5819596589503C4 /* Transitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004973F82EA2B4C017683002B9E6FBBB /* Transitioner.swift */; };
+		C5927E15CA232F759B7199FEF9A9BC8B /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114DDA7A436B1A04F2EE70068275D16 /* Convenience.swift */; };
 		C69D948108BB3D6BCE6AFFEF8D5D4F37 /* Pods-KRPresentationKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4539E08B1F8E245E4667D1333E6A56 /* Pods-KRPresentationKit_Tests-dummy.m */; };
 		C8024BF8CAA8A80813F65B66E81A6A5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
-		D40B21C0A930D3EF2A989D82F0C63C03 /* KRTimingFunction-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAFB1D27E6736FFDD901B533DFFD198 /* KRTimingFunction-dummy.m */; };
 		D51F2BD0C982FF5861F911AA5E3A2A8E /* Pods-KRPresentationKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A675B5601BFA1A141E38B9F7706C85 /* Pods-KRPresentationKit_Example-dummy.m */; };
-		D79D33432246A88A52644E9FC8DBB615 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
-		F0CE5556BD54BAEB40924D6640512968 /* KRTimingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE990397B2DCCD2C0D54F91FDD9F37 /* KRTimingFunction.swift */; };
+		D96C8D73A13FE3F46DAA4BBC9B1DAEE3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
+		EF700AA373A12B75E6F47DADB636AED5 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715435465D506CF534A26872A569A60 /* Attribute.swift */; };
 		F16BCD3FB86145626FE280F02BD8DB6D /* Pods-KRPresentationKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FB943745662E2A287F7C6CC8E06C55B /* Pods-KRPresentationKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F197AA58FC4B30479B4A8FAE2A1CDD78 /* KRPresentationKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA19FDDED87965B2D0E45A656F896A3A /* KRPresentationKit-dummy.m */; };
-		F969EB7D5D3B46A125E7001A935C5AFA /* KRPresentationKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 125C1815A4910D3905DB028A6C20C0DD /* KRPresentationKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,28 +39,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EC8FF6A53D40DDC4EE9B9487873D7A18;
+			remoteGlobalIDString = 22EC7D9EFBB7374E00372B614F679E94;
 			remoteInfo = KRTimingFunction;
 		};
 		69EEAC91F22AF5B0375431386A28F649 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EC8FF6A53D40DDC4EE9B9487873D7A18;
+			remoteGlobalIDString = 22EC7D9EFBB7374E00372B614F679E94;
 			remoteInfo = KRTimingFunction;
 		};
-		90905F95B9814DC20138E4991B89EB6E /* PBXContainerItemProxy */ = {
+		6BBCE77534DAF49518096C04CBC597AE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EC8FF6A53D40DDC4EE9B9487873D7A18;
+			remoteGlobalIDString = 22EC7D9EFBB7374E00372B614F679E94;
 			remoteInfo = KRTimingFunction;
 		};
 		9D6ACC604BCAADBB8C68937183FDC0CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2EABC1BE7D37FBB8C3361A68D3D47774;
+			remoteGlobalIDString = DF00CB51111EE6EA4FB87FD47BC989D1;
 			remoteInfo = KRPresentationKit;
 		};
 		AF423307900019E3417A09CAC2504841 /* PBXContainerItemProxy */ = {
@@ -74,30 +74,33 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2EABC1BE7D37FBB8C3361A68D3D47774;
+			remoteGlobalIDString = DF00CB51111EE6EA4FB87FD47BC989D1;
 			remoteInfo = KRPresentationKit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		00252517C782D3766134F5AB446F777C /* Pods-KRPresentationKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Example-resources.sh"; sourceTree = "<group>"; };
+		004973F82EA2B4C017683002B9E6FBBB /* Transitioner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transitioner.swift; sourceTree = "<group>"; };
 		03A0445C052990CF1B3930FE8F954F77 /* Pods-KRPresentationKit_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Tests-resources.sh"; sourceTree = "<group>"; };
 		0E0F5A4FB11FC17689ECC77B099C533B /* Pods-KRPresentationKit_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KRPresentationKit_Tests-umbrella.h"; sourceTree = "<group>"; };
 		1114DDA7A436B1A04F2EE70068275D16 /* Convenience.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 		125C1815A4910D3905DB028A6C20C0DD /* KRPresentationKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRPresentationKit-umbrella.h"; sourceTree = "<group>"; };
 		14DE43AC8B441C231A45CDC0E682F2DA /* KRTimingFunction+Float.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KRTimingFunction+Float.swift"; path = "KRTimingFunction/Classes/KRTimingFunction+Float.swift"; sourceTree = "<group>"; };
-		162E4AAA61D5A72AFAEF707BF6AD1A35 /* Pods_KRPresentationKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KRPresentationKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1620E12F1A523313C6FA6E303DF0B7EC /* DelegatingPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DelegatingPresentationController.swift; sourceTree = "<group>"; };
+		162E4AAA61D5A72AFAEF707BF6AD1A35 /* Pods_KRPresentationKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_KRPresentationKit_Example.framework; path = "Pods-KRPresentationKit_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16381291843074484264D996B1BA8F40 /* KRPresentationKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KRPresentationKit.xcconfig; sourceTree = "<group>"; };
 		1D4BC067B1DEB75145003436B679F51D /* Pods-KRPresentationKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KRPresentationKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		1FF2174CBBB93CB089C890C1A02C4BFC /* Pods-KRPresentationKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KRPresentationKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		225DBA3ED6D19966415391C340BE1FC5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FB943745662E2A287F7C6CC8E06C55B /* Pods-KRPresentationKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KRPresentationKit_Example-umbrella.h"; sourceTree = "<group>"; };
 		32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3BBE6DDBBA57AF6ABE0BA21C3C4C4D6E /* KRPresentationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KRPresentationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BBE6DDBBA57AF6ABE0BA21C3C4C4D6E /* KRPresentationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KRPresentationKit.framework; path = KRPresentationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBE990397B2DCCD2C0D54F91FDD9F37 /* KRTimingFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KRTimingFunction.swift; path = KRTimingFunction/Classes/KRTimingFunction.swift; sourceTree = "<group>"; };
 		3FFAB4C034E8AC16928172523188FDCB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		407AFEEA3E260C9B64EDC3A7D6863BEE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		407AFEEA3E260C9B64EDC3A7D6863BEE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		4819714E96FFDAE761B6830DE59D6511 /* Pods-KRPresentationKit_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		4E1FB29A7EAB65D287E518A3401EEADA /* UIViewAnimParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIViewAnimParameter.swift; sourceTree = "<group>"; };
 		50671F56B532629155453F398EDE7D65 /* Pods-KRPresentationKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KRPresentationKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		53B432754DF9753C0466F8BFEDEF4EAF /* KRPresentationKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KRPresentationKit.modulemap; sourceTree = "<group>"; };
 		586B0C47AB77A5DD64BBAC56C760ABA8 /* KRTimingFunction-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRTimingFunction-prefix.pch"; sourceTree = "<group>"; };
@@ -108,40 +111,38 @@
 		6FB0914561DD3C9202B508626E2ACD6D /* KRTimingFunction+CGFloat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KRTimingFunction+CGFloat.swift"; path = "KRTimingFunction/Classes/KRTimingFunction+CGFloat.swift"; sourceTree = "<group>"; };
 		74264B82B6CB8F702D830D456996246F /* KRTimingFunction.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KRTimingFunction.xcconfig; sourceTree = "<group>"; };
 		749D49449695B0884AF5039DCA1966B6 /* Pods-KRPresentationKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KRPresentationKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		77E50FE371A088F06748A5760F975054 /* TransitionParameterType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionParameterType.swift; sourceTree = "<group>"; };
 		81E18B2B746C61872C7E28CDE5D01E01 /* Pods-KRPresentationKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KRPresentationKit_Example.modulemap"; sourceTree = "<group>"; };
-		8314849F8CA5B9B52B85C4D714D32190 /* Pods_KRPresentationKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KRPresentationKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		859F6F4C916FDB56CA4171CA931BD22C /* KRPresentationKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = KRPresentationKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8314849F8CA5B9B52B85C4D714D32190 /* Pods_KRPresentationKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_KRPresentationKit_Tests.framework; path = "Pods-KRPresentationKit_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		859F6F4C916FDB56CA4171CA931BD22C /* KRPresentationKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = KRPresentationKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8818ABDE9B238056A1FD43E9768371D0 /* KRTransitionParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KRTransitionParameter.swift; sourceTree = "<group>"; };
 		88A675B5601BFA1A141E38B9F7706C85 /* Pods-KRPresentationKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KRPresentationKit_Example-dummy.m"; sourceTree = "<group>"; };
-		92A14E50F0C56E4B3B504CCF92E1B90E /* Presentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9713F4C701E270FECF18EF0A9D5F50E5 /* Pods-KRPresentationKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KRPresentationKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A35A5E6F7D8D3A048784F8F2948CFF08 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B54E30647C6472BB44754E578F53C2EF /* Attribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		B715435465D506CF534A26872A569A60 /* Attribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		B736027DB8D80255A56F13E6360E4768 /* Pods-KRPresentationKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KRPresentationKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BA03339AF42381D915522F1B790C8B37 /* Presentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		BA19FDDED87965B2D0E45A656F896A3A /* KRPresentationKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KRPresentationKit-dummy.m"; sourceTree = "<group>"; };
 		BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRTimingFunction-umbrella.h"; sourceTree = "<group>"; };
-		BE120E91D4CF4A56455931C557C4CBBF /* UIViewAnimParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIViewAnimParameter.swift; sourceTree = "<group>"; };
 		C18F60795760348D4ADA42AB1CDA557A /* KRPresentationKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRPresentationKit-prefix.pch"; sourceTree = "<group>"; };
-		C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DelegatingPresentationController.swift; sourceTree = "<group>"; };
-		C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transitioner.swift; sourceTree = "<group>"; };
 		C8977BF4C103F58BEAAA5026B121FD61 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD736187229A9AD7CC0A287B1F20F5EA /* Pods-KRPresentationKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		D6ECE35BB48E2FD3247A59997259EBEE /* KRTransitionParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KRTransitionParameter.swift; sourceTree = "<group>"; };
 		D82FB68535593E6695D2EB60CAE016DC /* Pods-KRPresentationKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KRPresentationKit_Tests.modulemap"; sourceTree = "<group>"; };
-		D8E252CE7B09A1FB22EDD5B543B0325B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D8E252CE7B09A1FB22EDD5B543B0325B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		DD4539E08B1F8E245E4667D1333E6A56 /* Pods-KRPresentationKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KRPresentationKit_Tests-dummy.m"; sourceTree = "<group>"; };
-		EA6219BF70FA6260FBD345070A5D1191 /* TransitionParameterType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionParameterType.swift; sourceTree = "<group>"; };
+		ED110B9789FD32E020FAD8653A8CA101 /* BackgroundPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackgroundPresentationController.swift; sourceTree = "<group>"; };
 		EEAB5B0A24C9EB27BB0164F61B88A1ED /* Pods-KRPresentationKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KRPresentationKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F13D7855D00AA24BFDA58026C8A6A2E4 /* KRTimingFunction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KRTimingFunction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackgroundPresentationController.swift; sourceTree = "<group>"; };
+		F13D7855D00AA24BFDA58026C8A6A2E4 /* KRTimingFunction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KRTimingFunction.framework; path = KRTimingFunction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4FED598739D16D7D8252E0046C24B4A9 /* Frameworks */ = {
+		473575E4CD0A57100BC41940D5F9B4B1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B27872CC36381C06E7CD87182A48AB3 /* Foundation.framework in Frameworks */,
+				D96C8D73A13FE3F46DAA4BBC9B1DAEE3 /* Foundation.framework in Frameworks */,
+				5DE6874C7886EE316ACE43CB6E65B27B /* KRTimingFunction.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,20 +154,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC3487E5D227C6AB9CAEDF75B9AFCF67 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D79D33432246A88A52644E9FC8DBB615 /* Foundation.framework in Frameworks */,
-				3957AACDB7350E50BFDDF7F22F5243FC /* KRTimingFunction.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C758D3CA17CC7B53A293583600507F22 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C8024BF8CAA8A80813F65B66E81A6A5F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFF581E53157BCBE0EBF7A09671AAB44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B3C6C9B7265181D8B71BC95630F6C34 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,15 +182,6 @@
 				8314849F8CA5B9B52B85C4D714D32190 /* Pods_KRPresentationKit_Tests.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		09175EDDDFFE8E95B3A8B94AB093D67C /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				9388A20645F09BAD959EF6B1B8E835AD /* Controller */,
-				92A14E50F0C56E4B3B504CCF92E1B90E /* Presentation.swift */,
-			);
-			path = Presentation;
 			sourceTree = "<group>";
 		};
 		0ACC6547BB1F880D8FBFA9BA4F9F90EB /* Pods-KRPresentationKit_Tests */ = {
@@ -209,18 +200,6 @@
 			);
 			name = "Pods-KRPresentationKit_Tests";
 			path = "Target Support Files/Pods-KRPresentationKit_Tests";
-			sourceTree = "<group>";
-		};
-		209DAE79FC8F00A1AB9A3AB89C8F53A4 /* Transition */ = {
-			isa = PBXGroup;
-			children = (
-				B54E30647C6472BB44754E578F53C2EF /* Attribute.swift */,
-				BE120E91D4CF4A56455931C557C4CBBF /* UIViewAnimParameter.swift */,
-				D6ECE35BB48E2FD3247A59997259EBEE /* KRTransitionParameter.swift */,
-				EA6219BF70FA6260FBD345070A5D1191 /* TransitionParameterType.swift */,
-				C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */,
-			);
-			path = Transition;
 			sourceTree = "<group>";
 		};
 		3583EB825656B49A04FCFA2EFEFFCD70 /* Targets Support Files */ = {
@@ -267,6 +246,7 @@
 				14DE43AC8B441C231A45CDC0E682F2DA /* KRTimingFunction+Float.swift */,
 				EF1391504AC8A6E4A45B0427DCAF2776 /* Support Files */,
 			);
+			name = KRTimingFunction;
 			path = KRTimingFunction;
 			sourceTree = "<group>";
 		};
@@ -304,15 +284,6 @@
 			path = "Example/Pods/Target Support Files/KRPresentationKit";
 			sourceTree = "<group>";
 		};
-		9388A20645F09BAD959EF6B1B8E835AD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */,
-				C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		A71924A65505886793C7C0CFAB011FEB /* Pods-KRPresentationKit_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,11 +302,11 @@
 			path = "Target Support Files/Pods-KRPresentationKit_Example";
 			sourceTree = "<group>";
 		};
-		C4D90BAC5A5D4A77C3F70CE57C328770 /* Classes */ = {
+		D2BF8BD2BD06842AA1A0047B7E9F8133 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				09175EDDDFFE8E95B3A8B94AB093D67C /* Presentation */,
-				209DAE79FC8F00A1AB9A3AB89C8F53A4 /* Transition */,
+				F436B8FF55C613DC85CF810FF4CAC9DE /* Presentation */,
+				E4BADF89F28F9642F0DFD744B960BEA5 /* Transition */,
 			);
 			name = Classes;
 			path = KRPresentationKit/Classes;
@@ -344,7 +315,7 @@
 		D793FBEDC616D107E345F6756D0B225E /* KRPresentationKit */ = {
 			isa = PBXGroup;
 			children = (
-				C4D90BAC5A5D4A77C3F70CE57C328770 /* Classes */,
+				D2BF8BD2BD06842AA1A0047B7E9F8133 /* Classes */,
 				5189836BD98E879718C4F093A69C115C /* Extension */,
 				3F3C75CC20D3BF48184515EB0547DFCA /* Pod */,
 				86777D827BD0E11D3ECB0CAC7E71FD92 /* Support Files */,
@@ -359,6 +330,19 @@
 				32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		E4BADF89F28F9642F0DFD744B960BEA5 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				B715435465D506CF534A26872A569A60 /* Attribute.swift */,
+				8818ABDE9B238056A1FD43E9768371D0 /* KRTransitionParameter.swift */,
+				004973F82EA2B4C017683002B9E6FBBB /* Transitioner.swift */,
+				77E50FE371A088F06748A5760F975054 /* TransitionParameterType.swift */,
+				4E1FB29A7EAB65D287E518A3401EEADA /* UIViewAnimParameter.swift */,
+			);
+			name = Transition;
+			path = Transition;
 			sourceTree = "<group>";
 		};
 		EA62DA9F9A5B24416BBA1C44A189255D /* Frameworks */ = {
@@ -384,6 +368,26 @@
 			path = "../Target Support Files/KRTimingFunction";
 			sourceTree = "<group>";
 		};
+		F436B8FF55C613DC85CF810FF4CAC9DE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BA03339AF42381D915522F1B790C8B37 /* Presentation.swift */,
+				F4E4428B7BA1F9B26D556116E60F7552 /* Controller */,
+			);
+			name = Presentation;
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		F4E4428B7BA1F9B26D556116E60F7552 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ED110B9789FD32E020FAD8653A8CA101 /* BackgroundPresentationController.swift */,
+				1620E12F1A523313C6FA6E303DF0B7EC /* DelegatingPresentationController.swift */,
+			);
+			name = Controller;
+			path = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -395,14 +399,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CA7D148AEDDBA2D726E18A7614BCDF9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F969EB7D5D3B46A125E7001A935C5AFA /* KRPresentationKit-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		325FBA2A362EBD0C4F5D4569BEBC9FB2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,33 +407,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8DC805B2B4E936E146811778D74D5F7F /* Headers */ = {
+		9B8769F553BA697499FFE8B29AB6CDD9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6923A53A1C56822BB51E4D31DF20551E /* KRTimingFunction-umbrella.h in Headers */,
+				4D168F93871814A3D0C5F15AE581792B /* KRTimingFunction-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F31DA46AB90632E991BC73184ADA939C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6288BC298C0C200AEE2DA9DC8E1E0EC2 /* KRPresentationKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2EABC1BE7D37FBB8C3361A68D3D47774 /* KRPresentationKit */ = {
+		22EC7D9EFBB7374E00372B614F679E94 /* KRTimingFunction */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EFB836BC7317774649230F4E25F3B27E /* Build configuration list for PBXNativeTarget "KRPresentationKit" */;
+			buildConfigurationList = 233927C4699DCDA0C0E4E06060AC2CF8 /* Build configuration list for PBXNativeTarget "KRTimingFunction" */;
 			buildPhases = (
-				B7978F30A0D22C3685425AF11964EEC2 /* Sources */,
-				BC3487E5D227C6AB9CAEDF75B9AFCF67 /* Frameworks */,
-				2CA7D148AEDDBA2D726E18A7614BCDF9 /* Headers */,
+				4B60406C3B909E55FC49FC485AA6A441 /* Sources */,
+				EFF581E53157BCBE0EBF7A09671AAB44 /* Frameworks */,
+				9B8769F553BA697499FFE8B29AB6CDD9 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8EBEB26D03DFC064372A946B4048DA70 /* PBXTargetDependency */,
 			);
-			name = KRPresentationKit;
-			productName = KRPresentationKit;
-			productReference = 3BBE6DDBBA57AF6ABE0BA21C3C4C4D6E /* KRPresentationKit.framework */;
+			name = KRTimingFunction;
+			productName = KRTimingFunction;
+			productReference = F13D7855D00AA24BFDA58026C8A6A2E4 /* KRTimingFunction.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		75C6DD14880AF205EF3DF9C95A2EDFC5 /* Pods-KRPresentationKit_Tests */ = {
@@ -479,21 +482,22 @@
 			productReference = 162E4AAA61D5A72AFAEF707BF6AD1A35 /* Pods_KRPresentationKit_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		EC8FF6A53D40DDC4EE9B9487873D7A18 /* KRTimingFunction */ = {
+		DF00CB51111EE6EA4FB87FD47BC989D1 /* KRPresentationKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 40084C0DCED1C2991C2354E1A4F4F44B /* Build configuration list for PBXNativeTarget "KRTimingFunction" */;
+			buildConfigurationList = 13105645DE319F4B2E09C7A941DA643F /* Build configuration list for PBXNativeTarget "KRPresentationKit" */;
 			buildPhases = (
-				F6ABAB61920D94C4A60F315E4BB6D6BB /* Sources */,
-				4FED598739D16D7D8252E0046C24B4A9 /* Frameworks */,
-				8DC805B2B4E936E146811778D74D5F7F /* Headers */,
+				2720E62CB77182260D115B98DA959C21 /* Sources */,
+				473575E4CD0A57100BC41940D5F9B4B1 /* Frameworks */,
+				F31DA46AB90632E991BC73184ADA939C /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8C0098E9FABE38680C794730A52438DC /* PBXTargetDependency */,
 			);
-			name = KRTimingFunction;
-			productName = KRTimingFunction;
-			productReference = F13D7855D00AA24BFDA58026C8A6A2E4 /* KRTimingFunction.framework */;
+			name = KRPresentationKit;
+			productName = KRPresentationKit;
+			productReference = 3BBE6DDBBA57AF6ABE0BA21C3C4C4D6E /* KRPresentationKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -517,8 +521,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2EABC1BE7D37FBB8C3361A68D3D47774 /* KRPresentationKit */,
-				EC8FF6A53D40DDC4EE9B9487873D7A18 /* KRTimingFunction */,
+				DF00CB51111EE6EA4FB87FD47BC989D1 /* KRPresentationKit */,
+				22EC7D9EFBB7374E00372B614F679E94 /* KRTimingFunction */,
 				92BC586179BF90F5F2C436F437CF105F /* Pods-KRPresentationKit_Example */,
 				75C6DD14880AF205EF3DF9C95A2EDFC5 /* Pods-KRPresentationKit_Tests */,
 			);
@@ -526,11 +530,39 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2720E62CB77182260D115B98DA959C21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF700AA373A12B75E6F47DADB636AED5 /* Attribute.swift in Sources */,
+				813482A303DFD1A254AA5AAA26EBE610 /* BackgroundPresentationController.swift in Sources */,
+				C5927E15CA232F759B7199FEF9A9BC8B /* Convenience.swift in Sources */,
+				519E1AA59A17BDED18570BAF83245B5E /* DelegatingPresentationController.swift in Sources */,
+				B21A7349F65F66EAACF84EF1032BD4AC /* KRPresentationKit-dummy.m in Sources */,
+				8BD2BCCB061B66F1C33154C7E6D23896 /* KRTransitionParameter.swift in Sources */,
+				6ED65F4740312B59925A28E1C329CEAC /* Presentation.swift in Sources */,
+				C530A8F160005B69D5819596589503C4 /* Transitioner.swift in Sources */,
+				7A9167904DA57B0CD9005F364B2E8174 /* TransitionParameterType.swift in Sources */,
+				5D11C7EF8B7466C5CF1AD018BF17A895 /* UIViewAnimParameter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31633BDCE4B997D75E365E5191DBEA1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D51F2BD0C982FF5861F911AA5E3A2A8E /* Pods-KRPresentationKit_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B60406C3B909E55FC49FC485AA6A441 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B45AD43F2361A8E2D52457A27C5ABA0C /* KRTimingFunction+CGFloat.swift in Sources */,
+				B7BDC79A8012618D7F24FA4E35959E73 /* KRTimingFunction+Float.swift in Sources */,
+				933ED7EC209D91E43101E1231B511999 /* KRTimingFunction-dummy.m in Sources */,
+				830AC13F8910D899249898ADD412B410 /* KRTimingFunction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,41 +574,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B7978F30A0D22C3685425AF11964EEC2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				34EDB671E2CA94865D169390FB6CE0FC /* Attribute.swift in Sources */,
-				58FD0BC93503A8174FD94DBFABF57DE4 /* BackgroundPresentationController.swift in Sources */,
-				A00C32E0DBFC94779C518B92AAF3BFAD /* Convenience.swift in Sources */,
-				F197AA58FC4B30479B4A8FAE2A1CDD78 /* KRPresentationKit-dummy.m in Sources */,
-				C06C6C1741A5B73F21A2E2A4E725D072 /* Presentation.swift in Sources */,
-				5DB0683B990D6343C088C6A283B856C2 /* DelegatingPresentationController.swift in Sources */,
-				603ABDED787C9EF88E39DD633815FD67 /* UIViewAnimParameter.swift in Sources */,
-				5EB1B33FF3610678A38DD8F66568657D /* KRTransitionParameter.swift in Sources */,
-				774D8B74766B86C89081AEA3A427D866 /* TransitionParameterType.swift in Sources */,
-				8637DDAD6E8F4046BB0623AD13AB314E /* Transitioner.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F6ABAB61920D94C4A60F315E4BB6D6BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				27B01BE556B76B64E5F29781922A1038 /* KRTimingFunction+CGFloat.swift in Sources */,
-				98C470C842E12D6759D0598892205B3C /* KRTimingFunction+Float.swift in Sources */,
-				D40B21C0A930D3EF2A989D82F0C63C03 /* KRTimingFunction-dummy.m in Sources */,
-				F0CE5556BD54BAEB40924D6640512968 /* KRTimingFunction.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		2B68906BEA1EBDC39B407CC96D982D3D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KRTimingFunction;
-			target = EC8FF6A53D40DDC4EE9B9487873D7A18 /* KRTimingFunction */;
+			target = 22EC7D9EFBB7374E00372B614F679E94 /* KRTimingFunction */;
 			targetProxy = 010F447A16BEBB8B1892F7283131CEFB /* PBXContainerItemProxy */;
 		};
 		4E8F4A76B5113634D52F46B24E94D389 /* PBXTargetDependency */ = {
@@ -588,63 +592,30 @@
 		66EF529FEB51FCA45B1B88D0549AA4E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KRTimingFunction;
-			target = EC8FF6A53D40DDC4EE9B9487873D7A18 /* KRTimingFunction */;
+			target = 22EC7D9EFBB7374E00372B614F679E94 /* KRTimingFunction */;
 			targetProxy = 69EEAC91F22AF5B0375431386A28F649 /* PBXContainerItemProxy */;
 		};
-		8EBEB26D03DFC064372A946B4048DA70 /* PBXTargetDependency */ = {
+		8C0098E9FABE38680C794730A52438DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KRTimingFunction;
-			target = EC8FF6A53D40DDC4EE9B9487873D7A18 /* KRTimingFunction */;
-			targetProxy = 90905F95B9814DC20138E4991B89EB6E /* PBXContainerItemProxy */;
+			target = 22EC7D9EFBB7374E00372B614F679E94 /* KRTimingFunction */;
+			targetProxy = 6BBCE77534DAF49518096C04CBC597AE /* PBXContainerItemProxy */;
 		};
 		CA52B847C64F49B299500C8575D50424 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KRPresentationKit;
-			target = 2EABC1BE7D37FBB8C3361A68D3D47774 /* KRPresentationKit */;
+			target = DF00CB51111EE6EA4FB87FD47BC989D1 /* KRPresentationKit */;
 			targetProxy = FB1F82ED5C1DABD75654308CC44AD3D2 /* PBXContainerItemProxy */;
 		};
 		D61C7FBED632A597E84F5A1CAFDF023F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KRPresentationKit;
-			target = 2EABC1BE7D37FBB8C3361A68D3D47774 /* KRPresentationKit */;
+			target = DF00CB51111EE6EA4FB87FD47BC989D1 /* KRPresentationKit */;
 			targetProxy = 9D6ACC604BCAADBB8C68937183FDC0CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		009AA3102FC50A72165A2B4755A16D1F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74264B82B6CB8F702D830D456996246F /* KRTimingFunction.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KRTimingFunction/KRTimingFunction-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KRTimingFunction/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/KRTimingFunction/KRTimingFunction.modulemap";
-				PRODUCT_MODULE_NAME = KRTimingFunction;
-				PRODUCT_NAME = KRTimingFunction;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		1EE19F5DD95931924296F637BF18BD8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -708,39 +679,6 @@
 			};
 			name = Debug;
 		};
-		2971DAC2B055B648ECC64784AEA9C0DD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16381291843074484264D996B1BA8F40 /* KRPresentationKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KRPresentationKit/KRPresentationKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KRPresentationKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/KRPresentationKit/KRPresentationKit.modulemap";
-				PRODUCT_MODULE_NAME = KRPresentationKit;
-				PRODUCT_NAME = KRPresentationKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		5192F36EB65E65AEBBAC0A2D1D89D1A6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 749D49449695B0884AF5039DCA1966B6 /* Pods-KRPresentationKit_Tests.release.xcconfig */;
@@ -776,7 +714,39 @@
 			};
 			name = Release;
 		};
-		58DC75A1ADB2A8FFB0D71CE7E3811101 /* Debug */ = {
+		525F9314658C518BB500DC134E252FF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16381291843074484264D996B1BA8F40 /* KRPresentationKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KRPresentationKit/KRPresentationKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KRPresentationKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/KRPresentationKit/KRPresentationKit.modulemap";
+				PRODUCT_MODULE_NAME = KRPresentationKit;
+				PRODUCT_NAME = KRPresentationKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6840C4E8DC26EC9A1F495CFC29F74DDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74264B82B6CB8F702D830D456996246F /* KRTimingFunction.xcconfig */;
 			buildSettings = {
@@ -808,7 +778,7 @@
 			};
 			name = Debug;
 		};
-		B0F3421E43FB8603B395385903BA668A /* Debug */ = {
+		79E4CFE00FEDDADBF6137E5DA1A4566A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 16381291843074484264D996B1BA8F40 /* KRPresentationKit.xcconfig */;
 			buildSettings = {
@@ -832,13 +802,47 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
+		};
+		AE54AFB69F91CB9A816030B8A2830467 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74264B82B6CB8F702D830D456996246F /* KRTimingFunction.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KRTimingFunction/KRTimingFunction-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KRTimingFunction/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/KRTimingFunction/KRTimingFunction.modulemap";
+				PRODUCT_MODULE_NAME = KRTimingFunction;
+				PRODUCT_NAME = KRTimingFunction;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		D1A08B3CACCADE469C3A5F349E07EE18 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1006,20 +1010,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		13105645DE319F4B2E09C7A941DA643F /* Build configuration list for PBXNativeTarget "KRPresentationKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				525F9314658C518BB500DC134E252FF4 /* Debug */,
+				79E4CFE00FEDDADBF6137E5DA1A4566A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		233927C4699DCDA0C0E4E06060AC2CF8 /* Build configuration list for PBXNativeTarget "KRTimingFunction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6840C4E8DC26EC9A1F495CFC29F74DDC /* Debug */,
+				AE54AFB69F91CB9A816030B8A2830467 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1EE19F5DD95931924296F637BF18BD8F /* Debug */,
 				F4568DEE257655D290C2B9CEAB37C934 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		40084C0DCED1C2991C2354E1A4F4F44B /* Build configuration list for PBXNativeTarget "KRTimingFunction" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				58DC75A1ADB2A8FFB0D71CE7E3811101 /* Debug */,
-				009AA3102FC50A72165A2B4755A16D1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1038,15 +1051,6 @@
 			buildConfigurations = (
 				D1A08B3CACCADE469C3A5F349E07EE18 /* Debug */,
 				E290F02BDC2FBB5D1428F1D11B538BD7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EFB836BC7317774649230F4E25F3B27E /* Build configuration list for PBXNativeTarget "KRPresentationKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B0F3421E43FB8603B395385903BA668A /* Debug */,
-				2971DAC2B055B648ECC64784AEA9C0DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

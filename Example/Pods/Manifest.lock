@@ -1,5 +1,5 @@
 PODS:
-  - KRPresentationKit (0.11.0.1):
+  - KRPresentationKit (0.12.0.1):
     - KRTimingFunction (~> 1.0.0)
   - KRTimingFunction (1.0.0)
 
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KRPresentationKit: f99fb983c72dee6401b63e23ff81bd59b039239d
+  KRPresentationKit: e2cf23452e49b70a50e524834c014b75e6f5fe81
   KRTimingFunction: f74a7630fb2e7e8daf7e619059cfedce1a76545b
 
 PODFILE CHECKSUM: 8a514f1e9a7f06106a38dfac7f6561a09558ed2f
