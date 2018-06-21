@@ -230,14 +230,14 @@ public extension CrossfadingTransition {
         { [weak self] in
             guard let weakSelf = self else { return }
             
-            fadeInCompletion?()
+            fadeOutCompletion?()
             weakSelf.transitioner = transitioner
             
             viewController.transitioningDelegate = weakSelf.transitioner
             viewController.modalPresentationStyle = .custom
             (weakSelf as! UIViewController).present(viewController,
                                                     animated: true,
-                                                    completion: fadeOutCompletion)
+                                                    completion: fadeInCompletion)
         }
     }
     
