@@ -1,5 +1,5 @@
 //
-//  TransitionAttributes.swift
+//  KRTransitionParameter.swift
 //  KRPresentationKit
 //
 //  Created by Joshua Park on 11/06/2018.
@@ -7,7 +7,7 @@
 
 import KRTimingFunction
 
-public struct TransitionAttributes: TransitionDataType {
+public struct KRTransitionParameter: TransitionParameterType {
     
     public var initial: [Attribute]
     
@@ -27,7 +27,9 @@ public struct TransitionAttributes: TransitionDataType {
                 timingFunction: FunctionType = .easeInOutCubic,
                 duration: Double = 0.3)
     {
-        (self.initial, self.timingFunction, self.duration) = (initial, timingFunction, duration)
+        self.initial = initial
+        self.timingFunction = timingFunction
+        self.duration = duration
     }
 }
 

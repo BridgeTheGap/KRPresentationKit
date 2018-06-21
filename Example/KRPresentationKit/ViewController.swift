@@ -53,7 +53,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
     
     // MARK: - 
     
-    private func getAttributes(sender: Any) -> TransitionAttributes {
+    private func getAttributes(sender: Any) -> KRTransitionParameter {
         let attrib: [Attribute] = {
             switch typeSelector.selectedSegmentIndex {
             case 0: return attrib1
@@ -66,7 +66,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
             }
         }()
         
-        var attribs = TransitionAttributes(initial: attrib)
+        var attribs = KRTransitionParameter(initial: attrib)
         attribs.duration = Double(durationSlider.value)
         
         switch functionSelector.selectedSegmentIndex {
@@ -78,7 +78,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
         return attribs
     }
     
-    private func getAnimation(sender: Any) -> TransitionAnimation {
+    private func getAnimation(sender: Any) -> UIViewAnimParameter {
         let attrib: [Attribute] = {
             switch typeSelector.selectedSegmentIndex {
             case 0: return attrib1
@@ -91,7 +91,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
             }
         }()
         
-        return TransitionAnimation(initial: attrib, options: [], duration: Double(durationSlider.value))
+        return UIViewAnimParameter(initial: attrib, options: [], duration: Double(durationSlider.value))
     }
     
     private func chromeColor() -> UIColor? {
@@ -107,7 +107,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
     }
 
     @IBAction func presentAction(_ sender: Any) {
-        let attribs: TransitionDataType = animationSwitch.isOn ? getAttributes(sender: sender) : getAnimation(sender: sender)
+        let attribs: TransitionParameterType = animationSwitch.isOn ? getAttributes(sender: sender) : getAnimation(sender: sender)
         
         transitioner = KRTransitioner(attributes: attribs)
         transitioner!.transitionID = "PresentedVC"
@@ -125,7 +125,7 @@ class ViewController: UIViewController, CrossfadingTransition, ContainerViewDele
     }
     
     @IBAction func presentBGAction(_ sender: Any) {
-        let attribs: TransitionDataType = animationSwitch.isOn ? getAttributes(sender: sender) : getAnimation(sender: sender)
+        let attribs: TransitionParameterType = animationSwitch.isOn ? getAttributes(sender: sender) : getAnimation(sender: sender)
         
         transitioner = KRTransitioner(attributes: attribs)
         transitioner?.transitionID = "BackgroundVC"

@@ -26,11 +26,11 @@ class PresentedViewController: UIViewController, CustomPresented {
         
         let duration = presenting.transitioner!.attributes.duration
         
-        let attribs: TransitionAttributes = {
+        let attribs: KRTransitionParameter = {
             switch identifier {
-            case "fade1": return TransitionAttributes(initial: attrib1, timingFunction: .easeOutCubic, duration: duration)
-            case "fade2": return TransitionAttributes(initial: attrib2, timingFunction: .easeOutBounce, duration: duration)
-            default: return TransitionAttributes(initial: attrib3, timingFunction: .easeOutBack, duration: duration)
+            case "fade1": return KRTransitionParameter(initial: attrib1, timingFunction: .easeOutCubic, duration: duration)
+            case "fade2": return KRTransitionParameter(initial: attrib2, timingFunction: .easeOutBounce, duration: duration)
+            default: return KRTransitionParameter(initial: attrib3, timingFunction: .easeOutBack, duration: duration)
             }
         }()
         let transitioner = KRTransitioner(attributes: attribs)
@@ -61,6 +61,7 @@ class PresentedViewController: UIViewController, CustomPresented {
     
     @IBAction func dismiss(_ sender: Any) {
         customPresenting?.dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
     }
  
     deinit {

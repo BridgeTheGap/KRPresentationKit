@@ -1,5 +1,5 @@
 //
-//  TransitionAnimation.swift
+//  UIViewAnimParameter.swift
 //  KRPresentationKit
 //
 //  Created by Joshua Park on 11/06/2018.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct TransitionAnimation: TransitionDataType {
+public struct UIViewAnimParameter: TransitionParameterType {
     
     public var initial: [Attribute]
     
@@ -19,6 +19,8 @@ public struct TransitionAnimation: TransitionDataType {
                 options: UIViewAnimationOptions = [],
                 duration: Double)
     {
-        (self.initial, self.options, self.duration) = (initial, options, duration)
+        self.initial = initial
+        self.options = options
+        self.duration = duration
     }
 }

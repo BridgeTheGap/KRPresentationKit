@@ -210,15 +210,15 @@ public protocol CrossfadingTransition: CustomPresenting {
     
 }
 
-internal extension CrossfadingTransition {
+public extension CrossfadingTransition {
     
     /**
      The default implementation.
      */
-    func fade(to viewController: UIViewController,
-              using transitioner: KRTransitioner?,
-              fadeInCompletion: (() -> Void)? = nil,
-              fadeOutCompletion: (() -> Void)? = nil)
+    public func fade(to viewController: UIViewController,
+                     using transitioner: KRTransitioner?,
+                     fadeInCompletion: (() -> Void)? = nil,
+                     fadeOutCompletion: (() -> Void)? = nil)
     {
         var transitioner = transitioner
         
@@ -227,9 +227,8 @@ internal extension CrossfadingTransition {
         self.transitioner?.fade(to: transitioner)
         
         (self as! UIViewController).dismiss(animated: true)
-        { [weak self, weak viewController] in
+        { [weak self] in
             guard let weakSelf = self else { return }
-            guard let viewController = viewController else { return }
             
             fadeInCompletion?()
             weakSelf.transitioner = transitioner

@@ -14,10 +14,10 @@
 		3957AACDB7350E50BFDDF7F22F5243FC /* KRTimingFunction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D787A84A5CF3CC6B0B71D0658EE83D /* KRTimingFunction.framework */; };
 		58FD0BC93503A8174FD94DBFABF57DE4 /* BackgroundPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */; };
 		5DB0683B990D6343C088C6A283B856C2 /* DelegatingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */; };
-		5EB1B33FF3610678A38DD8F66568657D /* TransitionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ECE35BB48E2FD3247A59997259EBEE /* TransitionAttributes.swift */; };
-		603ABDED787C9EF88E39DD633815FD67 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE120E91D4CF4A56455931C557C4CBBF /* TransitionAnimation.swift */; };
+		5EB1B33FF3610678A38DD8F66568657D /* KRTransitionParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ECE35BB48E2FD3247A59997259EBEE /* KRTransitionParameter.swift */; };
+		603ABDED787C9EF88E39DD633815FD67 /* UIViewAnimParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE120E91D4CF4A56455931C557C4CBBF /* UIViewAnimParameter.swift */; };
 		6923A53A1C56822BB51E4D31DF20551E /* KRTimingFunction-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		774D8B74766B86C89081AEA3A427D866 /* TransitionDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6219BF70FA6260FBD345070A5D1191 /* TransitionDataType.swift */; };
+		774D8B74766B86C89081AEA3A427D866 /* TransitionParameterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6219BF70FA6260FBD345070A5D1191 /* TransitionParameterType.swift */; };
 		8637DDAD6E8F4046BB0623AD13AB314E /* Transitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */; };
 		98C470C842E12D6759D0598892205B3C /* KRTimingFunction+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE43AC8B441C231A45CDC0E682F2DA /* KRTimingFunction+Float.swift */; };
 		9C0077E88B20A0FDF7C725538A614196 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F3426AC52A73CA1D11D8F153D24F19 /* Foundation.framework */; };
@@ -120,17 +120,17 @@
 		B736027DB8D80255A56F13E6360E4768 /* Pods-KRPresentationKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KRPresentationKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BA19FDDED87965B2D0E45A656F896A3A /* KRPresentationKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KRPresentationKit-dummy.m"; sourceTree = "<group>"; };
 		BA5A0510F72E5800529806B2D6B1CFDE /* KRTimingFunction-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRTimingFunction-umbrella.h"; sourceTree = "<group>"; };
-		BE120E91D4CF4A56455931C557C4CBBF /* TransitionAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
+		BE120E91D4CF4A56455931C557C4CBBF /* UIViewAnimParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIViewAnimParameter.swift; sourceTree = "<group>"; };
 		C18F60795760348D4ADA42AB1CDA557A /* KRPresentationKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KRPresentationKit-prefix.pch"; sourceTree = "<group>"; };
 		C18FBB1FC95F0DE75769528553FC2126 /* DelegatingPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DelegatingPresentationController.swift; sourceTree = "<group>"; };
 		C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transitioner.swift; sourceTree = "<group>"; };
 		C8977BF4C103F58BEAAA5026B121FD61 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD736187229A9AD7CC0A287B1F20F5EA /* Pods-KRPresentationKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KRPresentationKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		D6ECE35BB48E2FD3247A59997259EBEE /* TransitionAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionAttributes.swift; sourceTree = "<group>"; };
+		D6ECE35BB48E2FD3247A59997259EBEE /* KRTransitionParameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KRTransitionParameter.swift; sourceTree = "<group>"; };
 		D82FB68535593E6695D2EB60CAE016DC /* Pods-KRPresentationKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KRPresentationKit_Tests.modulemap"; sourceTree = "<group>"; };
 		D8E252CE7B09A1FB22EDD5B543B0325B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DD4539E08B1F8E245E4667D1333E6A56 /* Pods-KRPresentationKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KRPresentationKit_Tests-dummy.m"; sourceTree = "<group>"; };
-		EA6219BF70FA6260FBD345070A5D1191 /* TransitionDataType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionDataType.swift; sourceTree = "<group>"; };
+		EA6219BF70FA6260FBD345070A5D1191 /* TransitionParameterType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransitionParameterType.swift; sourceTree = "<group>"; };
 		EEAB5B0A24C9EB27BB0164F61B88A1ED /* Pods-KRPresentationKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KRPresentationKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F13D7855D00AA24BFDA58026C8A6A2E4 /* KRTimingFunction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KRTimingFunction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC7E8193969FF65165E85AB1074A0225 /* BackgroundPresentationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackgroundPresentationController.swift; sourceTree = "<group>"; };
@@ -215,9 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				B54E30647C6472BB44754E578F53C2EF /* Attribute.swift */,
-				BE120E91D4CF4A56455931C557C4CBBF /* TransitionAnimation.swift */,
-				D6ECE35BB48E2FD3247A59997259EBEE /* TransitionAttributes.swift */,
-				EA6219BF70FA6260FBD345070A5D1191 /* TransitionDataType.swift */,
+				BE120E91D4CF4A56455931C557C4CBBF /* UIViewAnimParameter.swift */,
+				D6ECE35BB48E2FD3247A59997259EBEE /* KRTransitionParameter.swift */,
+				EA6219BF70FA6260FBD345070A5D1191 /* TransitionParameterType.swift */,
 				C6A9564473BAF8DE97F44C6F4C070354 /* Transitioner.swift */,
 			);
 			path = Transition;
@@ -552,9 +552,9 @@
 				F197AA58FC4B30479B4A8FAE2A1CDD78 /* KRPresentationKit-dummy.m in Sources */,
 				C06C6C1741A5B73F21A2E2A4E725D072 /* Presentation.swift in Sources */,
 				5DB0683B990D6343C088C6A283B856C2 /* DelegatingPresentationController.swift in Sources */,
-				603ABDED787C9EF88E39DD633815FD67 /* TransitionAnimation.swift in Sources */,
-				5EB1B33FF3610678A38DD8F66568657D /* TransitionAttributes.swift in Sources */,
-				774D8B74766B86C89081AEA3A427D866 /* TransitionDataType.swift in Sources */,
+				603ABDED787C9EF88E39DD633815FD67 /* UIViewAnimParameter.swift in Sources */,
+				5EB1B33FF3610678A38DD8F66568657D /* KRTransitionParameter.swift in Sources */,
+				774D8B74766B86C89081AEA3A427D866 /* TransitionParameterType.swift in Sources */,
 				8637DDAD6E8F4046BB0623AD13AB314E /* Transitioner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

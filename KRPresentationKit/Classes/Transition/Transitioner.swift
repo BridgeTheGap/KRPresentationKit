@@ -17,29 +17,40 @@ public enum TransitionState {
     case fadingOut
 }
 
+/**
+ The class that handles transition and animation
+ in the presentation and dismissal process.
+ */
 public class KRTransitioner: NSObject, NSCopying,
                              UIViewControllerTransitioningDelegate,
                              UIViewControllerAnimatedTransitioning
 {
     
+    /// An identifier that allows clients to distinguish an instance from another.
     public var transitionID: String?
     
-    public var attributes: TransitionDataType
+    /// The attributes to be applied to the presented VC during transition.
+    public var attributes: TransitionParameterType
     
+    /// The delegate object to handle the background container view during presentation.
     public weak var containerViewDelegate: ContainerViewDelegate?
     
+    // TODO: Consider removing or hiding from public?
+    /// The current state of the transitioner object.
     public private(set) var state: TransitionState = .idle
     
+    /// The background view that is used during crossfading transition.
     public private(set) var transitioningBackground: UIView?
     
+    /// The presentation controller handling transition
     internal private(set) var presenter: UIPresentationController?
     
-    public required init(attributes: TransitionDataType) {
+    public required init(attributes: TransitionParameterType) {
         self.attributes = attributes
     }
     
     public override convenience init() {
-        self.init(attributes: TransitionAttributes())
+        self.init(attributes: KRTransitionParameter())
     }
     
     public func copied() -> KRTransitioner {
@@ -148,7 +159,7 @@ public class KRTransitioner: NSObject, NSCopying,
             
             if !(toVC is CustomBackgroundProvider) { containerView.addSubview(toView) }
             
-            if let animation = attributes as? TransitionAnimation {
+            if let animation = attributes as? UIViewAnimParameter {
                 UIView.animate(withDuration: animation.duration,
                                delay: 0.0,
                                options: animation.options,
@@ -184,7 +195,7 @@ public class KRTransitioner: NSObject, NSCopying,
                 transitionContext.completeTransition(didComplete)
             }
             
-            if let animation = attributes as? TransitionAnimation {
+            if let animation = attributes as? UIViewAnimParameter {
                 UIView.animate(withDuration: animation.duration,
                                delay: 0.0,
                                options: animation.options,
@@ -242,6 +253,8 @@ public class KRTransitioner: NSObject, NSCopying,
      - Parameters:
         - attributes: The list of attributes to be applied.
         - view: The view to apply `attributes` to.
+     
+     - Returns: The original attributes of `view` before applying `attributes`.
      */
     @discardableResult
     private func apply(attributes: [Attribute],
@@ -258,7 +271,7 @@ public class KRTransitioner: NSObject, NSCopying,
                            using targetAttributes: [Attribute])
         -> [CAAnimation]
     {
-        guard let attributes = attributes as? TransitionAttributes else {
+        guard let attributes = attributes as? KRTransitionParameter else {
             fatalError("<KRPresentationKit> - Failed to cast `attributes` as TransitionAttributes.")
         }
         

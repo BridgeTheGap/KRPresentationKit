@@ -7,6 +7,13 @@
 
 import UIKit
 
+/**
+ The attribute to apply to view in transition.
+ 
+ - Note: Using `rotation`, `scale`, and `translation` requires
+    careful handling of the order in which they are listed.
+    Further documentation will be provided in the next versions.
+ */
 public enum Attribute {
     
     case alpha(CGFloat)
