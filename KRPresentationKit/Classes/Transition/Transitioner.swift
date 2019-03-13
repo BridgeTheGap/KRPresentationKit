@@ -215,7 +215,7 @@ public class KRTransitioner: NSObject, NSCopying,
                     let animGroup = CAAnimationGroup()
                     animGroup.animations = animation(for: fromView, using: attributes.initial)
                     animGroup.duration = attributes.duration
-                    animGroup.fillMode = kCAFillModeForwards
+                    animGroup.fillMode = CAMediaTimingFillMode.forwards
                     animGroup.isRemovedOnCompletion = false
                     
                     fromView.layer.add(animGroup, forKey: animKey)

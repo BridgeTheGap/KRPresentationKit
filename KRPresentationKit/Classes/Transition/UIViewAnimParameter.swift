@@ -11,12 +11,12 @@ public struct UIViewAnimParameter: TransitionParameterType {
     
     public var initial: [Attribute]
     
-    public var options: UIViewAnimationOptions
+    public var options: UIView.AnimationOptions
     
     public var duration: Double
     
     public init(initial: [Attribute],
-                options: UIViewAnimationOptions = [],
+                options: UIView.AnimationOptions = [],
                 duration: Double)
     {
         self.initial = initial
