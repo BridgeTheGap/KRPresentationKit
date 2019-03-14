@@ -27,6 +27,7 @@ as well as the functionality to define a custom animation.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Josh Woomin Park' => 'wmpark@knowre.com' }
   s.source           = { :git => 'https://github.com/BridgeTheGap/KRPresentationKit.git', :tag => s.version.to_s }
+  s.swift_version    = '4.2'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
