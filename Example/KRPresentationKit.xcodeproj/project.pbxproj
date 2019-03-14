@@ -277,7 +277,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-KRPresentationKit_Tests/Pods-KRPresentationKit_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KRPresentationKit_Tests/Pods-KRPresentationKit_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/KRPresentationKit/KRPresentationKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KRTimingFunction/KRTimingFunction.framework",
 			);
@@ -288,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KRPresentationKit_Tests/Pods-KRPresentationKit_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KRPresentationKit_Tests/Pods-KRPresentationKit_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4555F2A3ACC2F4CEFE9B50F3 /* [CP] Check Pods Manifest.lock */ = {
@@ -315,7 +315,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-KRPresentationKit_Example/Pods-KRPresentationKit_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KRPresentationKit_Example/Pods-KRPresentationKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/KRPresentationKit/KRPresentationKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KRTimingFunction/KRTimingFunction.framework",
 			);
@@ -326,7 +326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KRPresentationKit_Example/Pods-KRPresentationKit_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KRPresentationKit_Example/Pods-KRPresentationKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B732792265DFC27EB22358E5 /* [CP] Check Pods Manifest.lock */ = {
